@@ -82,6 +82,17 @@ function clean(text: string): string {
 }
 
 /**
+ * Some scraped metadata strings are accidentally glued from list items
+ * (e.g. "SculpturesPerformancePhotographyGraphics"). Split them at
+ * CamelCase boundaries so the UI can wrap them naturally.
+ */
+function splitCamelRuns(text: string): string {
+  // Only act on long runs of letters with no spaces — leaves normal text alone.
+  if (text.includes(" ") || text.length < 14) return text;
+  return text.replace(/([a-z])([A-Z])/g, "$1 · $2");
+}
+
+/**
  * Trailing-hyphen slugs ("ceramic-", "vinyl-", "schmalgauzen-covers-")
  * are scrape artefacts. Trim them for routing.
  */
@@ -164,7 +175,7 @@ function splitMetadataAndDescription(paras: string[]): {
       continue;
     }
     if (para.length <= 80 && !looksLikeQuote(para)) {
-      metadata.push({ value: para });
+      metadata.push({ value: splitCamelRuns(para) });
     } else {
       inDescription = true;
       description.push(para);

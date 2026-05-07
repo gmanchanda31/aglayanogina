@@ -54,6 +54,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Defensive: any runaway content (long unbroken strings, oversized
+     images) gets clipped rather than producing horizontal scroll. */
+  overflow-x: clip;
 }
 
 ::selection {
@@ -68,6 +71,9 @@ body {
   letter-spacing: 0.12em;
   font-size: 0.8125rem;
   line-height: 1.4;
+  /* Long unbroken metadata strings (e.g. accidentally glued source text)
+     must not push horizontal scroll on narrow viewports. */
+  overflow-wrap: anywhere;
 }
 
 @utility serif {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Container } from "@/components/layout/container";
+import { PatreonAppeal } from "@/components/patreon-appeal";
 import { about, getProject } from "@/lib/content";
 import type { CVRow } from "@/lib/types";
 
@@ -63,8 +64,8 @@ export default function AboutPage() {
         </div>
       </Container>
 
-      <Container>
-        <div className="border-t border-mist" />
+      <Container className="pb-4 md:pb-6">
+        <PatreonAppeal />
       </Container>
 
       <Container className="py-20 md:py-28">

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { aboutNav, navSections, siteName } from "@/lib/content";
+import { aboutNav, contact, navSections, siteName } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { Container } from "./container";
 
@@ -63,6 +63,16 @@ export function SiteHeader() {
               </li>
             );
           })}
+          <li className="ml-1">
+            <a
+              href={contact.patreonUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="label-caps inline-flex items-center px-3.5 py-1.5 border border-clay text-clay hover:bg-clay hover:text-paper transition-colors duration-300"
+            >
+              Support
+            </a>
+          </li>
         </ul>
 
         <button
@@ -88,12 +98,12 @@ function MobileNav({ open, pathname }: { open: boolean; pathname: string }) {
     <div
       id="mobile-nav"
       className={cn(
-        "md:hidden fixed inset-x-0 top-[57px] bottom-0 z-30 bg-paper transition-opacity duration-200",
+        "md:hidden fixed inset-x-0 top-[65px] bottom-0 z-30 bg-paper transition-opacity duration-200 overflow-y-auto",
         open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
       )}
       aria-hidden={!open}
     >
-      <Container className="flex flex-col gap-1 pt-12">
+      <Container className="flex flex-col gap-1 pt-10 pb-12">
         {allLinks.map((link) => {
           const active = isActive(link.href, pathname);
           return (
@@ -110,6 +120,18 @@ function MobileNav({ open, pathname }: { open: boolean; pathname: string }) {
             </Link>
           );
         })}
+
+        <a
+          href={contact.patreonUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-10 inline-flex items-center justify-center label-caps px-5 py-4 border border-clay text-clay hover:bg-clay hover:text-paper transition-colors duration-300"
+        >
+          Support on Patreon
+        </a>
+        <p className="mt-4 text-stone text-sm leading-[1.6] max-w-sm">
+          Aglaya&apos;s practice is supported by readers and patrons. Joining the art diary helps her keep making.
+        </p>
       </Container>
     </div>
   );

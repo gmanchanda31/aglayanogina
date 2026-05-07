@@ -48,3 +48,4 @@ next-env.d.ts
 # dev screenshots (manual + playwright)
 /phase*-*.png
 /.playwright-mcp/
+/og-*.png
