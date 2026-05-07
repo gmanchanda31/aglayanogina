@@ -501,6 +501,30 @@ Lighthouse should sit at 95+ across the board. Re-run after big changes.
 
 ---
 
+## Sanity MCP for Claude
+
+`.mcp.json` at the repo root configures the official Sanity MCP server.
+When this project is opened in a Claude Code session, the MCP gives
+Claude tools to search content, create / edit / delete documents, and
+upload media — without leaving chat.
+
+Setup is one-time:
+
+1. Make sure `SANITY_API_TOKEN` is set in `.env.local` (same value as
+   `SANITY_WRITE_TOKEN`). Already wired.
+2. Restart the Claude Code session. The MCP server boots automatically;
+   `/mcp` lists it.
+
+Useful for:
+
+- Bulk imports / cleanups ("rename all 'xerography' tags to lowercase")
+- Schema-driven migrations
+- Audit queries ("list every project missing a hero image")
+- One-off content fixes
+
+Aglaya's daily workflow stays in Sanity Studio — the MCP is for
+developer-mode operations.
+
 ## When in doubt
 
 1. Read `lib/content.ts` and `lib/types.ts`. They are the contract.
