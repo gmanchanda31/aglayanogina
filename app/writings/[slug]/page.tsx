@@ -5,14 +5,14 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { Container } from "@/components/layout/container";
 import { JsonLd } from "@/components/seo/json-ld";
+import { ArticleBody } from "@/components/writing/article-body";
 import { getWriting, writings } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
-import { hasMdx, loadWritingMdx } from "@/lib/writings-mdx";
 
 type Params = Promise<{ slug: string }>;
 
 export function generateStaticParams() {
-  return writings.filter((w) => hasMdx(w.routeSlug)).map((w) => ({ slug: w.routeSlug }));
+  return writings.map((w) => ({ slug: w.routeSlug }));
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
@@ -35,17 +35,12 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
   const writing = getWriting(slug);
   if (!writing) notFound();
 
-  const Article = await loadWritingMdx(slug);
-  if (!Article) notFound();
-
   const idx = writings.findIndex((w) => w.routeSlug === slug);
   const prev = idx > 0 ? writings[idx - 1] : undefined;
   const next = idx < writings.length - 1 ? writings[idx + 1] : undefined;
 
-  // Other writings to surface at the bottom (3 random-ish: take 3 closest to current index)
-  const more = writings
-    .filter((w) => w.routeSlug !== slug && hasMdx(w.routeSlug))
-    .slice(0, 3);
+  // Other writings to surface at the bottom (3 closest to current index)
+  const more = writings.filter((w) => w.routeSlug !== slug).slice(0, 3);
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -88,7 +83,7 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
       {/* Article body */}
       <Container className="pb-16 md:pb-24">
         <article className="max-w-[640px] mx-auto">
-          <Article />
+          <ArticleBody body={writing.body} />
         </article>
       </Container>
 

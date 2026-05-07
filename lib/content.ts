@@ -14,7 +14,6 @@
  * Phase 3a; Phase 3b swaps them to PortableText from Sanity.
  */
 
-import parsedRaw from "@/data/parsed.json";
 import { sanityClient } from "./sanity-client";
 import {
   ARTIST_QUERY,
@@ -23,6 +22,7 @@ import {
   ILLUSTRATIONS_QUERY,
   PHOTOGRAPH_SETS_QUERY,
   PROJECTS_QUERY,
+  WRITINGS_QUERY,
 } from "./sanity-queries";
 import type {
   About,
@@ -141,6 +141,15 @@ interface SanityPhotographSetDoc {
   images?: SanityImage[];
 }
 
+interface SanityWritingDoc {
+  _id: string;
+  title: string;
+  slug: string;
+  year?: string;
+  excerpt?: string;
+  body?: PortableNode[];
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                Helpers                                     */
 /* -------------------------------------------------------------------------- */
@@ -222,6 +231,7 @@ const [
   exhibitionsDocs,
   illustrationsDocs,
   photographSetsDocs,
+  writingsDocs,
 ] = await Promise.all([
   sanityClient.fetch<SanityArtistDoc | null>(ARTIST_QUERY),
   sanityClient.fetch<SanityHomePicksDoc | null>(HOME_PICKS_QUERY),
@@ -229,6 +239,7 @@ const [
   sanityClient.fetch<SanityEntryDoc[]>(EXHIBITIONS_QUERY),
   sanityClient.fetch<SanityEntryDoc[]>(ILLUSTRATIONS_QUERY),
   sanityClient.fetch<SanityPhotographSetDoc[]>(PHOTOGRAPH_SETS_QUERY),
+  sanityClient.fetch<SanityWritingDoc[]>(WRITINGS_QUERY),
 ]);
 
 /* -------------------------------------------------------------------------- */
@@ -365,57 +376,41 @@ export const home: Home = (() => {
 })();
 
 /* -------------------------------------------------------------------------- */
-/*                            Writings (Phase 3a)                             */
+/*                                 Writings                                   */
 /* -------------------------------------------------------------------------- */
 
-// Writings still come from parsed.json + MDX in Phase 3a. Phase 3b swaps to
-// Sanity Portable Text. The lookup API here keeps writings index pages
-// rendering without changes.
-
-interface ParsedListing {
-  title: string;
-  href: string | null;
+/** Flatten PortableText body to plain paragraphs (used for excerpts/fallbacks). */
+function bodyToParagraphs(body: PortableNode[] | undefined): string[] {
+  if (!body) return [];
+  const out: string[] = [];
+  for (const node of body) {
+    if (node._type === "block") {
+      const text = (node.children ?? []).map((c) => c.text).join("").trim();
+      if (text) out.push(text);
+    } else if (node._type === "pullQuote") {
+      out.push(node.text);
+    }
+  }
+  return out;
 }
 
-interface ParsedPage {
-  file: string;
-  title: string;
-  blocks: Array<[string, string | string[]]>;
-  listing: ParsedListing[];
-}
-
-const parsedPages = parsedRaw as unknown as ParsedPage[];
-const writingsIndexListing =
-  parsedPages.find((p) => p.file === "_raw/writings.html")?.listing ?? [];
-
-function buildWriting(slug: string, routeSlug: string, title: string): WritingEntry | null {
-  const page = parsedPages.find((p) => p.file === `_raw/writings/${slug}.html`);
-  if (!page) return null;
-  const paras = page.blocks
-    .filter(([k]) => k === "p" || k === "blockquote")
-    .map(([, v]) => (typeof v === "string" ? v : "").replace(/‍/g, "").trim())
-    .filter(Boolean);
-  const cleaned = paras[0] === title ? paras.slice(1) : paras;
+export const writings: WritingEntry[] = writingsDocs.map((doc) => {
+  const paragraphs = bodyToParagraphs(doc.body);
+  const slug = doc.slug;
+  const routeSlug = normalizeSlug(slug);
   return {
     section: "writings",
     slug,
     routeSlug,
-    title,
+    title: doc.title,
     href: `/writings/${routeSlug}`,
     images: [],
-    paragraphs: cleaned,
-    excerpt: cleaned[0]?.slice(0, 200) ?? "",
+    paragraphs,
+    excerpt: doc.excerpt ?? paragraphs[0]?.slice(0, 200) ?? "",
+    body: (doc.body ?? []) as unknown[],
+    year: doc.year,
   };
-}
-
-export const writings: WritingEntry[] = writingsIndexListing
-  .filter((it) => it.href && it.title && !it.href.includes("webflow-io"))
-  .map((it) => {
-    const rawSlug = (it.href as string).replace(/^\/[^/]+\//, "");
-    const routeSlug = normalizeSlug(rawSlug);
-    return buildWriting(rawSlug, routeSlug, it.title);
-  })
-  .filter((w): w is WritingEntry => w !== null);
+});
 
 export function getWriting(slug: string) {
   return writings.find((w) => w.routeSlug === slug);

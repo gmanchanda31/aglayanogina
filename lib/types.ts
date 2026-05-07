@@ -77,12 +77,19 @@ export interface PhotographSet extends BaseEntry {
   /** Photographs only have a title + images — no body */
 }
 
+/** Sanity Portable Text body — opaque to TS, rendered via @portabletext/react. */
+export type PortableTextBody = unknown[];
+
 export interface WritingEntry extends BaseEntry {
   section: "writings";
-  /** Body paragraphs (excluding h1) */
+  /** Plain-text paragraphs derived from body — kept for excerpts + fallbacks */
   paragraphs: string[];
   /** First sentence/paragraph used as excerpt on listing */
   excerpt: string;
+  /** Rich-text body from Sanity, used by the writing detail page */
+  body: PortableTextBody;
+  /** Optional year displayed near the title */
+  year?: string;
 }
 
 export interface CVRow {

@@ -6,7 +6,6 @@ import {
   projects,
   writings,
 } from "@/lib/content";
-import { hasMdx } from "@/lib/writings-mdx";
 import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -47,9 +46,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly" as const,
       priority: 0.6,
     })),
-    ...writings
-      .filter((w) => hasMdx(w.routeSlug))
-      .map((w) => ({
+    ...writings.map((w) => ({
         url: `${SITE_URL}${w.href}`,
         lastModified: today,
         changeFrequency: "yearly" as const,
