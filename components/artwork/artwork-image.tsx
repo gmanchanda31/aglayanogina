@@ -12,6 +12,16 @@ interface ArtworkImageProps {
   className?: string;
   /** When true, omit the mist border */
   borderless?: boolean;
+  /**
+   * How the image fits its aspect-ratio container.
+   *
+   * - `contain` (default) — preserves the full artwork; paper-colored
+   *   "mat" appears around images whose intrinsic aspect doesn't match
+   *   the container. Right for art galleries: the work is never cropped.
+   * - `cover` — fills the container, cropping as needed. Use only when
+   *   the image will fit the container ratio (e.g. controlled stock).
+   */
+  fit?: "contain" | "cover";
 }
 
 export function ArtworkImage({
@@ -21,11 +31,12 @@ export function ArtworkImage({
   priority,
   className,
   borderless,
+  fit = "contain",
 }: ArtworkImageProps) {
   return (
     <div
       className={cn(
-        "relative overflow-hidden bg-mist/40",
+        "relative overflow-hidden bg-paper",
         aspect,
         !borderless && "border border-mist",
         className,
@@ -37,7 +48,7 @@ export function ArtworkImage({
         fill
         sizes={sizes}
         priority={priority}
-        className="object-cover"
+        className={fit === "cover" ? "object-cover" : "object-contain"}
       />
     </div>
   );

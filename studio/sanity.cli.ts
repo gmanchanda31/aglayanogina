@@ -6,9 +6,9 @@ export default defineCliConfig({
     dataset: process.env.SANITY_STUDIO_DATASET || "production",
   },
   /**
-   * `pnpm sanity deploy` will publish the studio to <projectName>.sanity.studio
-   * by default. We can pin it to a custom subdomain later via:
-   *   studioHost: "aglayanogina"
-   * which gives us https://aglayanogina.sanity.studio
+   * `pnpm sanity deploy` publishes the studio to:
+   *   https://aglayanogina.sanity.studio
+   * Auth is by SANITY_AUTH_TOKEN env var (we use the write token).
    */
+  studioHost: "aglayanogina",
 });

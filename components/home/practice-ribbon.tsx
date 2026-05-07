@@ -22,13 +22,13 @@ export function PracticeRibbon() {
                 className="group block focus-visible:outline-none"
               >
                 {tile.image ? (
-                  <div className="relative aspect-square overflow-hidden border border-mist bg-mist/40">
+                  <div className="relative aspect-square overflow-hidden border border-mist bg-paper">
                     <Image
                       src={tile.image.src}
                       alt={tile.image.alt}
                       fill
                       sizes="(min-width: 768px) 18vw, 45vw"
-                      className="object-cover transition-opacity duration-300 group-hover:opacity-90"
+                      className="object-contain p-2 transition-opacity duration-300 group-hover:opacity-90"
                     />
                   </div>
                 ) : (

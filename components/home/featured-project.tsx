@@ -21,16 +21,16 @@ export function FeaturedProject() {
         <p className="label-caps text-stone text-center">Currently on view</p>
       </Container>
 
-      {/* Full-bleed cinematic hero */}
+      {/* Full-bleed cinematic hero — contain so tall artworks aren't cropped */}
       {project.hero ? (
-        <figure className="relative w-full overflow-hidden bg-mist/40">
+        <figure className="relative w-full overflow-hidden bg-paper">
           <div className="relative w-full aspect-[3/2] md:aspect-[21/9]">
             <Image
               src={project.hero.src}
               alt={project.hero.alt}
               fill
               sizes="100vw"
-              className="object-cover"
+              className="object-contain"
             />
           </div>
         </figure>
