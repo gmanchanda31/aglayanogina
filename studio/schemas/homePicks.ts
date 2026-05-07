@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { HomeIcon } from "@sanity/icons";
 
 /**
  * Singleton — drives what the homepage features.
@@ -8,6 +9,7 @@ export const homePicks = defineType({
   name: "homePicks",
   title: "Homepage",
   type: "document",
+  icon: HomeIcon,
   fields: [
     defineField({
       name: "heroItalic",

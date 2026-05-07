@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { UserIcon } from "@sanity/icons";
 
 /**
  * Singleton — there's exactly one artist (Aglaya). Drives /about.
@@ -7,6 +8,7 @@ export const artist = defineType({
   name: "artist",
   title: "Artist",
   type: "document",
+  icon: UserIcon,
   // Sanity treats this as a singleton via the desk structure (see desk/structure.ts).
   fields: [
     defineField({

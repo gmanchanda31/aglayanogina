@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { CaseIcon } from "@sanity/icons";
 
 /**
  * A body of work. Lives at /projects/<slug>.
@@ -11,6 +12,7 @@ export const project = defineType({
   name: "project",
   title: "Project",
   type: "document",
+  icon: CaseIcon,
   fields: [
     defineField({
       name: "title",
@@ -110,8 +112,13 @@ export const project = defineType({
   preview: {
     select: {
       title: "title",
-      subtitle: "year",
+      year: "year",
+      medium: "medium",
       media: "hero",
+    },
+    prepare({ title, year, medium, media }) {
+      const subtitle = [year, medium].filter(Boolean).join(" · ");
+      return { title, subtitle, media };
     },
   },
 });

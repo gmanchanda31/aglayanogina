@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { ImagesIcon } from "@sanity/icons";
 
 /**
  * A photograph archive (Colour, Black & White, India, Turkey).
@@ -8,6 +9,7 @@ export const photographSet = defineType({
   name: "photographSet",
   title: "Photograph archive",
   type: "document",
+  icon: ImagesIcon,
   fields: [
     defineField({
       name: "title",

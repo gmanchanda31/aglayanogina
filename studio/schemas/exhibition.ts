@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { CalendarIcon } from "@sanity/icons";
 
 /**
  * An exhibition (solo or group). Lives at /exhibitions/<slug>.
@@ -9,6 +10,7 @@ export const exhibition = defineType({
   name: "exhibition",
   title: "Exhibition",
   type: "document",
+  icon: CalendarIcon,
   fields: [
     defineField({ name: "title", type: "string", validation: (r) => r.required() }),
     defineField({
@@ -66,6 +68,11 @@ export const exhibition = defineType({
     },
   ],
   preview: {
-    select: { title: "title", subtitle: "year", media: "hero" },
+    select: { title: "title", year: "year", venue: "venue", city: "city", media: "hero" },
+    prepare({ title, year, venue, city }) {
+      const where = [venue, city].filter(Boolean).join(", ");
+      const subtitle = [year, where].filter(Boolean).join(" · ");
+      return { title, subtitle };
+    },
   },
 });

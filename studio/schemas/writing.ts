@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { DocumentTextIcon } from "@sanity/icons";
 
 /**
  * A literary essay. Lives at /writings/<slug>.
@@ -10,6 +11,7 @@ export const writing = defineType({
   name: "writing",
   title: "Writing",
   type: "document",
+  icon: DocumentTextIcon,
   fields: [
     defineField({
       name: "title",

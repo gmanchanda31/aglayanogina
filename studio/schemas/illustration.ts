@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { EditIcon } from "@sanity/icons";
 
 /**
  * Illustration series (e.g. Schmalgauzen covers, The Eustomes).
@@ -8,6 +9,7 @@ export const illustration = defineType({
   name: "illustration",
   title: "Illustration series",
   type: "document",
+  icon: EditIcon,
   fields: [
     defineField({ name: "title", type: "string", validation: (r) => r.required() }),
     defineField({

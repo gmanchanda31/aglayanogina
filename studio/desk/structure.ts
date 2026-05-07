@@ -1,13 +1,29 @@
+import {
+  CalendarIcon,
+  CaseIcon,
+  DocumentTextIcon,
+  EditIcon,
+  HomeIcon,
+  ImagesIcon,
+  UserIcon,
+} from "@sanity/icons";
 import type { StructureBuilder } from "sanity/structure";
 
 /**
- * Custom desk structure for Aglaya. Pinned at top:
- *   - Homepage (singleton)
- *   - Artist (singleton — bio, CV, contact)
- * Below: lists of all the regular content types.
+ * Custom desk structure for Aglaya. Layout:
  *
- * The two singletons are list-items pointing to a fixed document id, so
- * there's only ever one of each — Aglaya never sees a "+ New" for these.
+ *   ──────────── Pinned ──────────────
+ *   Homepage       (singleton — what's featured on /)
+ *   Artist · Bio   (singleton — about page + CV + contact)
+ *   ─────────────────────────────────
+ *   Projects       (8)
+ *   Exhibitions    (9)
+ *   Illustrations  (5)
+ *   Photographs    (4)
+ *   Writings       (11)
+ *
+ * Singletons render as a single document instead of a list — Aglaya never
+ * sees a "+ New" for them.
  */
 export const deskStructure = (S: StructureBuilder) =>
   S.list()
@@ -16,6 +32,7 @@ export const deskStructure = (S: StructureBuilder) =>
       // ── Singletons ──────────────────────────────────────────────
       S.listItem()
         .title("Homepage")
+        .icon(HomeIcon)
         .id("homePicks")
         .child(
           S.document()
@@ -25,6 +42,7 @@ export const deskStructure = (S: StructureBuilder) =>
         ),
       S.listItem()
         .title("Artist · Bio + CV")
+        .icon(UserIcon)
         .id("artist")
         .child(
           S.document()
@@ -36,9 +54,13 @@ export const deskStructure = (S: StructureBuilder) =>
       S.divider(),
 
       // ── Lists ───────────────────────────────────────────────────
-      S.documentTypeListItem("project").title("Projects"),
-      S.documentTypeListItem("exhibition").title("Exhibitions"),
-      S.documentTypeListItem("illustration").title("Illustration series"),
-      S.documentTypeListItem("photographSet").title("Photograph archives"),
-      S.documentTypeListItem("writing").title("Writings"),
+      S.documentTypeListItem("project").title("Projects").icon(CaseIcon),
+      S.documentTypeListItem("exhibition").title("Exhibitions").icon(CalendarIcon),
+      S.documentTypeListItem("illustration")
+        .title("Illustration series")
+        .icon(EditIcon),
+      S.documentTypeListItem("photographSet")
+        .title("Photograph archives")
+        .icon(ImagesIcon),
+      S.documentTypeListItem("writing").title("Writings").icon(DocumentTextIcon),
     ]);
