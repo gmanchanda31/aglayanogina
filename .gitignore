@@ -49,5 +49,6 @@ next-env.d.ts
 /fix-*.png
 /og-*.png
 /phase*-*.png
+/step*.png
 /homepage-*.png
 /.playwright-mcp/
