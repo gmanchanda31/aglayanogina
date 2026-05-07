@@ -1,10 +1,33 @@
+/**
+ * Server-only typed content layer.
+ *
+ * Fetches everything from Sanity at module load time using top-level await.
+ * Public exports (`projects`, `exhibitions`, `getProject`, etc.) keep the
+ * synchronous shape pages have always used — pages don't need to be async.
+ *
+ * Static constants (siteName, navSections, contact, aboutNav) live in
+ * lib/site-config.ts because client components can't import top-level-await
+ * modules. They're re-exported from here for any server-side caller that
+ * already imports from "@/lib/content".
+ *
+ * Writings still come from data/parsed.json + content/writings/*.mdx in
+ * Phase 3a; Phase 3b swaps them to PortableText from Sanity.
+ */
+
 import parsedRaw from "@/data/parsed.json";
-import imagePlanRaw from "@/data/image_plan.json";
+import { sanityClient } from "./sanity-client";
+import {
+  ARTIST_QUERY,
+  EXHIBITIONS_QUERY,
+  HOME_PICKS_QUERY,
+  ILLUSTRATIONS_QUERY,
+  PHOTOGRAPH_SETS_QUERY,
+  PROJECTS_QUERY,
+} from "./sanity-queries";
 import type {
   About,
   Contact,
   CVRow,
-  Entry,
   ExhibitionEntry,
   Home,
   IllustrationEntry,
@@ -13,421 +36,275 @@ import type {
   PhotographSet,
   ProjectEntry,
   ProjectKind,
-  Section,
   WritingEntry,
 } from "./types";
 
 /* -------------------------------------------------------------------------- */
-/*                                Raw types                                   */
+/*                       Re-exports of static config                          */
 /* -------------------------------------------------------------------------- */
 
-type Block =
-  | [kind: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "blockquote", text: string]
-  | [kind: "ul" | "ol", items: string[]]
-  | [kind: "listing-item", text: string];
+export {
+  aboutNav,
+  contact,
+  navSections,
+  siteName,
+} from "./site-config";
 
-interface ParsedPage {
-  file: string;
+/* -------------------------------------------------------------------------- */
+/*                            Raw Sanity types                                */
+/* -------------------------------------------------------------------------- */
+
+interface SanityImage {
+  alt?: string;
+  caption?: string;
+  src: string | null;
+  width: number | null;
+  height: number | null;
+}
+
+interface PortableSpan {
+  _type: "span";
+  text: string;
+  marks?: string[];
+}
+
+interface PortableBlock {
+  _type: "block";
+  style?: string;
+  children?: PortableSpan[];
+}
+
+interface PortablePullQuote {
+  _type: "pullQuote";
+  text: string;
+  attribution?: string;
+}
+
+type PortableNode = PortableBlock | PortablePullQuote;
+
+interface SanityEntryDoc {
+  _id: string;
   title: string;
-  blocks: Block[];
-  images: string[];
-  listing: Array<{ title: string; href: string | null; image: string | null }>;
+  slug: string;
+  year?: string;
+  medium?: string;
+  location?: string;
+  dimensions?: string;
+  hero?: SanityImage;
+  gallery?: SanityImage[];
+  description?: PortableNode[];
+  kinds?: ProjectKind[];
+  // Exhibition extras
+  kind?: "Solo" | "Group";
+  venue?: string;
+  city?: string;
+  curator?: string;
+  // Illustration extras
+  client?: string;
 }
 
-interface PlanEntry {
-  url: string;
-  local: string;
-  name: string;
-  width: number;
-  height: number;
+interface SanityArtistDoc {
+  name?: string;
+  tagline?: string;
+  intro?: string;
+  paragraphs?: string[];
+  city?: string;
+  email?: string;
+  instagramUrl?: string;
+  whatsappUrl?: string;
+  patreonUrl?: string;
+  portrait?: SanityImage;
+  education?: CVRow[];
+  publications?: CVRow[];
+  soloExhibitions?: CVRow[];
+  selectedExhibitions?: CVRow[];
 }
 
-const parsed = parsedRaw as unknown as ParsedPage[];
-const imagePlan = imagePlanRaw as unknown as Record<string, PlanEntry[]>;
-
-/* -------------------------------------------------------------------------- */
-/*                                  Site data                                 */
-/* -------------------------------------------------------------------------- */
-
-export const contact: Contact = {
-  email: "aglaya.nn.art@gmail.com",
-  emailHref: "mailto:aglaya.nn.art@gmail.com",
-  instagramHandle: "@aglaya.nn",
-  instagramUrl: "https://www.instagram.com/aglaya.nn",
-  whatsappNumber: "+49 175 6252702",
-  whatsappUrl: "https://wa.me/491756252702",
-  patreonUrl: "https://patreon.com/aglayann",
-};
-
-export const navSections: Array<{ title: string; href: string; section: Section }> = [
-  { title: "Projects", href: "/projects", section: "projects" },
-  { title: "Exhibitions", href: "/exhibitions", section: "exhibitions" },
-  { title: "Illustrations", href: "/illustrations", section: "illustrations" },
-  { title: "Photographs", href: "/photographs", section: "photographs" },
-  { title: "Writings", href: "/writings", section: "writings" },
-];
-
-export const aboutNav = { title: "About", href: "/about" } as const;
-
-export const siteName = "Aglaya Nogina";
-export const siteCity = "Düsseldorf, Germany";
-export const siteTagline =
-  "Visual artist · Luhansk → Kyiv → Düsseldorf · b. 1996";
-
-/* -------------------------------------------------------------------------- */
-/*                                  Helpers                                   */
-/* -------------------------------------------------------------------------- */
-
-const ZWJ = /‍/g;
-
-function clean(text: string): string {
-  return text.replace(ZWJ, "").trim();
+interface SanityHomePicksDoc {
+  heroItalic?: string;
+  heroTagline?: string;
+  featuredTeaser?: string;
+  featuredExhibitionLine?: string;
+  featuredProject?: { _id: string; title: string; slug: string };
+  selectedWorks?: Array<{ _id: string; title: string; slug: string }>;
+  journalPicks?: Array<{
+    teaser?: string;
+    writing?: { _id: string; title: string; slug: string };
+  }>;
 }
 
-/**
- * Some scraped metadata strings are accidentally glued from list items
- * (e.g. "SculpturesPerformancePhotographyGraphics"). Split them at
- * CamelCase boundaries so the UI can wrap them naturally.
- */
-function splitCamelRuns(text: string): string {
-  // Only act on long runs of letters with no spaces — leaves normal text alone.
-  if (text.includes(" ") || text.length < 14) return text;
-  return text.replace(/([a-z])([A-Z])/g, "$1 · $2");
+interface SanityPhotographSetDoc {
+  _id: string;
+  title: string;
+  slug: string;
+  blurb?: string;
+  images?: SanityImage[];
 }
 
-/**
- * Trailing-hyphen slugs ("ceramic-", "vinyl-", "schmalgauzen-covers-")
- * are scrape artefacts. Trim them for routing.
- */
-function normalizeRouteSlug(slug: string): string {
+/* -------------------------------------------------------------------------- */
+/*                                Helpers                                     */
+/* -------------------------------------------------------------------------- */
+
+function normalizeSlug(slug: string): string {
   return slug.replace(/-+$/, "");
 }
 
-function lookupPlan(section: string, slug: string): PlanEntry[] {
-  return imagePlan[`${section}/${slug}`] ?? [];
+function toImageRef(img: SanityImage | undefined, fallbackAlt: string): ImageRef | undefined {
+  if (!img?.src || !img.width || !img.height) return undefined;
+  return {
+    src: img.src,
+    name: img.src.split("/").pop() ?? "image",
+    alt: img.alt || fallbackAlt,
+    width: img.width,
+    height: img.height,
+  };
 }
 
-/**
- * Map a single page's image URLs to local refs using image_plan.json,
- * in the original page order, falling back to the plan's order.
- */
-function imagesFor(
-  page: ParsedPage,
-  section: string,
-  slug: string,
+function toImageRefArray(
+  imgs: SanityImage[] | undefined,
   altPrefix: string,
-  altContext?: string,
 ): ImageRef[] {
-  const plan = lookupPlan(section, slug);
-  if (plan.length === 0) return [];
-  const byUrl = new Map(plan.map((p) => [p.url, p]));
-
-  const ordered: PlanEntry[] = [];
-  const seen = new Set<string>();
-  for (const url of page.images) {
-    const entry = byUrl.get(url);
-    if (entry && !seen.has(entry.local)) {
-      ordered.push(entry);
-      seen.add(entry.local);
-    }
-  }
-  // Append any plan entries that didn't match (defensive — shouldn't happen)
-  for (const entry of plan) {
-    if (!seen.has(entry.local)) {
-      ordered.push(entry);
-      seen.add(entry.local);
-    }
-  }
-
-  return ordered.map((p, i) => ({
-    src: `/${p.local}`, // image_plan stores "assets/..." → prepend "/"
-    name: p.name,
-    width: p.width,
-    height: p.height,
-    // Hero image (first one) gets the richer descriptor; subsequent images
-    // include the index for screen-reader users navigating the gallery.
-    alt:
-      i === 0
-        ? altContext
-          ? `${altPrefix} — ${altContext}`
-          : altPrefix
-        : `${altPrefix}${altContext ? `, ${altContext}` : ""} (${i + 1})`,
-  }));
+  if (!imgs) return [];
+  return imgs
+    .map((img, i) => toImageRef(img, `${altPrefix} (${i + 1})`))
+    .filter((ref): ref is ImageRef => ref !== undefined);
 }
 
-/**
- * Pulls paragraphs out of blocks, dropping zero-width-only entries.
- * Unwraps listing-item / heading kinds where appropriate.
- */
-function paragraphs(blocks: Block[]): string[] {
-  const out: string[] = [];
-  for (const block of blocks) {
-    const [kind, val] = block;
-    if (kind === "p" || kind === "blockquote") {
-      const txt = clean(val as string);
-      if (txt) out.push(txt);
-    }
-  }
-  return out;
-}
-
-/**
- * Heuristic: short leading paragraphs (≤80 chars) are metadata
- * (medium / dimensions / year / location). Stop at the first long paragraph.
- */
-function splitMetadataAndDescription(paras: string[]): {
-  metadata: MetadataLine[];
-  description: string[];
-} {
-  const metadata: MetadataLine[] = [];
-  const description: string[] = [];
-  let inDescription = false;
-  for (const para of paras) {
-    if (inDescription) {
-      description.push(para);
-      continue;
-    }
-    if (para.length <= 80 && !looksLikeQuote(para)) {
-      metadata.push(labelMetadata(splitCamelRuns(para)));
-    } else {
-      inDescription = true;
-      description.push(para);
-    }
-  }
-  return { metadata, description };
-}
-
-const KNOWN_CITIES =
-  /\b(Düsseldorf|Dusseldorf|Berlin|Kyiv|Lviv|Kharkiv|Cologne|Barcelona|Istanbul|Goa|Munich|Madrid|Paris|Rome|Vienna|Luhansk|Carpathians|Düssel|Germany|Ukraine|Spain|France|Italy|Turkey|India|USA|Austria|Netherlands|Poland)\b/i;
-
-function labelMetadata(value: string): MetadataLine {
-  const v = value.trim();
-  // Year or year range: 2024 / 2023-2025 / 2023—2025
-  if (/^(?:19|20)\d{2}\s*[-–—]?\s*(?:(?:19|20)\d{2}|ongoing)?$/.test(v)) {
-    return { label: "Year", value: v };
-  }
-  // Explicit dimensions
-  if (/^(size|dimensions|format)\s*[:\-]/i.test(v) || /\d+\s*[x×]\s*\d+/i.test(v)) {
-    return { label: "Dimensions", value: v.replace(/^(size|dimensions|format)\s*[:\-]\s*/i, "") };
-  }
-  // Location
-  if (KNOWN_CITIES.test(v)) {
-    return { label: "Location", value: v };
-  }
-  // Default — first metadata line is usually the medium
-  return { label: "Medium", value: v };
-}
-
-function looksLikeQuote(text: string): boolean {
-  return /^[“"„«]/.test(text) || /[”"]\s*$/.test(text);
-}
-
-/**
- * Detect a paragraph that's primarily a quote (starts and ends with quotation marks)
- * and lift it as the entry's pullQuote.
- */
-function extractPullQuote(description: string[]): {
+/** Extract plain-text paragraphs from PortableText. Pull quotes lifted separately. */
+function extractDescription(body: PortableNode[] | undefined): {
   description: string[];
   pullQuote?: string;
   quoteAttribution?: string;
 } {
-  const remaining: string[] = [];
+  if (!body) return { description: [] };
+
+  const description: string[] = [];
   let pullQuote: string | undefined;
   let quoteAttribution: string | undefined;
 
-  for (let i = 0; i < description.length; i++) {
-    const para = description[i];
-    if (!pullQuote && looksLikeQuote(para) && para.length > 60) {
-      pullQuote = para.replace(/^[“"„«]/, "").replace(/[”"»]\s*$/, "").trim();
-      // Check next paragraph for attribution like "— Aglaya."
-      const next = description[i + 1];
-      if (next && /^[—–-]\s*\w/.test(next) && next.length < 60) {
-        quoteAttribution = next.replace(/^[—–-]\s*/, "").replace(/\.$/, "").trim();
-        i++;
+  for (const node of body) {
+    if (node._type === "pullQuote") {
+      if (!pullQuote) {
+        pullQuote = node.text;
+        quoteAttribution = node.attribution;
       }
       continue;
     }
-    remaining.push(para);
+    if (node._type === "block") {
+      const text = (node.children ?? [])
+        .map((c) => c.text)
+        .join("")
+        .trim();
+      if (text) description.push(text);
+    }
   }
 
-  return { description: remaining, pullQuote, quoteAttribution };
+  return { description, pullQuote, quoteAttribution };
+}
+
+function buildMetadata(doc: SanityEntryDoc): MetadataLine[] {
+  const lines: MetadataLine[] = [];
+  if (doc.medium) lines.push({ label: "Medium", value: doc.medium });
+  if (doc.year) lines.push({ label: "Year", value: doc.year });
+  if (doc.dimensions) lines.push({ label: "Dimensions", value: doc.dimensions });
+  if (doc.location) lines.push({ label: "Location", value: doc.location });
+  return lines;
 }
 
 /* -------------------------------------------------------------------------- */
-/*                          Page lookups (memoised)                           */
+/*                          Fetch + transform                                 */
 /* -------------------------------------------------------------------------- */
 
-const pageByPath = new Map<string, ParsedPage>();
-for (const p of parsed) pageByPath.set(p.file, p);
-
-function getPage(section: string, slug: string): ParsedPage | undefined {
-  const path = section ? `_raw/${section}/${slug}.html` : `_raw/${slug}.html`;
-  return pageByPath.get(path);
-}
-
-function listingFor(section: Section): Array<{
-  title: string;
-  rawSlug: string;
-  routeSlug: string;
-}> {
-  const page = getPage("", section);
-  if (!page) return [];
-  return page.listing
-    .filter((it) => it.href && it.title)
-    .map((it) => {
-      const rawSlug = (it.href as string).replace(/^\/[^/]+\//, "");
-      return {
-        title: clean(it.title),
-        rawSlug,
-        routeSlug: normalizeRouteSlug(rawSlug),
-      };
-    })
-    .filter((it) => {
-      // Drop the broken webflow.io writing slug
-      return !it.rawSlug.includes("webflow-io");
-    });
-}
+const [
+  artistDoc,
+  homePicksDoc,
+  projectsDocs,
+  exhibitionsDocs,
+  illustrationsDocs,
+  photographSetsDocs,
+] = await Promise.all([
+  sanityClient.fetch<SanityArtistDoc | null>(ARTIST_QUERY),
+  sanityClient.fetch<SanityHomePicksDoc | null>(HOME_PICKS_QUERY),
+  sanityClient.fetch<SanityEntryDoc[]>(PROJECTS_QUERY),
+  sanityClient.fetch<SanityEntryDoc[]>(EXHIBITIONS_QUERY),
+  sanityClient.fetch<SanityEntryDoc[]>(ILLUSTRATIONS_QUERY),
+  sanityClient.fetch<SanityPhotographSetDoc[]>(PHOTOGRAPH_SETS_QUERY),
+]);
 
 /* -------------------------------------------------------------------------- */
-/*                              Entry builders                                */
+/*                         Public dynamic exports                             */
 /* -------------------------------------------------------------------------- */
 
-function buildEntry<S extends Section>(
+export const siteCity = artistDoc?.city ?? "Düsseldorf, Germany";
+export const siteTagline =
+  artistDoc?.tagline ??
+  "Visual artist · Luhansk → Kyiv → Düsseldorf · b. 1996";
+
+function buildEntry<S extends "projects" | "exhibitions" | "illustrations">(
   section: S,
-  rawSlug: string,
-  routeSlug: string,
-  listingTitle: string,
-): (Entry & { section: S }) | null {
-  const page = getPage(section, rawSlug);
-  if (!page) return null;
-
-  const title = listingTitle || clean(page.title);
-  const allParas = paragraphs(page.blocks);
-  const { metadata, description: rawDesc } = splitMetadataAndDescription(allParas);
-  const { description, pullQuote, quoteAttribution } = extractPullQuote(rawDesc);
-
-  const medium = metadata.find((m) => m.label === "Medium")?.value;
-  const year = metadata.find((m) => m.label === "Year")?.value;
-  const altContext = [medium, year].filter(Boolean).join(", ");
-  const imgs = imagesFor(page, section, rawSlug, title, altContext || undefined);
+  doc: SanityEntryDoc,
+) {
+  const slug = doc.slug;
+  const routeSlug = normalizeSlug(slug);
+  const altContext = [doc.medium, doc.year].filter(Boolean).join(", ");
+  const hero = toImageRef(doc.hero, altContext ? `${doc.title} — ${altContext}` : doc.title);
+  const gallery = toImageRefArray(doc.gallery, `${doc.title}${altContext ? `, ${altContext}` : ""}`);
+  const { description, pullQuote, quoteAttribution } = extractDescription(doc.description);
 
   return {
     section,
-    slug: rawSlug,
+    slug,
     routeSlug,
-    title,
+    title: doc.title,
     href: `/${section}/${routeSlug}`,
-    hero: imgs[0],
-    images: imgs,
-    metadata,
+    hero,
+    images: hero ? [hero, ...gallery] : gallery,
+    metadata: buildMetadata(doc),
     description,
     pullQuote,
     quoteAttribution,
   };
 }
 
-function buildPhotographSet(
-  rawSlug: string,
-  routeSlug: string,
-  listingTitle: string,
-): PhotographSet | null {
-  const page = getPage("photographs", rawSlug);
-  if (!page) return null;
-  const title = listingTitle || clean(page.title);
-  const imgs = imagesFor(page, "photographs", rawSlug, title);
+export const projects: ProjectEntry[] = projectsDocs.map((doc) => ({
+  ...buildEntry("projects", doc),
+  kinds: doc.kinds ?? [],
+}));
+
+export const exhibitions: ExhibitionEntry[] = exhibitionsDocs.map((doc) => {
+  const base = buildEntry("exhibitions", doc);
+  // Fold venue/city/curator into the metadata stack
+  const metadata = [...base.metadata];
+  if (doc.venue) metadata.push({ label: "Venue", value: doc.venue });
+  if (doc.city) metadata.push({ label: "City", value: doc.city });
+  if (doc.curator) metadata.push({ label: "Curator", value: doc.curator });
+  return { ...base, metadata } as ExhibitionEntry;
+});
+
+export const illustrations: IllustrationEntry[] = illustrationsDocs.map((doc) => {
+  const base = buildEntry("illustrations", doc);
+  const metadata = [...base.metadata];
+  if (doc.client) metadata.push({ label: "Client", value: doc.client });
+  return { ...base, metadata } as IllustrationEntry;
+});
+
+export const photographSets: PhotographSet[] = photographSetsDocs.map((doc) => {
+  const slug = doc.slug;
+  const routeSlug = normalizeSlug(slug);
+  const images = toImageRefArray(doc.images, doc.title);
   return {
     section: "photographs",
-    slug: rawSlug,
+    slug,
     routeSlug,
-    title,
+    title: doc.title,
     href: `/photographs/${routeSlug}`,
-    hero: imgs[0],
-    images: imgs,
+    hero: images[0],
+    images,
   };
-}
-
-function buildWriting(
-  rawSlug: string,
-  routeSlug: string,
-  listingTitle: string,
-): WritingEntry | null {
-  const page = getPage("writings", rawSlug);
-  if (!page) return null;
-  const title = listingTitle || clean(page.title);
-  const paras = paragraphs(page.blocks).filter(
-    (p) => clean(p) && p !== title,
-  );
-  // Drop the leading h1 as plain p if the parser captured it
-  const cleaned = paras[0] === title ? paras.slice(1) : paras;
-  const excerpt = (cleaned[0] ?? "").slice(0, 200);
-  return {
-    section: "writings",
-    slug: rawSlug,
-    routeSlug,
-    title,
-    href: `/writings/${routeSlug}`,
-    images: [],
-    paragraphs: cleaned,
-    excerpt,
-  };
-}
+});
 
 /* -------------------------------------------------------------------------- */
-/*                                  Exports                                   */
-/* -------------------------------------------------------------------------- */
-
-/* Map a project's medium / metadata / slug onto the filter chip set */
-const KIND_MATCHERS: Array<[ProjectKind, RegExp]> = [
-  ["Print", /xerography|relief print|engrav|graphic|print|paper/i],
-  ["Painting", /paint/i],
-  ["Ceramic", /ceramic/i],
-  ["Sculpture", /sculpt/i],
-  ["Photography", /photograph/i],
-  ["Textile", /textile|fabric/i],
-  ["Book", /\bbook\b/i],
-];
-
-function deriveKinds(entry: Entry): ProjectKind[] {
-  const haystack = [
-    entry.title,
-    entry.slug,
-    ...entry.metadata.map((m) => m.value),
-    entry.description.slice(0, 2).join(" "),
-  ].join(" ");
-  const found: ProjectKind[] = [];
-  for (const [kind, re] of KIND_MATCHERS) {
-    if (re.test(haystack)) found.push(kind);
-  }
-  return found;
-}
-
-export const projects: ProjectEntry[] = listingFor("projects")
-  .map((it) => buildEntry("projects", it.rawSlug, it.routeSlug, it.title))
-  .filter((e): e is Entry & { section: "projects" } => e !== null)
-  .map((entry) => ({ ...entry, kinds: deriveKinds(entry) }) as ProjectEntry);
-
-export const exhibitions: ExhibitionEntry[] = listingFor("exhibitions")
-  .map((it) =>
-    buildEntry("exhibitions", it.rawSlug, it.routeSlug, it.title) as ExhibitionEntry | null,
-  )
-  .filter((e): e is ExhibitionEntry => e !== null);
-
-export const illustrations: IllustrationEntry[] = listingFor("illustrations")
-  .map((it) =>
-    buildEntry("illustrations", it.rawSlug, it.routeSlug, it.title) as IllustrationEntry | null,
-  )
-  .filter((e): e is IllustrationEntry => e !== null);
-
-export const photographSets: PhotographSet[] = listingFor("photographs")
-  .map((it) => buildPhotographSet(it.rawSlug, it.routeSlug, it.title))
-  .filter((e): e is PhotographSet => e !== null);
-
-export const writings: WritingEntry[] = listingFor("writings")
-  .map((it) => buildWriting(it.rawSlug, it.routeSlug, it.title))
-  .filter((e): e is WritingEntry => e !== null);
-
-/* -------------------------------------------------------------------------- */
-/*                                 Lookups                                    */
+/*                              Lookups                                       */
 /* -------------------------------------------------------------------------- */
 
 export function getProject(slug: string) {
@@ -442,154 +319,162 @@ export function getIllustration(slug: string) {
 export function getPhotographSet(slug: string) {
   return photographSets.find((e) => e.routeSlug === slug);
 }
-export function getWriting(slug: string) {
-  return writings.find((e) => e.routeSlug === slug);
-}
+
+/* -------------------------------------------------------------------------- */
+/*                                 About                                      */
+/* -------------------------------------------------------------------------- */
+
+export const about: About = {
+  intro: artistDoc?.intro ?? "",
+  paragraphs: artistDoc?.paragraphs ?? [],
+  cv: {
+    education: artistDoc?.education ?? [],
+    publications: artistDoc?.publications ?? [],
+    soloExhibitions: artistDoc?.soloExhibitions ?? [],
+    selectedExhibitions: artistDoc?.selectedExhibitions ?? [],
+  },
+};
+
+/**
+ * Studio portrait. Lives on the artist doc; falls back to the static
+ * file we shipped before the migration if the doc is missing.
+ */
+export const portrait: ImageRef | undefined = toImageRef(
+  artistDoc?.portrait,
+  `${artistDoc?.name ?? "Aglaya Nogina"} in studio`,
+);
+
+/**
+ * Live contact info from the artist doc, if present. Pages prefer this
+ * over the static `contact` re-exported above. Footer + studio CTAs use it.
+ */
+export const liveContact: Partial<Contact> = {
+  email: artistDoc?.email,
+  emailHref: artistDoc?.email ? `mailto:${artistDoc.email}` : undefined,
+  instagramUrl: artistDoc?.instagramUrl,
+  whatsappUrl: artistDoc?.whatsappUrl,
+  patreonUrl: artistDoc?.patreonUrl,
+};
 
 /* -------------------------------------------------------------------------- */
 /*                                  Home                                      */
 /* -------------------------------------------------------------------------- */
 
 export const home: Home = (() => {
-  const page = getPage("", "home");
-  if (!page) return {};
-  const plan = imagePlan["/home"] ?? [];
-  if (plan.length === 0) return {};
-  const first = plan[0];
-  return {
-    hero: {
-      src: `/${first.local}`,
-      name: first.name,
-      width: first.width,
-      height: first.height,
-      alt: "Aglaya Nogina at work — featured artwork",
-    },
-  };
+  const portraitImage = portrait;
+  if (!portraitImage) return {};
+  return { hero: portraitImage };
 })();
 
 /* -------------------------------------------------------------------------- */
-/*                                  About                                     */
+/*                            Writings (Phase 3a)                             */
 /* -------------------------------------------------------------------------- */
 
-const CV_HEADERS = [
-  "EDUCATION",
-  "PUBLICATIONS",
-  "SOLO EXHIBITIONS",
-  "SELECTED EXHIBITIONS",
-  "BIO",
-] as const;
+// Writings still come from parsed.json + MDX in Phase 3a. Phase 3b swaps to
+// Sanity Portable Text. The lookup API here keeps writings index pages
+// rendering without changes.
 
-type CVHeader = (typeof CV_HEADERS)[number];
+interface ParsedListing {
+  title: string;
+  href: string | null;
+}
 
-function parseCV(): About {
-  const page = getPage("", "about");
-  if (!page) {
-    return {
-      intro: "",
-      paragraphs: [],
-      cv: { education: [], publications: [], soloExhibitions: [], selectedExhibitions: [] },
-    };
-  }
+interface ParsedPage {
+  file: string;
+  title: string;
+  blocks: Array<[string, string | string[]]>;
+  listing: ParsedListing[];
+}
 
-  // CV section headers may arrive as h5/h6 (e.g., EDUCATION) or as plain
-  // paragraphs whose text is the all-caps section title (PUBLICATIONS, SOLO
-  // EXHIBITIONS, etc.). Capture both kinds, in order.
-  const paras: string[] = [];
-  for (const block of page.blocks) {
-    const [kind, val] = block;
-    if (kind === "p" || kind === "blockquote" || kind === "h2" || kind === "h3" || kind === "h4" || kind === "h5" || kind === "h6") {
-      const txt = clean(val as string);
-      if (txt) paras.push(txt);
-    }
-  }
+const parsedPages = parsedRaw as unknown as ParsedPage[];
+const writingsIndexListing =
+  parsedPages.find((p) => p.file === "_raw/writings.html")?.listing ?? [];
 
-  const sections: Record<CVHeader, string[]> = {
-    EDUCATION: [],
-    PUBLICATIONS: [],
-    "SOLO EXHIBITIONS": [],
-    "SELECTED EXHIBITIONS": [],
-    BIO: [],
+function buildWriting(slug: string, routeSlug: string, title: string): WritingEntry | null {
+  const page = parsedPages.find((p) => p.file === `_raw/writings/${slug}.html`);
+  if (!page) return null;
+  const paras = page.blocks
+    .filter(([k]) => k === "p" || k === "blockquote")
+    .map(([, v]) => (typeof v === "string" ? v : "").replace(/‍/g, "").trim())
+    .filter(Boolean);
+  const cleaned = paras[0] === title ? paras.slice(1) : paras;
+  return {
+    section: "writings",
+    slug,
+    routeSlug,
+    title,
+    href: `/writings/${routeSlug}`,
+    images: [],
+    paragraphs: cleaned,
+    excerpt: cleaned[0]?.slice(0, 200) ?? "",
   };
+}
 
-  let current: CVHeader | null = null;
-  for (const para of paras) {
-    const upper = para.toUpperCase();
-    const match = CV_HEADERS.find((h) => upper === h || upper.startsWith(h));
-    if (match) {
-      current = match;
-      continue;
-    }
-    if (current) sections[current].push(para);
-  }
+export const writings: WritingEntry[] = writingsIndexListing
+  .filter((it) => it.href && it.title && !it.href.includes("webflow-io"))
+  .map((it) => {
+    const rawSlug = (it.href as string).replace(/^\/[^/]+\//, "");
+    const routeSlug = normalizeSlug(rawSlug);
+    return buildWriting(rawSlug, routeSlug, it.title);
+  })
+  .filter((w): w is WritingEntry => w !== null);
 
-  // Education comes as alternating year-line + entry-line pairs OR combined lines
-  const education = pairCV(sections.EDUCATION);
-  const publications = pairCV(sections.PUBLICATIONS);
-  const soloExhibitions = parseDashCV(sections["SOLO EXHIBITIONS"]);
-  const selectedExhibitions = parseDashCV(sections["SELECTED EXHIBITIONS"]);
+export function getWriting(slug: string) {
+  return writings.find((w) => w.routeSlug === slug);
+}
 
-  const bio = sections.BIO;
-  const intro = bio[0] ?? "";
-  const restParas = bio.slice(1);
+/* -------------------------------------------------------------------------- */
+/*                              Home picks                                    */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Studio-driven homepage selections. Each ref expanded to the resolved
+ * project / writing entry so home components don't need to fetch separately.
+ *
+ * Falls back gracefully when fields are empty in Sanity.
+ */
+export interface HomePicks {
+  heroItalic: string;
+  heroTagline: string;
+  featuredProject?: ProjectEntry;
+  featuredTeaser: string;
+  featuredExhibitionLine?: string;
+  selectedWorks: ProjectEntry[];
+  journalPicks: Array<{ writing: WritingEntry; teaser: string }>;
+}
+
+export const homePicks: HomePicks = (() => {
+  const fallbackTagline =
+    "Ukrainian visual artist working in xerography, painting, ceramic, and writing. Lives in Düsseldorf.";
+
+  const featuredSlug = homePicksDoc?.featuredProject
+    ? normalizeSlug(homePicksDoc.featuredProject.slug)
+    : undefined;
+  const featuredProject = featuredSlug ? getProject(featuredSlug) : undefined;
+
+  const selectedWorks = (homePicksDoc?.selectedWorks ?? [])
+    .map((ref) => getProject(normalizeSlug(ref.slug)))
+    .filter((p): p is ProjectEntry => p !== undefined);
+
+  const journalPicks = (homePicksDoc?.journalPicks ?? [])
+    .map((pick) => {
+      if (!pick.writing) return null;
+      const writing = getWriting(normalizeSlug(pick.writing.slug));
+      if (!writing) return null;
+      const teaser = pick.teaser?.trim() || writing.excerpt;
+      return { writing, teaser };
+    })
+    .filter(
+      (p): p is { writing: WritingEntry; teaser: string } => p !== null,
+    );
 
   return {
-    intro,
-    paragraphs: restParas,
-    cv: { education, publications, soloExhibitions, selectedExhibitions },
+    heroItalic: homePicksDoc?.heroItalic ?? "",
+    heroTagline: homePicksDoc?.heroTagline ?? fallbackTagline,
+    featuredProject,
+    featuredTeaser: homePicksDoc?.featuredTeaser ?? "",
+    featuredExhibitionLine: homePicksDoc?.featuredExhibitionLine,
+    selectedWorks,
+    journalPicks,
   };
-}
-
-/**
- * For sections like Education that arrive as alternating "2013 - 2017" / "Kharkiv Art College"
- * or some combined "2018 - 2022 Kyiv National Academy of Fine Arts and Architecture".
- */
-function pairCV(lines: string[]): CVRow[] {
-  const rows: CVRow[] = [];
-  let i = 0;
-  while (i < lines.length) {
-    const line = lines[i];
-    const yearMatch = line.match(/^((?:19|20)\d{2}(?:\s*[-–—]\s*(?:(?:19|20)?\d{2,4}|ongoing))?)/);
-    if (yearMatch && line === yearMatch[0]) {
-      // Year on its own line — pair with next
-      const next = lines[i + 1];
-      if (next) {
-        rows.push({ year: yearMatch[0], detail: next });
-        i += 2;
-        continue;
-      }
-    }
-    if (yearMatch) {
-      const year = yearMatch[0];
-      const detail = line.slice(year.length).trim();
-      rows.push({ year, detail: detail || line });
-    } else {
-      // Continuation paragraph — append to previous row's detail
-      if (rows.length > 0) {
-        rows[rows.length - 1].detail += ` ${line}`;
-      } else {
-        rows.push({ year: "", detail: line });
-      }
-    }
-    i++;
-  }
-  return rows;
-}
-
-/**
- * For exhibitions sections: lines like "2025, October – \"Lost beauty\", curated by Daria Zhuravel at KUT Gallery, Kyiv"
- * Year is everything before the first em-dash / en-dash / hyphen separator.
- */
-function parseDashCV(lines: string[]): CVRow[] {
-  const rows: CVRow[] = [];
-  for (const line of lines) {
-    const match = line.match(/^([^—–-]+?)\s*[—–-]\s*(.+)$/);
-    if (match) {
-      rows.push({ year: match[1].trim(), detail: match[2].trim() });
-    } else {
-      rows.push({ year: "", detail: line });
-    }
-  }
-  return rows;
-}
-
-export const about: About = parseCV();
+})();

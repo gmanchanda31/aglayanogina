@@ -32,13 +32,17 @@ export function HomeHero() {
             NOGINA
           </h1>
 
-          <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-xl md:text-2xl lg:text-[1.625rem] leading-[1.4] mt-8 max-w-[36ch]">
-            {HERO_ITALIC}
-          </p>
+          {HERO_ITALIC ? (
+            <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-xl md:text-2xl lg:text-[1.625rem] leading-[1.4] mt-8 max-w-[36ch]">
+              {HERO_ITALIC}
+            </p>
+          ) : null}
 
-          <p className="label-caps text-stone mt-8 max-w-md leading-[1.6]">
-            {HERO_TAGLINE}
-          </p>
+          {HERO_TAGLINE ? (
+            <p className={`label-caps text-stone max-w-md leading-[1.6] ${HERO_ITALIC ? "mt-8" : "mt-10"}`}>
+              {HERO_TAGLINE}
+            </p>
+          ) : null}
 
           <div className="flex flex-wrap gap-4 mt-10">
             <Link

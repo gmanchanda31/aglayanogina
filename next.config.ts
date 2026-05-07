@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     // Layouts cap at 1200 — generating 3840 variants is wasted CPU and bytes
     deviceSizes: [640, 750, 828, 1080, 1200, 1600, 1920],
+    // Sanity-hosted images come through the CDN
+    remotePatterns: [
+      { protocol: "https", hostname: "cdn.sanity.io" },
+    ],
   },
   async headers() {
     return [

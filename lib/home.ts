@@ -1,16 +1,20 @@
 /**
- * Home-page data picks. Centralised here so each home component can be a
- * pure presentational unit — no content decisions baked into JSX.
+ * Thin home-page data layer. All dynamic content (hero italic, featured
+ * project, selected works, journal picks, statement paragraph, portrait)
+ * comes from Sanity via lib/content.ts. The only thing static here is
+ * the practice ribbon — that's route configuration, not content.
  *
- * Everything resolves at module load (build time). All sources live in
- * `lib/content.ts` so swapping a featured project is a one-line change here.
+ * Invented strings that lived in this file before (the homepage hero
+ * italic, journal teasers, featured-project teaser) are removed. Aglaya
+ * fills those in studio; components hide the line gracefully when empty.
  */
 
 import {
+  about,
   getProject,
-  getWriting,
+  homePicks,
   photographSets,
-  projects,
+  portrait,
 } from "./content";
 import type { ImageRef, ProjectEntry, WritingEntry } from "./types";
 
@@ -18,17 +22,14 @@ import type { ImageRef, ProjectEntry, WritingEntry } from "./types";
 /*                                 HERO                                       */
 /* -------------------------------------------------------------------------- */
 
-export const HERO_ITALIC =
-  "I work with memory, displacement, and the shape of friendship across distance.";
+/** Hero italic line — comes from Sanity, may be empty. */
+export const HERO_ITALIC: string = homePicks.heroItalic;
 
-export const HERO_TAGLINE =
-  "Ukrainian visual artist working in xerography, painting, ceramic, and writing. Lives in Düsseldorf.";
+/** Hero tagline — comes from Sanity (with a sensible fallback). */
+export const HERO_TAGLINE: string = homePicks.heroTagline;
 
-/**
- * Studio portrait — the only photo we have of Aglaya in front of her work.
- * Dimensions copied from the measured value in `data/image_plan.json`.
- */
-export const HERO_PORTRAIT: ImageRef = {
+/** Studio portrait — Sanity-uploaded; falls back to the bundled studio shot. */
+export const HERO_PORTRAIT: ImageRef = portrait ?? {
   src: "/assets/home/home/001_a2f83c866258b1c4ae29ff098079fb6ef408549a.jpg",
   name: "studio-portrait.jpg",
   alt: "Aglaya Nogina in her Düsseldorf studio, in front of a large monochrome xerography print on textile",
@@ -43,9 +44,8 @@ export const HERO_PORTRAIT: ImageRef = {
 export interface PracticeTile {
   label: string;
   href: string;
-  /** When `image` is null, the tile renders as a special card. */
+  /** When `image` is null, the tile renders as a special typographic card. */
   image: ImageRef | null;
-  /** Optional copy used in the card variant (writing tile). */
   cardLine?: string;
   cardSubline?: string;
 }
@@ -56,21 +56,9 @@ function tileImage(project: ProjectEntry | undefined, label: string): ImageRef |
 }
 
 export const practiceTiles: PracticeTile[] = [
-  {
-    label: "Print",
-    href: "/projects",
-    image: tileImage(getProject("archipelago"), "Print"),
-  },
-  {
-    label: "Painting",
-    href: "/projects",
-    image: tileImage(getProject("terra-memoria-mundi"), "Painting"),
-  },
-  {
-    label: "Ceramic",
-    href: "/projects/ceramic",
-    image: tileImage(getProject("ceramic"), "Ceramic"),
-  },
+  { label: "Print",       href: "/projects",           image: tileImage(getProject("archipelago"),         "Print") },
+  { label: "Painting",    href: "/projects",           image: tileImage(getProject("terra-memoria-mundi"), "Painting") },
+  { label: "Ceramic",     href: "/projects/ceramic",   image: tileImage(getProject("ceramic"),             "Ceramic") },
   {
     label: "Photography",
     href: "/photographs",
@@ -92,8 +80,14 @@ export const practiceTiles: PracticeTile[] = [
 /*                               STATEMENT                                    */
 /* -------------------------------------------------------------------------- */
 
-export const STATEMENT_PARAGRAPH =
-  "Aglaya was born in Luhansk in 1996 and lived in Kharkiv and Kyiv. After the full-scale war began, she moved to Düsseldorf, where she currently lives and studies at the Kunstakademie. She works with graphic media — relief printing, xerography, engraving — alongside painting, photography, ceramics, textiles, and text. In her work, she explores self-identification, memory, emigration, and relationships during the war.";
+/**
+ * Centered statement on the homepage. Built from the artist's real bio:
+ * intro paragraph + the body paragraphs joined.
+ */
+export const STATEMENT_PARAGRAPH: string = (() => {
+  const parts = [about.intro, ...about.paragraphs].filter(Boolean);
+  return parts.join(" ");
+})();
 
 /* -------------------------------------------------------------------------- */
 /*                            FEATURED PROJECT                                */
@@ -107,13 +101,11 @@ export interface FeaturedProject {
   exhibitionLine?: string;
 }
 
-const lostBeauty = getProject("lost-beauty");
-
-export const featuredProject: FeaturedProject | null = lostBeauty
+export const featuredProject: FeaturedProject | null = homePicks.featuredProject
   ? {
-      project: lostBeauty,
-      teaser: "Beauty as a process of recovery after loss.",
-      exhibitionLine: "KUT Gallery, Kyiv · October 2025",
+      project: homePicks.featuredProject,
+      teaser: homePicks.featuredTeaser,
+      exhibitionLine: homePicks.featuredExhibitionLine,
     }
   : null;
 
@@ -121,40 +113,16 @@ export const featuredProject: FeaturedProject | null = lostBeauty
 /*                            SELECTED WORKS                                  */
 /* -------------------------------------------------------------------------- */
 
-const SELECTED_SLUGS = [
-  "archipelago",
-  "terra-memoria-mundi",
-  "nest",
-  "archipelago-book",
-] as const;
-
-export const selectedWorks: ProjectEntry[] = SELECTED_SLUGS
-  .map((slug) => projects.find((p) => p.routeSlug === slug))
-  .filter((p): p is ProjectEntry => p !== undefined);
+export const selectedWorks: ProjectEntry[] = homePicks.selectedWorks;
 
 /* -------------------------------------------------------------------------- */
 /*                              JOURNAL PAIR                                  */
 /* -------------------------------------------------------------------------- */
 
-const JOURNAL_SLUGS = ["afterlife", "5-2-richard-bach-street"] as const;
-
 export interface JournalPick {
   writing: WritingEntry;
-  /** Single-sentence teaser used on the home card — keep ≤ 110 chars. */
+  /** Single-sentence teaser used on the home card. */
   teaser: string;
 }
 
-const teasers: Record<string, string> = {
-  afterlife:
-    "Standing in line at the gates, chewing gum with the flavor of afterlife.",
-  "5-2-richard-bach-street":
-    "Returning to the Luhansk apartment that lives now only in dreams.",
-};
-
-export const journalPicks: JournalPick[] = JOURNAL_SLUGS
-  .map((slug) => {
-    const writing = getWriting(slug);
-    if (!writing) return null;
-    return { writing, teaser: teasers[slug] ?? writing.excerpt };
-  })
-  .filter((p): p is JournalPick => p !== null);
+export const journalPicks: JournalPick[] = homePicks.journalPicks;

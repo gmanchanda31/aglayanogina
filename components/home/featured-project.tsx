@@ -46,9 +46,11 @@ export function FeaturedProject() {
             >
               {project.title}
             </h2>
-            <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-xl md:text-[1.5rem] leading-[1.4] mt-6 max-w-xl">
-              {teaser}
-            </p>
+            {teaser ? (
+              <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-xl md:text-[1.5rem] leading-[1.4] mt-6 max-w-xl">
+                {teaser}
+              </p>
+            ) : null}
             <Link
               href={project.href}
               className="group inline-flex items-center gap-2 mt-10 px-7 py-3 border border-ink text-ink label-caps hover:bg-ink hover:text-paper transition-colors duration-300"
