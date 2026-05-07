@@ -1,5 +1,5 @@
-import parsedRaw from "@/_scrape/scripts/parsed.json";
-import imagePlanRaw from "@/_scrape/scripts/image_plan.json";
+import parsedRaw from "@/data/parsed.json";
+import imagePlanRaw from "@/data/image_plan.json";
 import type {
   About,
   Contact,

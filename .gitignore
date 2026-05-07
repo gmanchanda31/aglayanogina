@@ -40,10 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# scrape artifacts (raw HTML, parser scripts, design previews)
-/_scrape/raw/
-/_scrape/previews/
-/_scrape/scripts/__pycache__/
+# scrape artifacts — kept only as a local reference, not part of the build.
+# All content data has been moved to /data/ (parsed.json + image_plan.json).
+/_scrape/
 
 # dev screenshots (manual + playwright)
 /phase*-*.png

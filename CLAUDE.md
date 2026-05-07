@@ -84,12 +84,14 @@ all-caps with `.label-caps` (12-13px, tracked 0.12em).
   /assets/<section>/<slug>/   # All artwork — committed to the repo (~110MB)
   /fonts/                  # TTFs used by ImageResponse (OG, favicon)
 
-/_scrape                   # Original scrape artifacts (kept for reference)
-  /scripts/parsed.json     # ★ The content data the site reads from
-  /scripts/image_plan.json # URL → local path map
-  /scripts/*.py            # Original parser scripts
-  /raw/                    # Original HTML — gitignored
-  /previews/               # Stitch design previews — gitignored
+/data                      # ★ Content truth source — read at build time
+  parsed.json              # The content tree (pages, blocks, listings)
+  image_plan.json          # URL → local-asset map
+  README.md                # Editing notes for this directory
+
+/_scrape                   # Original scrape artifacts — gitignored
+  /raw/                    # Original Webflow HTML (reference only)
+  /previews/               # Stitch design previews (reference only)
 
 mdx-components.tsx         # MDX component overrides (h2, p, em, DropCap, PullQuote)
 next.config.ts             # MDX, image config, security headers
@@ -116,12 +118,12 @@ typechecks, and prerenders every route + every OG image.
 ## How the content flows
 
 The site is **fully static** — every page is prerendered at build time from
-data in `_scrape/scripts/parsed.json` plus images in `public/assets/`.
+data in `data/parsed.json` plus images in `public/assets/`.
 
 ```
-_scrape/scripts/parsed.json   ──┐
-_scrape/scripts/image_plan.json ├─→  lib/content.ts  ──→  app/<route>/page.tsx
-public/assets/<section>/<slug>/ ─┘                         (prerendered HTML)
+data/parsed.json     ─┐
+data/image_plan.json  ├─→  lib/content.ts  ──→  app/<route>/page.tsx
+public/assets/...    ─┘                          (prerendered HTML)
 ```
 
 **`lib/content.ts` is the single source of truth in code.** Pages import
@@ -181,7 +183,7 @@ import { projects, exhibitions, getProject, about, contact } from "@/lib/content
 ## Adding new content — step by step
 
 > **TL;DR.** New artwork goes into `public/assets/<section>/<slug>/`. New
-> entries go into `_scrape/scripts/parsed.json` + `_scrape/scripts/image_plan.json`.
+> entries go into `data/parsed.json` + `data/image_plan.json`.
 > New essays go into `content/writings/<slug>.mdx` + a registry entry.
 
 ### Add a new project
@@ -197,7 +199,7 @@ import { projects, exhibitions, getProject, about, contact } from "@/lib/content
    so order is stable (`001_IMG_1.jpeg`, `002_IMG_2.jpeg`, …). Keep originals
    under ~3 MB; `next/image` handles resizing.
 
-2. **Add the entry to `_scrape/scripts/image_plan.json`**:
+2. **Add the entry to `data/image_plan.json`**:
 
    ```jsonc
    "projects/<slug>": [
@@ -209,7 +211,7 @@ import { projects, exhibitions, getProject, about, contact } from "@/lib/content
    `url` can be the string `"local-only"` (or any unique placeholder) — it's
    used as a deduplication key, not fetched.
 
-3. **Append the project page to `_scrape/scripts/parsed.json`**:
+3. **Append the project page to `data/parsed.json`**:
 
    ```jsonc
    {
@@ -278,7 +280,7 @@ The simplest content task. To add 5 new photos to `colour`:
 
 1. Drop them into `public/assets/photographs/colour/` with sequential
    filenames (e.g. `025_IMG_NEW1.jpeg` continuing from the existing 24).
-2. Append entries to `_scrape/scripts/image_plan.json` under
+2. Append entries to `data/image_plan.json` under
    `"photographs/colour"` — one per file, same shape as existing entries.
 3. Append the matching `"local-only"` entries to the `images` array of the
    colour page in `parsed.json` (`_raw/photographs/colour.html`).
@@ -351,7 +353,7 @@ automatically.
 
 To add a new exhibition row:
 
-1. Open `_scrape/scripts/parsed.json`, find the about entry.
+1. Open `data/parsed.json`, find the about entry.
 2. Inside `blocks`, add a new `["p", "<year>, <month> — <name> at <venue>, <city>"]`
    under the right section heading.
 3. Build + push.
@@ -390,7 +392,7 @@ These flow into the footer and the Patreon CTAs.
 - **Don't introduce new fonts.** Vollkorn + Inter only.
 - **Don't add icons from outside `lucide-react`.**
 - **Use `next/image` for every artwork.** Always pass an explicit `sizes` prop.
-- **Keep `_scrape/scripts/parsed.json` valid JSON.** A single trailing comma will
+- **Keep `data/parsed.json` valid JSON.** A single trailing comma will
   break the build. Run `pnpm build` after edits before committing.
 - **Slugs.** Lowercase, hyphenated, no trailing hyphens, no diacritics
   (URL: `lost-beauty`, asset folder: `lost-beauty/`). The content layer
@@ -504,8 +506,8 @@ Lighthouse should sit at 95+ across the board. Re-run after big changes.
 1. Read `lib/content.ts` and `lib/types.ts`. They are the contract.
 2. Look at how an existing entry (e.g. Archipelago project) is wired,
    end-to-end:
-   - `_scrape/scripts/parsed.json` (entry + listing reference)
-   - `_scrape/scripts/image_plan.json` (image map)
+   - `data/parsed.json` (entry + listing reference)
+   - `data/image_plan.json` (image map)
    - `public/assets/projects/archipelago/` (the actual files)
    - `app/projects/[slug]/page.tsx` (route)
    - `components/detail/entry-detail.tsx` (template)
