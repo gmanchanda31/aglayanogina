@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const vollkorn = Vollkorn({
@@ -20,8 +21,6 @@ const inter = Inter({
   weight: ["300", "400", "500", "600"],
   display: "swap",
 });
-
-const SITE_URL = "https://aglayanogina.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

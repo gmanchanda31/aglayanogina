@@ -2,6 +2,7 @@
 import path from "node:path";
 import fs from "node:fs/promises";
 import { ImageResponse } from "next/og";
+import { SITE_HOST } from "@/lib/site";
 
 export const OG_SIZE = { width: 1200, height: 630 } as const;
 export const OG_CONTENT_TYPE = "image/png";
@@ -148,7 +149,7 @@ export async function landingOG({ eyebrow, title, lede, imagePath }: LandingOGPr
                 color: COLOR.stone,
               }}
             >
-              aglayanogina.com
+              {SITE_HOST}
             </div>
             <div
               style={{
@@ -338,7 +339,7 @@ export async function detailOG({ section, title, meta, imagePath }: DetailOGProp
                 color: COLOR.stone,
               }}
             >
-              aglayanogina.com
+              {SITE_HOST}
             </div>
           </div>
         </div>
