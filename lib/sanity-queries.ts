@@ -34,7 +34,7 @@ export const ARTIST_QUERY = /* groq */ `*[_type == "artist" && _id == "artist"][
   selectedExhibitions[]{ year, detail }
 }`;
 
-const ENTRY_PROJECTION = /* groq */ `{
+export const PROJECTS_QUERY = /* groq */ `*[_type == "project"] | order(year desc) {
   _id,
   title,
   "slug": slug.current,
@@ -43,14 +43,10 @@ const ENTRY_PROJECTION = /* groq */ `{
   location,
   dimensions,
   description,
+  kinds,
   hero ${IMAGE_WITH_ALT},
   gallery[] ${IMAGE_WITH_ALT}
 }`;
-
-export const PROJECTS_QUERY = /* groq */ `*[_type == "project"] | order(year desc) ${ENTRY_PROJECTION.replace(
-  "}",
-  ', kinds }',
-)}`;
 
 export const EXHIBITIONS_QUERY = /* groq */ `*[_type == "exhibition"] | order(year desc) {
   _id,
