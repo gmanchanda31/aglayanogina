@@ -1,0 +1,99 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* Editorial Gallery palette */
+  --color-paper: #faf7f2;
+  --color-ink: #0f0e0d;
+  --color-clay: #b5826a;
+  --color-mist: #e8e2d8;
+  --color-stone: #6b655e;
+
+  /* Typography — fonts come from next/font CSS variables */
+  --font-serif: var(--font-vollkorn), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Base radii — Stitch HTML uses 2px default */
+  --radius: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+
+  /* Container */
+  --spacing-container: 1200px;
+
+  /* shadcn-style mappings */
+  --color-background: var(--color-paper);
+  --color-foreground: var(--color-ink);
+  --color-primary: var(--color-ink);
+  --color-primary-foreground: var(--color-paper);
+  --color-secondary: var(--color-mist);
+  --color-secondary-foreground: var(--color-ink);
+  --color-muted: var(--color-mist);
+  --color-muted-foreground: var(--color-stone);
+  --color-accent: var(--color-clay);
+  --color-accent-foreground: var(--color-paper);
+  --color-border: var(--color-mist);
+  --color-input: var(--color-mist);
+  --color-ring: var(--color-clay);
+  --color-destructive: #b54040;
+  --color-destructive-foreground: var(--color-paper);
+}
+
+* {
+  border-color: var(--color-mist);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: rgba(181 130 106 / 0.25);
+  color: var(--color-ink);
+}
+
+/* Utilities used throughout the design language */
+@utility label-caps {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+@utility serif {
+  font-family: var(--font-serif);
+}
+
+@utility serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+/* Subtle, accessible focus ring used everywhere */
+:where(a, button, [role="button"], input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-clay);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+/* Honor reduced motion preference globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

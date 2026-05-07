@@ -1,0 +1,1567 @@
+{
+  "/about": [],
+  "exhibitions/archipelago-berlin": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9c1080dbd3240bb3b1bd_IMG_6364.jpeg",
+      "local": "assets/exhibitions/archipelago-berlin/001_IMG_6364.jpeg",
+      "name": "001_IMG_6364.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9c105af39382aa3e1593_IMG_6365.jpeg",
+      "local": "assets/exhibitions/archipelago-berlin/002_IMG_6365.jpeg",
+      "name": "002_IMG_6365.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9c09c6b0c96a5f5dedcd_IMG_6363.jpeg",
+      "local": "assets/exhibitions/archipelago-berlin/003_IMG_6363.jpeg",
+      "name": "003_IMG_6363.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9c1098a44e16d914be11_IMG_6362.jpeg",
+      "local": "assets/exhibitions/archipelago-berlin/004_IMG_6362.jpeg",
+      "name": "004_IMG_6362.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9c105ef6b4c850c4e095_IMG_6361.jpeg",
+      "local": "assets/exhibitions/archipelago-berlin/005_IMG_6361.jpeg",
+      "name": "005_IMG_6361.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9c10baae65a18a508076_IMG_6366.jpeg",
+      "local": "assets/exhibitions/archipelago-berlin/006_IMG_6366.jpeg",
+      "name": "006_IMG_6366.jpeg"
+    }
+  ],
+  "exhibitions/archipelago-dusseldorf": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9acb528ab28c28e16d56_IMG_6373.jpeg",
+      "local": "assets/exhibitions/archipelago-dusseldorf/001_IMG_6373.jpeg",
+      "name": "001_IMG_6373.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9ab9b41b2956ce2b261b_IMG_6372.jpeg",
+      "local": "assets/exhibitions/archipelago-dusseldorf/002_IMG_6372.jpeg",
+      "name": "002_IMG_6372.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9acb625ed872be3fff5d_IMG_6371.jpeg",
+      "local": "assets/exhibitions/archipelago-dusseldorf/003_IMG_6371.jpeg",
+      "name": "003_IMG_6371.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9acbd454783d5fe8d1c5_IMG_6370.jpeg",
+      "local": "assets/exhibitions/archipelago-dusseldorf/004_IMG_6370.jpeg",
+      "name": "004_IMG_6370.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9acafd415b592b506282_IMG_6369.jpeg",
+      "local": "assets/exhibitions/archipelago-dusseldorf/005_IMG_6369.jpeg",
+      "name": "005_IMG_6369.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9aca4467b345f79bd9cc_IMG_6368.jpeg",
+      "local": "assets/exhibitions/archipelago-dusseldorf/006_IMG_6368.jpeg",
+      "name": "006_IMG_6368.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9aca8bf7c0c3b6e5d17d_IMG_6367.jpeg",
+      "local": "assets/exhibitions/archipelago-dusseldorf/007_IMG_6367.jpeg",
+      "name": "007_IMG_6367.jpeg"
+    }
+  ],
+  "exhibitions/aura-kunstraum-dusseldorf": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ec05666a6533908c5bdc9_IMG_6560.jpeg",
+      "local": "assets/exhibitions/aura-kunstraum-dusseldorf/001_IMG_6560.jpeg",
+      "name": "001_IMG_6560.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ec05dce9d6a977ea3f479_IMG_6559.jpeg",
+      "local": "assets/exhibitions/aura-kunstraum-dusseldorf/002_IMG_6559.jpeg",
+      "name": "002_IMG_6559.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ec06b0b9e9bb9d7658ab1_IMG_6561.jpeg",
+      "local": "assets/exhibitions/aura-kunstraum-dusseldorf/003_IMG_6561.jpeg",
+      "name": "003_IMG_6561.jpeg"
+    }
+  ],
+  "exhibitions/carpathians": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9eb366d8a1f786d90ee4_IMG_6386.jpeg",
+      "local": "assets/exhibitions/carpathians/001_IMG_6386.jpeg",
+      "name": "001_IMG_6386.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9eb3f5522eac68f885f4_IMG_6385.jpeg",
+      "local": "assets/exhibitions/carpathians/002_IMG_6385.jpeg",
+      "name": "002_IMG_6385.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9ea74122f89a1b4683a9_IMG_6383.jpeg",
+      "local": "assets/exhibitions/carpathians/003_IMG_6383.jpeg",
+      "name": "003_IMG_6383.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9ea703048526af8339ae_IMG_6387.jpeg",
+      "local": "assets/exhibitions/carpathians/004_IMG_6387.jpeg",
+      "name": "004_IMG_6387.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9ea7dd6a1e5e2723c5ef_IMG_6382.jpeg",
+      "local": "assets/exhibitions/carpathians/005_IMG_6382.jpeg",
+      "name": "005_IMG_6382.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9ea74b0580c2b0ae8192_IMG_6381.jpeg",
+      "local": "assets/exhibitions/carpathians/006_IMG_6381.jpeg",
+      "name": "006_IMG_6381.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9ea7959d139bb138e06a_IMG_6380.jpeg",
+      "local": "assets/exhibitions/carpathians/007_IMG_6380.jpeg",
+      "name": "007_IMG_6380.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9e67dae5413c0ea530a6_IMG_6379.jpeg",
+      "local": "assets/exhibitions/carpathians/008_IMG_6379.jpeg",
+      "name": "008_IMG_6379.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9ea62f33bd55f88d473c_IMG_6378.jpeg",
+      "local": "assets/exhibitions/carpathians/009_IMG_6378.jpeg",
+      "name": "009_IMG_6378.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9ea6528ab28c28e2a7c5_IMG_6377.jpeg",
+      "local": "assets/exhibitions/carpathians/010_IMG_6377.jpeg",
+      "name": "010_IMG_6377.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9ea69e6e9d4851eac5bc_IMG_6376.jpeg",
+      "local": "assets/exhibitions/carpathians/011_IMG_6376.jpeg",
+      "name": "011_IMG_6376.jpeg"
+    }
+  ],
+  "exhibitions/kyiv": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9d0ab694ddd08d862720_IMG_6349.jpeg",
+      "local": "assets/exhibitions/kyiv/001_IMG_6349.jpeg",
+      "name": "001_IMG_6349.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9d09bc27e6f444cf1429_IMG_6356.jpeg",
+      "local": "assets/exhibitions/kyiv/002_IMG_6356.jpeg",
+      "name": "002_IMG_6356.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9d097bd391f1fd51d663_IMG_6357.jpeg",
+      "local": "assets/exhibitions/kyiv/003_IMG_6357.jpeg",
+      "name": "003_IMG_6357.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9d0278ea86b00a3bddc6_IMG_6358.jpeg",
+      "local": "assets/exhibitions/kyiv/004_IMG_6358.jpeg",
+      "name": "004_IMG_6358.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9d00d53c12e229cd208e_IMG_6359.jpeg",
+      "local": "assets/exhibitions/kyiv/005_IMG_6359.jpeg",
+      "name": "005_IMG_6359.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9cddf0b879031eda5604_IMG_6351.jpeg",
+      "local": "assets/exhibitions/kyiv/006_IMG_6351.jpeg",
+      "name": "006_IMG_6351.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9d040c55238dd7340f16_IMG_6353.jpeg",
+      "local": "assets/exhibitions/kyiv/007_IMG_6353.jpeg",
+      "name": "007_IMG_6353.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9d003033e98ef117ffd4_IMG_6352.jpeg",
+      "local": "assets/exhibitions/kyiv/008_IMG_6352.jpeg",
+      "name": "008_IMG_6352.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9d00a682c45bd892511b_IMG_6354.jpeg",
+      "local": "assets/exhibitions/kyiv/009_IMG_6354.jpeg",
+      "name": "009_IMG_6354.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9d0072f9bb27bd9d0339_IMG_6355.jpeg",
+      "local": "assets/exhibitions/kyiv/010_IMG_6355.jpeg",
+      "name": "010_IMG_6355.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9d00000f8e26234b5bf5_IMG_6350.jpeg",
+      "local": "assets/exhibitions/kyiv/011_IMG_6350.jpeg",
+      "name": "011_IMG_6350.jpeg"
+    }
+  ],
+  "exhibitions/landscapes-of-memory": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea10683e7cf398ff20494_IMG_6388.jpeg",
+      "local": "assets/exhibitions/landscapes-of-memory/001_IMG_6388.jpeg",
+      "name": "001_IMG_6388.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea16de99236cee7df6a1e_IMG_6400.jpeg",
+      "local": "assets/exhibitions/landscapes-of-memory/002_IMG_6400.jpeg",
+      "name": "002_IMG_6400.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea0dedf447eed8eaea074_IMG_6393.jpeg",
+      "local": "assets/exhibitions/landscapes-of-memory/003_IMG_6393.jpeg",
+      "name": "003_IMG_6393.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea8db8c52bdc8e8cafcc2_IMG_6403.jpeg",
+      "local": "assets/exhibitions/landscapes-of-memory/004_IMG_6403.jpeg",
+      "name": "004_IMG_6403.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea10698a44e16d916464c_IMG_6396.jpeg",
+      "local": "assets/exhibitions/landscapes-of-memory/005_IMG_6396.jpeg",
+      "name": "005_IMG_6396.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea107c14176069acdd6df_IMG_6392.jpeg",
+      "local": "assets/exhibitions/landscapes-of-memory/006_IMG_6392.jpeg",
+      "name": "006_IMG_6392.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea8db98ab7b56a628bebc_IMG_6405.jpeg",
+      "local": "assets/exhibitions/landscapes-of-memory/007_IMG_6405.jpeg",
+      "name": "007_IMG_6405.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea1076d04986759ae399f_IMG_6394.jpeg",
+      "local": "assets/exhibitions/landscapes-of-memory/008_IMG_6394.jpeg",
+      "name": "008_IMG_6394.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea1069c60ed5937d58f16_IMG_6391.jpeg",
+      "local": "assets/exhibitions/landscapes-of-memory/009_IMG_6391.jpeg",
+      "name": "009_IMG_6391.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea1073589e62d12dda7ea_IMG_6395.jpeg",
+      "local": "assets/exhibitions/landscapes-of-memory/010_IMG_6395.jpeg",
+      "name": "010_IMG_6395.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea107f2104a06c0459d8c_IMG_6399.jpeg",
+      "local": "assets/exhibitions/landscapes-of-memory/011_IMG_6399.jpeg",
+      "name": "011_IMG_6399.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea1064122f89a1b47178b_IMG_6397.jpeg",
+      "local": "assets/exhibitions/landscapes-of-memory/012_IMG_6397.jpeg",
+      "name": "012_IMG_6397.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea106f50d2c053fd91c55_IMG_6390.jpeg",
+      "local": "assets/exhibitions/landscapes-of-memory/013_IMG_6390.jpeg",
+      "name": "013_IMG_6390.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea106000f8e26234c56fa_IMG_6389.jpeg",
+      "local": "assets/exhibitions/landscapes-of-memory/014_IMG_6389.jpeg",
+      "name": "014_IMG_6389.jpeg"
+    }
+  ],
+  "exhibitions/lost-beauty": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7ad17dc68af6622c74d_IMG_6442.jpeg",
+      "local": "assets/exhibitions/lost-beauty/001_IMG_6442.jpeg",
+      "name": "001_IMG_6442.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7ab28483cd55f9436ca_IMG_6411.jpeg",
+      "local": "assets/exhibitions/lost-beauty/002_IMG_6411.jpeg",
+      "name": "002_IMG_6411.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7ac5fb769fa12516380_IMG_6425.jpeg",
+      "local": "assets/exhibitions/lost-beauty/003_IMG_6425.jpeg",
+      "name": "003_IMG_6425.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7adf49c69162653692e_IMG_6447.jpeg",
+      "local": "assets/exhibitions/lost-beauty/004_IMG_6447.jpeg",
+      "name": "004_IMG_6447.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7acb841e4b5ccac2d0d_IMG_6421.jpeg",
+      "local": "assets/exhibitions/lost-beauty/005_IMG_6421.jpeg",
+      "name": "005_IMG_6421.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7ac911201f351c2b87a_IMG_6424.jpeg",
+      "local": "assets/exhibitions/lost-beauty/006_IMG_6424.jpeg",
+      "name": "006_IMG_6424.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7ab88f66626ab8ca564_IMG_6414.jpeg",
+      "local": "assets/exhibitions/lost-beauty/007_IMG_6414.jpeg",
+      "name": "007_IMG_6414.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7ab07298459ece8e375_IMG_6412.jpeg",
+      "local": "assets/exhibitions/lost-beauty/008_IMG_6412.jpeg",
+      "name": "008_IMG_6412.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7aabb2b8b4f9490c4c3_IMG_6410.jpeg",
+      "local": "assets/exhibitions/lost-beauty/009_IMG_6410.jpeg",
+      "name": "009_IMG_6410.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7aa166dc04852071a8d_IMG_6427.jpeg",
+      "local": "assets/exhibitions/lost-beauty/010_IMG_6427.jpeg",
+      "name": "010_IMG_6427.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7aa36c7c6e199c50bd8_IMG_6438.jpeg",
+      "local": "assets/exhibitions/lost-beauty/011_IMG_6438.jpeg",
+      "name": "011_IMG_6438.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7aa0ba957048f420742_IMG_6439.jpeg",
+      "local": "assets/exhibitions/lost-beauty/012_IMG_6439.jpeg",
+      "name": "012_IMG_6439.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7a9dcbbc19f95e9362e_IMG_6440.jpeg",
+      "local": "assets/exhibitions/lost-beauty/013_IMG_6440.jpeg",
+      "name": "013_IMG_6440.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7a9d1c5d7d4451f1953_IMG_6455.jpeg",
+      "local": "assets/exhibitions/lost-beauty/014_IMG_6455.jpeg",
+      "name": "014_IMG_6455.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7a9d20c099cf4b1f451_IMG_6441.jpeg",
+      "local": "assets/exhibitions/lost-beauty/015_IMG_6441.jpeg",
+      "name": "015_IMG_6441.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7aac6a6e5129e4d3519_IMG_6446.jpeg",
+      "local": "assets/exhibitions/lost-beauty/016_IMG_6446.jpeg",
+      "name": "016_IMG_6446.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7a9a34c2840a41ceae5_IMG_6434.jpeg",
+      "local": "assets/exhibitions/lost-beauty/017_IMG_6434.jpeg",
+      "name": "017_IMG_6434.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7a95202f58bbf062af2_IMG_6433.jpeg",
+      "local": "assets/exhibitions/lost-beauty/018_IMG_6433.jpeg",
+      "name": "018_IMG_6433.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7a91e39c6cfb2c280d1_IMG_6432.jpeg",
+      "local": "assets/exhibitions/lost-beauty/019_IMG_6432.jpeg",
+      "name": "019_IMG_6432.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7a897277586eb6a70e1_IMG_6429.jpeg",
+      "local": "assets/exhibitions/lost-beauty/020_IMG_6429.jpeg",
+      "name": "020_IMG_6429.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7a8991883faf53986eb_IMG_6428.jpeg",
+      "local": "assets/exhibitions/lost-beauty/021_IMG_6428.jpeg",
+      "name": "021_IMG_6428.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7a8db21bb43cbd2c297_IMG_6409.jpeg",
+      "local": "assets/exhibitions/lost-beauty/022_IMG_6409.jpeg",
+      "name": "022_IMG_6409.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7a8c21f65ea4ffb8db8_IMG_6415.jpeg",
+      "local": "assets/exhibitions/lost-beauty/023_IMG_6415.jpeg",
+      "name": "023_IMG_6415.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea7cb793563ae8611af97_IMG_6422.jpeg",
+      "local": "assets/exhibitions/lost-beauty/024_IMG_6422.jpeg",
+      "name": "024_IMG_6422.jpeg"
+    }
+  ],
+  "exhibitions/memories-of-the-future": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/696e0b419c4468974d77f732_IMG_6583.jpeg",
+      "local": "assets/exhibitions/memories-of-the-future/001_IMG_6583.jpeg",
+      "name": "001_IMG_6583.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/696e0b409e3a876557a39d09_IMG_6582.jpeg",
+      "local": "assets/exhibitions/memories-of-the-future/002_IMG_6582.jpeg",
+      "name": "002_IMG_6582.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/696e0b41113deb07546cf0af_IMG_6581.jpeg",
+      "local": "assets/exhibitions/memories-of-the-future/003_IMG_6581.jpeg",
+      "name": "003_IMG_6581.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/696e0b3842154c55a1696520_IMG_6580.jpeg",
+      "local": "assets/exhibitions/memories-of-the-future/004_IMG_6580.jpeg",
+      "name": "004_IMG_6580.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/696e0b4114b25c7401bf0a75_IMG_6579.jpeg",
+      "local": "assets/exhibitions/memories-of-the-future/005_IMG_6579.jpeg",
+      "name": "005_IMG_6579.jpeg"
+    }
+  ],
+  "exhibitions/schonhausen-palace-berlin": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ec1f3bdf4346eafe0a4e5_IMG_6567.jpeg",
+      "local": "assets/exhibitions/schonhausen-palace-berlin/001_IMG_6567.jpeg",
+      "name": "001_IMG_6567.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ec1f3ca12666f2bac9a48_IMG_6338.jpeg",
+      "local": "assets/exhibitions/schonhausen-palace-berlin/002_IMG_6338.jpeg",
+      "name": "002_IMG_6338.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ec1f28e28a4433ac9752e_IMG_6565.jpeg",
+      "local": "assets/exhibitions/schonhausen-palace-berlin/003_IMG_6565.jpeg",
+      "name": "003_IMG_6565.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ec1ddca12666f2bac96bb_IMG_6564.jpeg",
+      "local": "assets/exhibitions/schonhausen-palace-berlin/004_IMG_6564.jpeg",
+      "name": "004_IMG_6564.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ec1f21397f2d1a5aae762_IMG_6562.jpeg",
+      "local": "assets/exhibitions/schonhausen-palace-berlin/005_IMG_6562.jpeg",
+      "name": "005_IMG_6562.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ec1f2ba4abddb6fa08301_IMG_6563.jpeg",
+      "local": "assets/exhibitions/schonhausen-palace-berlin/006_IMG_6563.jpeg",
+      "name": "006_IMG_6563.jpeg"
+    }
+  ],
+  "/exhibitions": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/696e0b3842154c55a1696520_IMG_6580.jpeg",
+      "local": "assets/home/exhibitions/001_IMG_6580.jpeg",
+      "name": "001_IMG_6580.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ec1ddca12666f2bac96bb_IMG_6564.jpeg",
+      "local": "assets/home/exhibitions/002_IMG_6564.jpeg",
+      "name": "002_IMG_6564.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ec05666a6533908c5bdc9_IMG_6560.jpeg",
+      "local": "assets/home/exhibitions/003_IMG_6560.jpeg",
+      "name": "003_IMG_6560.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea82f1c5e8bb77686011a_IMG_6454.jpeg",
+      "local": "assets/home/exhibitions/004_IMG_6454.jpeg",
+      "name": "004_IMG_6454.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ea0dedf447eed8eaea074_IMG_6393.jpeg",
+      "local": "assets/home/exhibitions/005_IMG_6393.jpeg",
+      "name": "005_IMG_6393.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9e67dae5413c0ea530a6_IMG_6379.jpeg",
+      "local": "assets/home/exhibitions/006_IMG_6379.jpeg",
+      "name": "006_IMG_6379.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9cddf0b879031eda5604_IMG_6351.jpeg",
+      "local": "assets/home/exhibitions/007_IMG_6351.jpeg",
+      "name": "007_IMG_6351.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9bedac7fa5c634388f32_IMG_6374.jpeg",
+      "local": "assets/home/exhibitions/008_IMG_6374.jpeg",
+      "name": "008_IMG_6374.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e9ab9b41b2956ce2b261b_IMG_6372.jpeg",
+      "local": "assets/home/exhibitions/009_IMG_6372.jpeg",
+      "name": "009_IMG_6372.jpeg"
+    }
+  ],
+  "/home": [
+    {
+      "url": "https://cdn.prod.website-files.com/691864b1ef0cfc882104d0ae/6918c0dd7343a867f9af177b_a2f83c866258b1c4ae29ff098079fb6ef408549a.jpg",
+      "local": "assets/home/home/001_a2f83c866258b1c4ae29ff098079fb6ef408549a.jpg",
+      "name": "001_a2f83c866258b1c4ae29ff098079fb6ef408549a.jpg"
+    }
+  ],
+  "illustrations/illustrations-for-the-album-garden-of-loving-lilies": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e5d3c1496139802f22a6c_IMG_9838.jpeg",
+      "local": "assets/illustrations/illustrations-for-the-album-garden-of-loving-lilies/001_IMG_9838.jpeg",
+      "name": "001_IMG_9838.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e5d3c73bdfdc9df15989c_IMG_9834.jpeg",
+      "local": "assets/illustrations/illustrations-for-the-album-garden-of-loving-lilies/002_IMG_9834.jpeg",
+      "name": "002_IMG_9834.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e5d3c3d2130f5c79c2e41_IMG_9839.jpeg",
+      "local": "assets/illustrations/illustrations-for-the-album-garden-of-loving-lilies/003_IMG_9839.jpeg",
+      "name": "003_IMG_9839.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e5d3f38c38e67e99f1d00_IMG_9833.jpeg",
+      "local": "assets/illustrations/illustrations-for-the-album-garden-of-loving-lilies/004_IMG_9833.jpeg",
+      "name": "004_IMG_9833.jpeg"
+    }
+  ],
+  "illustrations/schmalgauzen-covers-": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e63ee72594c6c2d4b338e_IMG_6272.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/001_IMG_6272.jpeg",
+      "name": "001_IMG_6272.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e626e0bbf654439a1a0d5_IMG_9836.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/002_IMG_9836.jpeg",
+      "name": "002_IMG_9836.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e63ee24ccc5241847ba78_IMG_6269.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/003_IMG_6269.jpeg",
+      "name": "003_IMG_6269.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e63ee0190b2d10df003db_IMG_6268.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/004_IMG_6268.jpeg",
+      "name": "004_IMG_6268.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e635b4af89969a94db281_IMG_9842.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/005_IMG_9842.jpeg",
+      "name": "005_IMG_9842.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e6d2a61afe8b9e731a6dc_IMG_6279.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/006_IMG_6279.jpeg",
+      "name": "006_IMG_6279.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e626db74c47055f0f6dd1_IMG_9841.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/007_IMG_9841.jpeg",
+      "name": "007_IMG_9841.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e626ec4afdddcc6c6d05f_IMG_9837.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/008_IMG_9837.jpeg",
+      "name": "008_IMG_9837.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e63ee5484514faaacc160_IMG_6271.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/009_IMG_6271.jpeg",
+      "name": "009_IMG_6271.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e626e1af566e00d0e1c18_IMG_9835.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/010_IMG_9835.jpeg",
+      "name": "010_IMG_9835.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e63ef944684fef025994b_IMG_6270.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/011_IMG_6270.jpeg",
+      "name": "011_IMG_6270.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e6d2a85babf5e3dec953d_IMG_6284.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/012_IMG_6284.jpeg",
+      "name": "012_IMG_6284.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e6d2adfc06fca21b2dd85_IMG_6282.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/013_IMG_6282.jpeg",
+      "name": "013_IMG_6282.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e6d2acbcef14d417c86ce_IMG_6280.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/014_IMG_6280.jpeg",
+      "name": "014_IMG_6280.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e6d2a4c04f551a5cc4f0c_IMG_6281.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/015_IMG_6281.jpeg",
+      "name": "015_IMG_6281.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e6d2ac0f9b42494ba51a4_IMG_6283.jpeg",
+      "local": "assets/illustrations/schmalgauzen-covers-/016_IMG_6283.jpeg",
+      "name": "016_IMG_6283.jpeg"
+    }
+  ],
+  "illustrations/the-eustomes": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e77c5c8a88bd78a57601f_IMG_6293.jpeg",
+      "local": "assets/illustrations/the-eustomes/001_IMG_6293.jpeg",
+      "name": "001_IMG_6293.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8125413620ebd1d88b97_IMG_6315.jpeg",
+      "local": "assets/illustrations/the-eustomes/002_IMG_6315.jpeg",
+      "name": "002_IMG_6315.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e81229a812e01ba3e8839_IMG_6319.jpeg",
+      "local": "assets/illustrations/the-eustomes/003_IMG_6319.jpeg",
+      "name": "003_IMG_6319.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8122a40617b6979f26b1_IMG_6310.jpeg",
+      "local": "assets/illustrations/the-eustomes/004_IMG_6310.jpeg",
+      "name": "004_IMG_6310.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e81225fe45e1df5c265a5_IMG_6318.jpeg",
+      "local": "assets/illustrations/the-eustomes/005_IMG_6318.jpeg",
+      "name": "005_IMG_6318.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8122154f008ef1026923_IMG_6306.jpeg",
+      "local": "assets/illustrations/the-eustomes/006_IMG_6306.jpeg",
+      "name": "006_IMG_6306.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8122eb3cb8b6025379a9_IMG_6304.jpeg",
+      "local": "assets/illustrations/the-eustomes/007_IMG_6304.jpeg",
+      "name": "007_IMG_6304.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8122f402afbab58fa268_IMG_6303.jpeg",
+      "local": "assets/illustrations/the-eustomes/008_IMG_6303.jpeg",
+      "name": "008_IMG_6303.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8122e7ca64a39c095d14_IMG_6302.jpeg",
+      "local": "assets/illustrations/the-eustomes/009_IMG_6302.jpeg",
+      "name": "009_IMG_6302.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8122a2053739d1086130_IMG_6301.jpeg",
+      "local": "assets/illustrations/the-eustomes/010_IMG_6301.jpeg",
+      "name": "010_IMG_6301.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8122847753ce55a0e06b_IMG_6305.jpeg",
+      "local": "assets/illustrations/the-eustomes/011_IMG_6305.jpeg",
+      "name": "011_IMG_6305.jpeg"
+    }
+  ],
+  "illustrations/the-winter-sea": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e700a52fab44666f9fcfb_IMG_6286.jpeg",
+      "local": "assets/illustrations/the-winter-sea/001_IMG_6286.jpeg",
+      "name": "001_IMG_6286.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e700a7f2e6ba39a69adfa_IMG_6285.jpeg",
+      "local": "assets/illustrations/the-winter-sea/002_IMG_6285.jpeg",
+      "name": "002_IMG_6285.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e6ff27c7c66caebb7dcd0_IMG_6289.jpeg",
+      "local": "assets/illustrations/the-winter-sea/003_IMG_6289.jpeg",
+      "name": "003_IMG_6289.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e700a74235b25604e8a0b_IMG_6291.jpeg",
+      "local": "assets/illustrations/the-winter-sea/004_IMG_6291.jpeg",
+      "name": "004_IMG_6291.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e700adc5d8dc31c76f2af_IMG_6290.jpeg",
+      "local": "assets/illustrations/the-winter-sea/005_IMG_6290.jpeg",
+      "name": "005_IMG_6290.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e700a256e4c269ba1207d_IMG_6288.jpeg",
+      "local": "assets/illustrations/the-winter-sea/006_IMG_6288.jpeg",
+      "name": "006_IMG_6288.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e700a28a3c022348967c9_IMG_6287.jpeg",
+      "local": "assets/illustrations/the-winter-sea/007_IMG_6287.jpeg",
+      "name": "007_IMG_6287.jpeg"
+    }
+  ],
+  "illustrations/vinyl-": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e81b9f8803b361513c2b9_IMG_6308.jpeg",
+      "local": "assets/illustrations/vinyl-/001_IMG_6308.jpeg",
+      "name": "001_IMG_6308.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e68b2d4d9c141daac5c2e_IMG_6275.jpeg",
+      "local": "assets/illustrations/vinyl-/002_IMG_6275.jpeg",
+      "name": "002_IMG_6275.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e68aad0c4fbb0e9efbbcd_IMG_6274.jpeg",
+      "local": "assets/illustrations/vinyl-/003_IMG_6274.jpeg",
+      "name": "003_IMG_6274.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e68b20d348e68c6c125fd_IMG_6273.jpeg",
+      "local": "assets/illustrations/vinyl-/004_IMG_6273.jpeg",
+      "name": "004_IMG_6273.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e694cb2b9e3455ba5e529_IMG_6276.jpeg",
+      "local": "assets/illustrations/vinyl-/005_IMG_6276.jpeg",
+      "name": "005_IMG_6276.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e694cf2cd5f6e094bacc7_IMG_6277.jpeg",
+      "local": "assets/illustrations/vinyl-/006_IMG_6277.jpeg",
+      "name": "006_IMG_6277.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e69b7609deab29b2e5821_IMG_6278.jpeg",
+      "local": "assets/illustrations/vinyl-/007_IMG_6278.jpeg",
+      "name": "007_IMG_6278.jpeg"
+    }
+  ],
+  "/illustrations": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e5d3c1496139802f22a6c_IMG_9838.jpeg",
+      "local": "assets/home/illustrations/001_IMG_9838.jpeg",
+      "name": "001_IMG_9838.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e62433a0ed19ad653ff7b_IMG_9842.jpeg",
+      "local": "assets/home/illustrations/002_IMG_9842.jpeg",
+      "name": "002_IMG_9842.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e68aad0c4fbb0e9efbbcd_IMG_6274.jpeg",
+      "local": "assets/home/illustrations/003_IMG_6274.jpeg",
+      "name": "003_IMG_6274.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e6ff27c7c66caebb7dcd0_IMG_6289.jpeg",
+      "local": "assets/home/illustrations/004_IMG_6289.jpeg",
+      "name": "004_IMG_6289.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e810722c4bfafbdfd8f77_IMG_6297.jpeg",
+      "local": "assets/home/illustrations/005_IMG_6297.jpeg",
+      "name": "005_IMG_6297.jpeg"
+    }
+  ],
+  "photographs/b-w": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb947da693c3d22beb771_IMG_6512.jpeg",
+      "local": "assets/photographs/b-w/001_IMG_6512.jpeg",
+      "name": "001_IMG_6512.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb8e64a5c0578dcca7c75_IMG_6527.jpeg",
+      "local": "assets/photographs/b-w/002_IMG_6527.jpeg",
+      "name": "002_IMG_6527.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb946da2649e5f2de48a5_IMG_6514.jpeg",
+      "local": "assets/photographs/b-w/003_IMG_6514.jpeg",
+      "name": "003_IMG_6514.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb92bca29b8b424985eba_IMG_6523.jpeg",
+      "local": "assets/photographs/b-w/004_IMG_6523.jpeg",
+      "name": "004_IMG_6523.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb92c00b51321d61cc170_IMG_6522.jpeg",
+      "local": "assets/photographs/b-w/005_IMG_6522.jpeg",
+      "name": "005_IMG_6522.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb946078ad2dfe4e3ca75_IMG_6528.jpeg",
+      "local": "assets/photographs/b-w/006_IMG_6528.jpeg",
+      "name": "006_IMG_6528.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb937ffc9aac9f9f86784_IMG_6530.jpeg",
+      "local": "assets/photographs/b-w/007_IMG_6530.jpeg",
+      "name": "007_IMG_6530.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebd80416bc0abc340eb42_IMG_6541.jpeg",
+      "local": "assets/photographs/b-w/008_IMG_6541.jpeg",
+      "name": "008_IMG_6541.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebd8027650c635212caa7_IMG_6540.jpeg",
+      "local": "assets/photographs/b-w/009_IMG_6540.jpeg",
+      "name": "009_IMG_6540.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebd8096088057a359a308_IMG_6539.jpeg",
+      "local": "assets/photographs/b-w/010_IMG_6539.jpeg",
+      "name": "010_IMG_6539.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebd8075016e71f8d486d5_IMG_6542.jpeg",
+      "local": "assets/photographs/b-w/011_IMG_6542.jpeg",
+      "name": "011_IMG_6542.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebd80399100199abc1770_IMG_6538.jpeg",
+      "local": "assets/photographs/b-w/012_IMG_6538.jpeg",
+      "name": "012_IMG_6538.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebd801397f2d1a5a9bad4_IMG_6529.jpeg",
+      "local": "assets/photographs/b-w/013_IMG_6529.jpeg",
+      "name": "013_IMG_6529.jpeg"
+    }
+  ],
+  "photographs/colour": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebb203a11fdcfab5cd410_IMG_6518.jpeg",
+      "local": "assets/photographs/colour/001_IMG_6518.jpeg",
+      "name": "001_IMG_6518.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebb3c2c2cd29941799af0_IMG_6520.jpeg",
+      "local": "assets/photographs/colour/002_IMG_6520.jpeg",
+      "name": "002_IMG_6520.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebb3bbb9a96feae057f31_IMG_6521.jpeg",
+      "local": "assets/photographs/colour/003_IMG_6521.jpeg",
+      "name": "003_IMG_6521.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebb3b86947981c3308ac1_IMG_6517.jpeg",
+      "local": "assets/photographs/colour/004_IMG_6517.jpeg",
+      "name": "004_IMG_6517.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebb3b1153c137c82314ae_IMG_6516.jpeg",
+      "local": "assets/photographs/colour/005_IMG_6516.jpeg",
+      "name": "005_IMG_6516.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebb3bf252849e7b850531_IMG_6532.jpeg",
+      "local": "assets/photographs/colour/006_IMG_6532.jpeg",
+      "name": "006_IMG_6532.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebb3b411df1749f805b2c_IMG_6534.jpeg",
+      "local": "assets/photographs/colour/007_IMG_6534.jpeg",
+      "name": "007_IMG_6534.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebb3b34a6d8c0d62a9c47_IMG_6536.jpeg",
+      "local": "assets/photographs/colour/008_IMG_6536.jpeg",
+      "name": "008_IMG_6536.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcb8e799c2ce894e8bf6_IMG_6558.jpeg",
+      "local": "assets/photographs/colour/009_IMG_6558.jpeg",
+      "name": "009_IMG_6558.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcb79941b62617020568_IMG_6547.jpeg",
+      "local": "assets/photographs/colour/010_IMG_6547.jpeg",
+      "name": "010_IMG_6547.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcb7cbbe19476afdefe4_IMG_6555.jpeg",
+      "local": "assets/photographs/colour/011_IMG_6555.jpeg",
+      "name": "011_IMG_6555.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcb743ed1838771bd1ad_IMG_6556.jpeg",
+      "local": "assets/photographs/colour/012_IMG_6556.jpeg",
+      "name": "012_IMG_6556.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcb7f5100b2a06ad2c11_IMG_6557.jpeg",
+      "local": "assets/photographs/colour/013_IMG_6557.jpeg",
+      "name": "013_IMG_6557.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcb6deab0a439d8edc32_IMG_6549.jpeg",
+      "local": "assets/photographs/colour/014_IMG_6549.jpeg",
+      "name": "014_IMG_6549.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcaa3d09b4baa1cc58af_IMG_6546.jpeg",
+      "local": "assets/photographs/colour/015_IMG_6546.jpeg",
+      "name": "015_IMG_6546.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcac649be7d72fa52a9d_IMG_6550.jpeg",
+      "local": "assets/photographs/colour/016_IMG_6550.jpeg",
+      "name": "016_IMG_6550.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcacc0dd082fb9bb93f2_IMG_6554.jpeg",
+      "local": "assets/photographs/colour/017_IMG_6554.jpeg",
+      "name": "017_IMG_6554.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcaa3d7db5b82f47354b_IMG_6544.jpeg",
+      "local": "assets/photographs/colour/018_IMG_6544.jpeg",
+      "name": "018_IMG_6544.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcd63a11fdcfab5d2cd7_IMG_6551.jpeg",
+      "local": "assets/photographs/colour/019_IMG_6551.jpeg",
+      "name": "019_IMG_6551.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcd6e5cb91421e792606_IMG_6543.jpeg",
+      "local": "assets/photographs/colour/020_IMG_6543.jpeg",
+      "name": "020_IMG_6543.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcd58d05e979af1d979d_IMG_6537.jpeg",
+      "local": "assets/photographs/colour/021_IMG_6537.jpeg",
+      "name": "021_IMG_6537.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcd5a83da3365dcbc30d_IMG_6531.jpeg",
+      "local": "assets/photographs/colour/022_IMG_6531.jpeg",
+      "name": "022_IMG_6531.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcd5e8a86b606cfb6d23_IMG_6552.jpeg",
+      "local": "assets/photographs/colour/023_IMG_6552.jpeg",
+      "name": "023_IMG_6552.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebcd5f1bed79d3d9bd054_IMG_6553.jpeg",
+      "local": "assets/photographs/colour/024_IMG_6553.jpeg",
+      "name": "024_IMG_6553.jpeg"
+    }
+  ],
+  "photographs/india": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eaea7bc2d6c823cc096e0_IMG_6470.jpeg",
+      "local": "assets/photographs/india/001_IMG_6470.jpeg",
+      "name": "001_IMG_6470.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ead9550050f5277473842_IMG_6483.jpeg",
+      "local": "assets/photographs/india/002_IMG_6483.jpeg",
+      "name": "002_IMG_6483.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eaea6a6393423684b3164_IMG_6461.jpeg",
+      "local": "assets/photographs/india/003_IMG_6461.jpeg",
+      "name": "003_IMG_6461.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eaea8a99b2cbf47676d31_IMG_6477.jpeg",
+      "local": "assets/photographs/india/004_IMG_6477.jpeg",
+      "name": "004_IMG_6477.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eaea88cc32096df3f9dfc_IMG_6465.jpeg",
+      "local": "assets/photographs/india/005_IMG_6465.jpeg",
+      "name": "005_IMG_6465.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eaea72da37c1cf1497a3d_IMG_6464.jpeg",
+      "local": "assets/photographs/india/006_IMG_6464.jpeg",
+      "name": "006_IMG_6464.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eaea70539af7230441f6f_IMG_6462.jpeg",
+      "local": "assets/photographs/india/007_IMG_6462.jpeg",
+      "name": "007_IMG_6462.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eaea734af873b4a0013e7_IMG_6463.jpeg",
+      "local": "assets/photographs/india/008_IMG_6463.jpeg",
+      "name": "008_IMG_6463.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eaea61395076c29ae52b6_IMG_6466.jpeg",
+      "local": "assets/photographs/india/009_IMG_6466.jpeg",
+      "name": "009_IMG_6466.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eae9d1a917963d1e97f2c_IMG_6471.jpeg",
+      "local": "assets/photographs/india/010_IMG_6471.jpeg",
+      "name": "010_IMG_6471.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eae9d040b3446281aae21_IMG_6484.jpeg",
+      "local": "assets/photographs/india/011_IMG_6484.jpeg",
+      "name": "011_IMG_6484.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eae9c9e46e974eca59d81_IMG_6481.jpeg",
+      "local": "assets/photographs/india/012_IMG_6481.jpeg",
+      "name": "012_IMG_6481.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eae9c313f5a3b9b122da5_IMG_6486.jpeg",
+      "local": "assets/photographs/india/013_IMG_6486.jpeg",
+      "name": "013_IMG_6486.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eae9cc9065acc103e8f9f_IMG_6487.jpeg",
+      "local": "assets/photographs/india/014_IMG_6487.jpeg",
+      "name": "014_IMG_6487.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eae9cca50c8ebdac285ca_IMG_6479.jpeg",
+      "local": "assets/photographs/india/015_IMG_6479.jpeg",
+      "name": "015_IMG_6479.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eae9b8e28a4433ac438ab_IMG_6476.jpeg",
+      "local": "assets/photographs/india/016_IMG_6476.jpeg",
+      "name": "016_IMG_6476.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eae5808f73194370fa5d0_IMG_6475.jpeg",
+      "local": "assets/photographs/india/017_IMG_6475.jpeg",
+      "name": "017_IMG_6475.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eae9bff830eac432afbef_IMG_6482.jpeg",
+      "local": "assets/photographs/india/018_IMG_6482.jpeg",
+      "name": "018_IMG_6482.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eae9b83d14ad80c17c9a0_IMG_6472.jpeg",
+      "local": "assets/photographs/india/019_IMG_6472.jpeg",
+      "name": "019_IMG_6472.jpeg"
+    }
+  ],
+  "photographs/turkey": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb42109fff72d6859217b_IMG_6511.jpeg",
+      "local": "assets/photographs/turkey/001_IMG_6511.jpeg",
+      "name": "001_IMG_6511.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb0c03fd2dd722d888aea_IMG_6507.jpeg",
+      "local": "assets/photographs/turkey/002_IMG_6507.jpeg",
+      "name": "002_IMG_6507.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb4491a917963d1eae126_IMG_6506.jpeg",
+      "local": "assets/photographs/turkey/003_IMG_6506.jpeg",
+      "name": "003_IMG_6506.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb4492c2cd29941775f10_IMG_6508.jpeg",
+      "local": "assets/photographs/turkey/004_IMG_6508.jpeg",
+      "name": "004_IMG_6508.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb4495465907a681a650c_IMG_6505.jpeg",
+      "local": "assets/photographs/turkey/005_IMG_6505.jpeg",
+      "name": "005_IMG_6505.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb4491d10b4e3d91130b2_IMG_6504.jpeg",
+      "local": "assets/photographs/turkey/006_IMG_6504.jpeg",
+      "name": "006_IMG_6504.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb449d3a8485d9367c15e_IMG_6502.jpeg",
+      "local": "assets/photographs/turkey/007_IMG_6502.jpeg",
+      "name": "007_IMG_6502.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb4495d866a7b30aecc43_IMG_6500.jpeg",
+      "local": "assets/photographs/turkey/008_IMG_6500.jpeg",
+      "name": "008_IMG_6500.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb4482b05acbec0c10cad_IMG_6499.jpeg",
+      "local": "assets/photographs/turkey/009_IMG_6499.jpeg",
+      "name": "009_IMG_6499.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb448ae7abc98f0f6dd6a_IMG_6498.jpeg",
+      "local": "assets/photographs/turkey/010_IMG_6498.jpeg",
+      "name": "010_IMG_6498.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb44869abacbbb4f2e3bc_IMG_6497.jpeg",
+      "local": "assets/photographs/turkey/011_IMG_6497.jpeg",
+      "name": "011_IMG_6497.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb448e491b6d39662f5a7_IMG_6496.jpeg",
+      "local": "assets/photographs/turkey/012_IMG_6496.jpeg",
+      "name": "012_IMG_6496.jpeg"
+    }
+  ],
+  "/photographs": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ebb203a11fdcfab5cd410_IMG_6518.jpeg",
+      "local": "assets/home/photographs/001_IMG_6518.jpeg",
+      "name": "001_IMG_6518.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb8e64a5c0578dcca7c75_IMG_6527.jpeg",
+      "local": "assets/home/photographs/002_IMG_6527.jpeg",
+      "name": "002_IMG_6527.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695eb42109fff72d6859217b_IMG_6511.jpeg",
+      "local": "assets/home/photographs/003_IMG_6511.jpeg",
+      "name": "003_IMG_6511.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695ead9550050f5277473842_IMG_6483.jpeg",
+      "local": "assets/home/photographs/004_IMG_6483.jpeg",
+      "name": "004_IMG_6483.jpeg"
+    }
+  ],
+  "projects/archipelago-book": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8accb50e6c2686e5e0dd_IMG_6322.jpeg",
+      "local": "assets/projects/archipelago-book/001_IMG_6322.jpeg",
+      "name": "001_IMG_6322.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8acd109a4f1ba14227f7_IMG_6324.jpeg",
+      "local": "assets/projects/archipelago-book/002_IMG_6324.jpeg",
+      "name": "002_IMG_6324.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8acce92ab61cf9401465_IMG_6323.jpeg",
+      "local": "assets/projects/archipelago-book/003_IMG_6323.jpeg",
+      "name": "003_IMG_6323.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8ac0cf0a3d1fe91ec042_IMG_6321.jpeg",
+      "local": "assets/projects/archipelago-book/004_IMG_6321.jpeg",
+      "name": "004_IMG_6321.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8accd8c6587f0a589d32_IMG_6326.jpeg",
+      "local": "assets/projects/archipelago-book/005_IMG_6326.jpeg",
+      "name": "005_IMG_6326.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8acc5c81e5535f542038_IMG_6325.jpeg",
+      "local": "assets/projects/archipelago-book/006_IMG_6325.jpeg",
+      "name": "006_IMG_6325.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8afccf159e3996705b6f_IMG_6327.jpeg",
+      "local": "assets/projects/archipelago-book/007_IMG_6327.jpeg",
+      "name": "007_IMG_6327.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8accb97c26e78022dc37_IMG_6328.jpeg",
+      "local": "assets/projects/archipelago-book/008_IMG_6328.jpeg",
+      "name": "008_IMG_6328.jpeg"
+    }
+  ],
+  "projects/archipelago": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333e72af76ad83afd298_IMG_6239.jpeg",
+      "local": "assets/projects/archipelago/001_IMG_6239.jpeg",
+      "name": "001_IMG_6239.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333e874f8d0c8c6c8da9_IMG_6231.jpeg",
+      "local": "assets/projects/archipelago/002_IMG_6231.jpeg",
+      "name": "002_IMG_6231.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333e32fbc48011534db7_IMG_6236.jpeg",
+      "local": "assets/projects/archipelago/003_IMG_6236.jpeg",
+      "name": "003_IMG_6236.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333ed07f99c0a1d04f93_IMG_6232.jpeg",
+      "local": "assets/projects/archipelago/004_IMG_6232.jpeg",
+      "name": "004_IMG_6232.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333e8da9f3b5e1f02467_IMG_6226.jpeg",
+      "local": "assets/projects/archipelago/005_IMG_6226.jpeg",
+      "name": "005_IMG_6226.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333ec6c7514bb555aa70_IMG_6235.jpeg",
+      "local": "assets/projects/archipelago/006_IMG_6235.jpeg",
+      "name": "006_IMG_6235.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333e04cb7e0a95cb0028_IMG_6225.jpeg",
+      "local": "assets/projects/archipelago/007_IMG_6225.jpeg",
+      "name": "007_IMG_6225.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333eaf8ce9fe296f050c_IMG_6234.jpeg",
+      "local": "assets/projects/archipelago/008_IMG_6234.jpeg",
+      "name": "008_IMG_6234.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333ea47d968330d39ddd_IMG_6244.jpeg",
+      "local": "assets/projects/archipelago/009_IMG_6244.jpeg",
+      "name": "009_IMG_6244.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333d69fb40540cb327d4_IMG_6237.jpeg",
+      "local": "assets/projects/archipelago/010_IMG_6237.jpeg",
+      "name": "010_IMG_6237.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333dc0d81d36a69a2d82_IMG_6245.jpeg",
+      "local": "assets/projects/archipelago/011_IMG_6245.jpeg",
+      "name": "011_IMG_6245.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333d882df952b8e5f503_IMG_6228.jpeg",
+      "local": "assets/projects/archipelago/012_IMG_6228.jpeg",
+      "name": "012_IMG_6228.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333d1dfa3090ec3ef1eb_IMG_6240.jpeg",
+      "local": "assets/projects/archipelago/013_IMG_6240.jpeg",
+      "name": "013_IMG_6240.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333d5f41fed1ada35b3d_IMG_6227.jpeg",
+      "local": "assets/projects/archipelago/014_IMG_6227.jpeg",
+      "name": "014_IMG_6227.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333d32fbc48011534da4_IMG_6243.jpeg",
+      "local": "assets/projects/archipelago/015_IMG_6243.jpeg",
+      "name": "015_IMG_6243.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333cf144d70cd6a94819_IMG_6242.jpeg",
+      "local": "assets/projects/archipelago/016_IMG_6242.jpeg",
+      "name": "016_IMG_6242.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333d3ac7b4b5c7259c35_IMG_6241.jpeg",
+      "local": "assets/projects/archipelago/017_IMG_6241.jpeg",
+      "name": "017_IMG_6241.jpeg"
+    }
+  ],
+  "projects/archive-of-dreams": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6922109f6bfc40caf8c642ae_A041_08031605_C004.00_01_53_03.Standbild016.jpg",
+      "local": "assets/projects/archive-of-dreams/001_A041_08031605_C004.00_01_53_03.Standbild016.jpg",
+      "name": "001_A041_08031605_C004.00_01_53_03.Standbild016.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/692210a4f7a1406aceb91d19_A041_08031605_C004.00_00_11_14.Standbild002.jpg",
+      "local": "assets/projects/archive-of-dreams/002_A041_08031605_C004.00_00_11_14.Standbild002.jpg",
+      "name": "002_A041_08031605_C004.00_00_11_14.Standbild002.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/692210a45f562e6c2806d123_A041_08031605_C004.00_00_03_15.Standbild001.jpg",
+      "local": "assets/projects/archive-of-dreams/003_A041_08031605_C004.00_00_03_15.Standbild001.jpg",
+      "name": "003_A041_08031605_C004.00_00_03_15.Standbild001.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/692210a406c1846d1a2943a9_A041_08031605_C004.00_00_52_16.Standbild008.jpg",
+      "local": "assets/projects/archive-of-dreams/004_A041_08031605_C004.00_00_52_16.Standbild008.jpg",
+      "name": "004_A041_08031605_C004.00_00_52_16.Standbild008.jpg"
+    }
+  ],
+  "projects/ceramic-": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/69220f9a5e493982668fc652_%D0%A0%D0%BE%D0%B6%D0%B5%D0%B2%D0%B8%D0%B9%20%D0%BE%D0%B1%CA%BC%D1%94%D0%BA%D1%82.jpg",
+      "local": "assets/projects/ceramic-/001_\u0420\u043e\u0436\u0435\u0432\u0438\u0439_\u043e\u0431\u02bc\u0454\u043a\u0442.jpg",
+      "name": "001_\u0420\u043e\u0436\u0435\u0432\u0438\u0439_\u043e\u0431\u02bc\u0454\u043a\u0442.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/69220f9e7fbc31aad8870203_%D0%91%D0%BB%D0%B0%D0%BA%D0%B8%D1%82%D0%BD%D0%B0%20%D1%82%D1%80%D0%BE%D1%8F%D0%BD%D0%B4%D0%B0.jpg",
+      "local": "assets/projects/ceramic-/002_\u0411\u043b\u0430\u043a\u0438\u0442\u043d\u0430_\u0442\u0440\u043e\u044f\u043d\u0434\u0430.jpg",
+      "name": "002_\u0411\u043b\u0430\u043a\u0438\u0442\u043d\u0430_\u0442\u0440\u043e\u044f\u043d\u0434\u0430.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/69343c8398e4b9ac7edfef59_BFBB6C10-1A46-4B58-9E1E-21D9D0D8860C.jpeg",
+      "local": "assets/projects/ceramic-/003_BFBB6C10-1A46-4B58-9E1E-21D9D0D8860C.jpeg",
+      "name": "003_BFBB6C10-1A46-4B58-9E1E-21D9D0D8860C.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/69343c83a6922490e80367bf_IMG_6252.jpeg",
+      "local": "assets/projects/ceramic-/004_IMG_6252.jpeg",
+      "name": "004_IMG_6252.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/69343c83a13dc12fb7b5d2eb_IMG_6253.jpeg",
+      "local": "assets/projects/ceramic-/005_IMG_6253.jpeg",
+      "name": "005_IMG_6253.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/69343c83d8acbe3f7e4eaf75_IMG_6254.jpeg",
+      "local": "assets/projects/ceramic-/006_IMG_6254.jpeg",
+      "name": "006_IMG_6254.jpeg"
+    }
+  ],
+  "projects/invisibility": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693433c5c9ec48264e9024f2_IMG_8768.jpeg",
+      "local": "assets/projects/invisibility/001_IMG_8768.jpeg",
+      "name": "001_IMG_8768.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934344c29b38daba6310489_IMG_6249.jpeg",
+      "local": "assets/projects/invisibility/002_IMG_6249.jpeg",
+      "name": "002_IMG_6249.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934344c4e0ea3f0c631e9c1_IMG_6246.jpeg",
+      "local": "assets/projects/invisibility/003_IMG_6246.jpeg",
+      "name": "003_IMG_6246.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693433d35228ec885ad06352_IMG_8775.jpeg",
+      "local": "assets/projects/invisibility/004_IMG_8775.jpeg",
+      "name": "004_IMG_8775.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693433bc743acb37aa4c3fc0_IMG_8767.jpeg",
+      "local": "assets/projects/invisibility/005_IMG_8767.jpeg",
+      "name": "005_IMG_8767.jpeg"
+    }
+  ],
+  "projects/lost-beauty": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693428ddb4b6f8e175ef44f5_IMG_6197.jpeg",
+      "local": "assets/projects/lost-beauty/001_IMG_6197.jpeg",
+      "name": "001_IMG_6197.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693428d73efcced0b43417ce_IMG_6188.jpeg",
+      "local": "assets/projects/lost-beauty/002_IMG_6188.jpeg",
+      "name": "002_IMG_6188.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693428d71eb726c8c5461cbe_IMG_6185.jpeg",
+      "local": "assets/projects/lost-beauty/003_IMG_6185.jpeg",
+      "name": "003_IMG_6185.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693428d75dfda7dc53cadddc_IMG_6187.jpeg",
+      "local": "assets/projects/lost-beauty/004_IMG_6187.jpeg",
+      "name": "004_IMG_6187.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693428dc5c4ea8320a0fb059_IMG_6194.jpeg",
+      "local": "assets/projects/lost-beauty/005_IMG_6194.jpeg",
+      "name": "005_IMG_6194.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934296a98e4b9ac7edd8b43_IMG_6201.jpeg",
+      "local": "assets/projects/lost-beauty/006_IMG_6201.jpeg",
+      "name": "006_IMG_6201.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934296a348669d6e15f3ebd_IMG_6200.jpeg",
+      "local": "assets/projects/lost-beauty/007_IMG_6200.jpeg",
+      "name": "007_IMG_6200.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693428dc93385c8df752b3c9_IMG_6193.jpeg",
+      "local": "assets/projects/lost-beauty/008_IMG_6193.jpeg",
+      "name": "008_IMG_6193.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693425103ac7b4b5c7240bdf_IMG_8778.jpeg",
+      "local": "assets/projects/lost-beauty/009_IMG_8778.jpeg",
+      "name": "009_IMG_8778.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693426b6cf5fc46433be579b_IMG_8779.jpeg",
+      "local": "assets/projects/lost-beauty/010_IMG_8779.jpeg",
+      "name": "010_IMG_8779.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693428da7d99cd7fb831bcca_IMG_6191.jpeg",
+      "local": "assets/projects/lost-beauty/011_IMG_6191.jpeg",
+      "name": "011_IMG_6191.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/69342553ece99d3fa5cea2a3_IMG_8785.jpeg",
+      "local": "assets/projects/lost-beauty/012_IMG_8785.jpeg",
+      "name": "012_IMG_8785.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693428dc0dd086d5fb7bdb9f_IMG_6195.jpeg",
+      "local": "assets/projects/lost-beauty/013_IMG_6195.jpeg",
+      "name": "013_IMG_6195.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693428d956d45fd81bc27e20_IMG_6192.jpeg",
+      "local": "assets/projects/lost-beauty/014_IMG_6192.jpeg",
+      "name": "014_IMG_6192.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693428d9b3e2c9175fd0cf55_IMG_6190.jpeg",
+      "local": "assets/projects/lost-beauty/015_IMG_6190.jpeg",
+      "name": "015_IMG_6190.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/693428d998e4b9ac7edd7b02_IMG_6189.jpeg",
+      "local": "assets/projects/lost-beauty/016_IMG_6189.jpeg",
+      "name": "016_IMG_6189.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934296ac6c7514bb55491c6_IMG_6198.jpeg",
+      "local": "assets/projects/lost-beauty/017_IMG_6198.jpeg",
+      "name": "017_IMG_6198.jpeg"
+    }
+  ],
+  "projects/nest": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/692214966cec67374a1dca9b_IMG_4089_1.jpg",
+      "local": "assets/projects/nest/001_IMG_4089_1.jpg",
+      "name": "001_IMG_4089_1.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/69221496ccfb4d1db4686438_IMG_4070_1.jpg",
+      "local": "assets/projects/nest/002_IMG_4070_1.jpg",
+      "name": "002_IMG_4070_1.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/69221496e0e58abb72b8326c_IMG_4059_1.jpg",
+      "local": "assets/projects/nest/003_IMG_4059_1.jpg",
+      "name": "003_IMG_4059_1.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/69221496d31c7799c910d5ec_IMG_4057_1.jpg",
+      "local": "assets/projects/nest/004_IMG_4057_1.jpg",
+      "name": "004_IMG_4057_1.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/692214953748daceb2f86ada_IMG_4054_1.jpg",
+      "local": "assets/projects/nest/005_IMG_4054_1.jpg",
+      "name": "005_IMG_4054_1.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6922148f4f4253c3beb28f99_IMG_4052_1.jpg",
+      "local": "assets/projects/nest/006_IMG_4052_1.jpg",
+      "name": "006_IMG_4052_1.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6922149501147a2f4c1ac88f_IMG_4040_1.jpg",
+      "local": "assets/projects/nest/007_IMG_4040_1.jpg",
+      "name": "007_IMG_4040_1.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/69221496386737526d060313_IMG_4036_1.jpg",
+      "local": "assets/projects/nest/008_IMG_4036_1.jpg",
+      "name": "008_IMG_4036_1.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6922149593aafc7345ad33a1_IMG_4030_1.jpg",
+      "local": "assets/projects/nest/009_IMG_4030_1.jpg",
+      "name": "009_IMG_4030_1.jpg"
+    }
+  ],
+  "projects/terra-memoria-mundi": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8c9308f7e856383ff603_IMG_6334.jpeg",
+      "local": "assets/projects/terra-memoria-mundi/001_IMG_6334.jpeg",
+      "name": "001_IMG_6334.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8c9362bfbd24e5c8f8a0_IMG_6333.jpeg",
+      "local": "assets/projects/terra-memoria-mundi/002_IMG_6333.jpeg",
+      "name": "002_IMG_6333.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8c93ab7c87e31aae6c89_IMG_6331.jpeg",
+      "local": "assets/projects/terra-memoria-mundi/003_IMG_6331.jpeg",
+      "name": "003_IMG_6331.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8c8b83b7cd1823d6cde3_IMG_6332.jpeg",
+      "local": "assets/projects/terra-memoria-mundi/004_IMG_6332.jpeg",
+      "name": "004_IMG_6332.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8c9307ded10aec7aa3f2_IMG_6330.jpeg",
+      "local": "assets/projects/terra-memoria-mundi/005_IMG_6330.jpeg",
+      "name": "005_IMG_6330.jpeg"
+    }
+  ],
+  "/projects": [
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8c8b83b7cd1823d6cde3_IMG_6332.jpeg",
+      "local": "assets/home/projects/001_IMG_6332.jpeg",
+      "name": "001_IMG_6332.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6922153dd9566bf92f30b16f_A041_08031605_C004.00_02_45_02.Standbild020.jpg",
+      "local": "assets/home/projects/002_A041_08031605_C004.00_02_45_02.Standbild020.jpg",
+      "name": "002_A041_08031605_C004.00_02_45_02.Standbild020.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6922148f4f4253c3beb28f99_IMG_4052_1.jpg",
+      "local": "assets/home/projects/003_IMG_4052_1.jpg",
+      "name": "003_IMG_4052_1.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934333d32fbc48011534da4_IMG_6243.jpeg",
+      "local": "assets/home/projects/004_IMG_6243.jpeg",
+      "name": "004_IMG_6243.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6934344c29b38daba6310489_IMG_6249.jpeg",
+      "local": "assets/home/projects/005_IMG_6249.jpeg",
+      "name": "005_IMG_6249.jpeg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/6922109f6bfc40caf8c642ae_A041_08031605_C004.00_01_53_03.Standbild016.jpg",
+      "local": "assets/home/projects/006_A041_08031605_C004.00_01_53_03.Standbild016.jpg",
+      "name": "006_A041_08031605_C004.00_01_53_03.Standbild016.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/69220f9a5e493982668fc652_%D0%A0%D0%BE%D0%B6%D0%B5%D0%B2%D0%B8%D0%B9%20%D0%BE%D0%B1%CA%BC%D1%94%D0%BA%D1%82.jpg",
+      "local": "assets/home/projects/007_\u0420\u043e\u0436\u0435\u0432\u0438\u0439_\u043e\u0431\u02bc\u0454\u043a\u0442.jpg",
+      "name": "007_\u0420\u043e\u0436\u0435\u0432\u0438\u0439_\u043e\u0431\u02bc\u0454\u043a\u0442.jpg"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/692207b249c62c4f401185e4/695e8ac0cf0a3d1fe91ec042_IMG_6321.jpeg",
+      "local": "assets/home/projects/008_IMG_6321.jpeg",
+      "name": "008_IMG_6321.jpeg"
+    }
+  ],
+  "writings/3-stories-about-love": [],
+  "writings/5-2-richard-bach-street": [],
+  "writings/afterlife": [],
+  "writings/botanical-bridge": [],
+  "writings/instruction": [],
+  "writings/its-a-sad-and-beautiful-world": [],
+  "writings/nest": [],
+  "writings/our-mirror-diaries": [],
+  "writings/uno-duos-tres-cuatro": [],
+  "writings/vulcanization": [],
+  "writings/yo-yo-and-despair": [],
+  "/writings": []
+}
