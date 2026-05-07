@@ -3,6 +3,15 @@ import type { NextConfig } from "next";
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
+  options: {
+    // Recognise and strip YAML / TOML frontmatter blocks at the top of each
+    // MDX file. Without this, `---\ntitle: …\n---` renders as literal text
+    // on the page (the runtime treats it as paragraph content).
+    //
+    // Plugin passed as a string identifier so Turbopack can serialise the
+    // loader options (it can't serialise an imported module reference).
+    remarkPlugins: [["remark-frontmatter", { type: "yaml", marker: "-" }]],
+  },
 });
 
 const nextConfig: NextConfig = {
