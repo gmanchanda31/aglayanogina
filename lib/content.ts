@@ -12,6 +12,7 @@ import type {
   MetadataLine,
   PhotographSet,
   ProjectEntry,
+  ProjectKind,
   Section,
   WritingEntry,
 } from "./types";
@@ -175,13 +176,34 @@ function splitMetadataAndDescription(paras: string[]): {
       continue;
     }
     if (para.length <= 80 && !looksLikeQuote(para)) {
-      metadata.push({ value: splitCamelRuns(para) });
+      metadata.push(labelMetadata(splitCamelRuns(para)));
     } else {
       inDescription = true;
       description.push(para);
     }
   }
   return { metadata, description };
+}
+
+const KNOWN_CITIES =
+  /\b(Düsseldorf|Dusseldorf|Berlin|Kyiv|Lviv|Kharkiv|Cologne|Barcelona|Istanbul|Goa|Munich|Madrid|Paris|Rome|Vienna|Luhansk|Carpathians|Düssel|Germany|Ukraine|Spain|France|Italy|Turkey|India|USA|Austria|Netherlands|Poland)\b/i;
+
+function labelMetadata(value: string): MetadataLine {
+  const v = value.trim();
+  // Year or year range: 2024 / 2023-2025 / 2023—2025
+  if (/^(?:19|20)\d{2}\s*[-–—]?\s*(?:(?:19|20)\d{2}|ongoing)?$/.test(v)) {
+    return { label: "Year", value: v };
+  }
+  // Explicit dimensions
+  if (/^(size|dimensions|format)\s*[:\-]/i.test(v) || /\d+\s*[x×]\s*\d+/i.test(v)) {
+    return { label: "Dimensions", value: v.replace(/^(size|dimensions|format)\s*[:\-]\s*/i, "") };
+  }
+  // Location
+  if (KNOWN_CITIES.test(v)) {
+    return { label: "Location", value: v };
+  }
+  // Default — first metadata line is usually the medium
+  return { label: "Medium", value: v };
 }
 
 function looksLikeQuote(text: string): boolean {
@@ -339,11 +361,35 @@ function buildWriting(
 /*                                  Exports                                   */
 /* -------------------------------------------------------------------------- */
 
+/* Map a project's medium / metadata / slug onto the filter chip set */
+const KIND_MATCHERS: Array<[ProjectKind, RegExp]> = [
+  ["Print", /xerography|relief print|engrav|graphic|print|paper/i],
+  ["Painting", /paint/i],
+  ["Ceramic", /ceramic/i],
+  ["Sculpture", /sculpt/i],
+  ["Photography", /photograph/i],
+  ["Textile", /textile|fabric/i],
+  ["Book", /\bbook\b/i],
+];
+
+function deriveKinds(entry: Entry): ProjectKind[] {
+  const haystack = [
+    entry.title,
+    entry.slug,
+    ...entry.metadata.map((m) => m.value),
+    entry.description.slice(0, 2).join(" "),
+  ].join(" ");
+  const found: ProjectKind[] = [];
+  for (const [kind, re] of KIND_MATCHERS) {
+    if (re.test(haystack)) found.push(kind);
+  }
+  return found;
+}
+
 export const projects: ProjectEntry[] = listingFor("projects")
-  .map((it) =>
-    buildEntry("projects", it.rawSlug, it.routeSlug, it.title) as ProjectEntry | null,
-  )
-  .filter((e): e is ProjectEntry => e !== null);
+  .map((it) => buildEntry("projects", it.rawSlug, it.routeSlug, it.title))
+  .filter((e): e is Entry & { section: "projects" } => e !== null)
+  .map((entry) => ({ ...entry, kinds: deriveKinds(entry) }) as ProjectEntry);
 
 export const exhibitions: ExhibitionEntry[] = listingFor("exhibitions")
   .map((it) =>

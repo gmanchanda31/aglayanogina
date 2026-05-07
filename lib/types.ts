@@ -45,8 +45,19 @@ export interface Entry extends BaseEntry {
   quoteAttribution?: string;
 }
 
+export type ProjectKind =
+  | "Print"
+  | "Painting"
+  | "Ceramic"
+  | "Sculpture"
+  | "Photography"
+  | "Textile"
+  | "Book";
+
 export interface ProjectEntry extends Entry {
   section: "projects";
+  /** Derived from medium / metadata — used by the projects filter */
+  kinds: ProjectKind[];
 }
 
 export interface ExhibitionEntry extends Entry {

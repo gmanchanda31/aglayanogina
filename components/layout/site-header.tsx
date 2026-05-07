@@ -19,7 +19,7 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Lock body scroll while the mobile sheet is open + close on route change
+  // Lock body scroll while the mobile sheet is open
   useEffect(() => {
     if (!mobileOpen) return;
     document.body.style.overflow = "hidden";
@@ -28,68 +28,71 @@ export function SiteHeader() {
     };
   }, [mobileOpen]);
 
+  // Close on navigation
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-mist bg-paper/95 backdrop-blur-sm">
-      <Container as="nav" className="flex items-center justify-between py-5 md:py-6">
-        <Link
-          href="/"
-          aria-label={`${siteName} — home`}
-          className="font-[family-name:var(--font-vollkorn)] text-base md:text-lg uppercase tracking-[0.18em] text-ink"
-        >
-          {siteName}
-        </Link>
+    <>
+      <header className="sticky top-0 z-40 border-b border-mist bg-paper">
+        <Container as="nav" className="flex items-center justify-between py-5 md:py-6">
+          <Link
+            href="/"
+            aria-label={`${siteName} — home`}
+            className="inline-flex items-center font-[family-name:var(--font-vollkorn)] text-base md:text-lg uppercase tracking-[0.18em] leading-none text-ink h-8"
+          >
+            {siteName}
+          </Link>
 
-        <ul className="hidden md:flex items-center gap-7 lg:gap-9">
-          {allLinks.map((link) => {
-            const active = isActive(link.href, pathname);
-            return (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "label-caps relative pb-1 transition-colors",
-                    active
-                      ? "text-ink after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-px after:bg-clay"
-                      : "text-stone hover:text-ink",
-                  )}
-                >
-                  {link.title}
-                </Link>
-              </li>
-            );
-          })}
-          <li className="ml-1">
-            <a
-              href={contact.patreonUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="label-caps inline-flex items-center px-3.5 py-1.5 border border-clay text-clay hover:bg-clay hover:text-paper transition-colors duration-300"
-            >
-              Support
-            </a>
-          </li>
-        </ul>
+          <ul className="hidden md:flex items-center gap-7 lg:gap-9">
+            {allLinks.map((link) => {
+              const active = isActive(link.href, pathname);
+              return (
+                <li key={link.href} className="inline-flex h-8 items-center">
+                  <Link
+                    href={link.href}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "label-caps inline-flex items-center h-full leading-none transition-colors relative",
+                      active
+                        ? "text-ink after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-px after:bg-clay"
+                        : "text-stone hover:text-ink",
+                    )}
+                  >
+                    {link.title}
+                  </Link>
+                </li>
+              );
+            })}
+            <li className="ml-1 inline-flex h-8 items-center">
+              <a
+                href={contact.patreonUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="label-caps inline-flex items-center h-full leading-none px-3.5 border border-ink text-ink hover:bg-ink hover:text-paper transition-colors duration-300"
+              >
+                Support
+              </a>
+            </li>
+          </ul>
 
-        <button
-          type="button"
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-nav"
-          onClick={() => setMobileOpen((v) => !v)}
-          className="md:hidden inline-flex items-center gap-2 label-caps text-ink"
-        >
-          {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-          <span>{mobileOpen ? "Close" : "Menu"}</span>
-        </button>
-      </Container>
+          <button
+            type="button"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
+            onClick={() => setMobileOpen((v) => !v)}
+            className="md:hidden inline-flex items-center gap-2 label-caps text-ink"
+          >
+            {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            <span>{mobileOpen ? "Close" : "Menu"}</span>
+          </button>
+        </Container>
+      </header>
 
       <MobileNav open={mobileOpen} pathname={pathname} />
-    </header>
+    </>
   );
 }
 
@@ -125,7 +128,7 @@ function MobileNav({ open, pathname }: { open: boolean; pathname: string }) {
           href={contact.patreonUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-10 inline-flex items-center justify-center label-caps px-5 py-4 border border-clay text-clay hover:bg-clay hover:text-paper transition-colors duration-300"
+          className="mt-10 inline-flex items-center justify-center label-caps px-5 py-4 border border-ink text-ink hover:bg-ink hover:text-paper transition-colors duration-300"
         >
           Support on Patreon
         </a>
