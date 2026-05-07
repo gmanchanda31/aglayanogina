@@ -81,13 +81,13 @@ export const practiceTiles: PracticeTile[] = [
 /* -------------------------------------------------------------------------- */
 
 /**
- * Centered statement on the homepage. Built from the artist's real bio:
- * intro paragraph + the body paragraphs joined.
+ * Centered statement on the homepage — three real bio paragraphs from
+ * the About page, kept separate so they read the way they were written.
  */
-export const STATEMENT_PARAGRAPH: string = (() => {
-  const parts = [about.intro, ...about.paragraphs].filter(Boolean);
-  return parts.join(" ");
-})();
+export const STATEMENT_PARAGRAPHS: string[] = [
+  about.intro,
+  ...about.paragraphs,
+].filter(Boolean);
 
 /* -------------------------------------------------------------------------- */
 /*                            FEATURED PROJECT                                */

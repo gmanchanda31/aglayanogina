@@ -236,9 +236,7 @@ const [
 /* -------------------------------------------------------------------------- */
 
 export const siteCity = artistDoc?.city ?? "Düsseldorf, Germany";
-export const siteTagline =
-  artistDoc?.tagline ??
-  "Visual artist · Luhansk → Kyiv → Düsseldorf · b. 1996";
+export const siteTagline = artistDoc?.tagline ?? "";
 
 function buildEntry<S extends "projects" | "exhibitions" | "illustrations">(
   section: S,
@@ -444,9 +442,6 @@ export interface HomePicks {
 }
 
 export const homePicks: HomePicks = (() => {
-  const fallbackTagline =
-    "Ukrainian visual artist working in xerography, painting, ceramic, and writing. Lives in Düsseldorf.";
-
   const featuredSlug = homePicksDoc?.featuredProject
     ? normalizeSlug(homePicksDoc.featuredProject.slug)
     : undefined;
@@ -470,7 +465,7 @@ export const homePicks: HomePicks = (() => {
 
   return {
     heroItalic: homePicksDoc?.heroItalic ?? "",
-    heroTagline: homePicksDoc?.heroTagline ?? fallbackTagline,
+    heroTagline: homePicksDoc?.heroTagline ?? "",
     featuredProject,
     featuredTeaser: homePicksDoc?.featuredTeaser ?? "",
     featuredExhibitionLine: homePicksDoc?.featuredExhibitionLine,

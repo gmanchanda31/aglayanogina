@@ -77,10 +77,6 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
           <h1 className="font-[family-name:var(--font-vollkorn)] text-[3.5rem] sm:text-[5rem] md:text-[6rem] leading-[1.02] tracking-tight mt-4">
             {writing.title}
           </h1>
-          <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-xl md:text-2xl leading-[1.4] mt-6 max-w-prose mx-auto">
-            {writing.excerpt}
-            {writing.excerpt.length === 200 ? "…" : ""}
-          </p>
           <p className="label-caps text-stone mt-10">— Aglaya Nogina</p>
         </header>
       </Container>

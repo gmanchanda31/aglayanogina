@@ -18,7 +18,6 @@ export default function WritingsPage() {
         <PageHeader
           eyebrow={`${writings.length} essays`}
           title="Writings"
-          lede="Lyrical essays and short prose — sometimes companion pieces to the visual work, sometimes their own quiet thing."
         />
       </Container>
 

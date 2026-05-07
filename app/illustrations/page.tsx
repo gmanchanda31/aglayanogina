@@ -25,7 +25,6 @@ export default function IllustrationsPage() {
         <PageHeader
           eyebrow={`${illustrations.length} series`}
           title="Illustrations"
-          lede="Pen-and-ink series and album covers — Schmalgauzen, The Eustomes, The Winter Sea — patterned, intricate, and quiet."
         />
       </Container>
 
