@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Container } from "@/components/layout/container";
 import { PatreonAppeal } from "@/components/patreon-appeal";
-import { about, getProject } from "@/lib/content";
+import { JsonLd } from "@/components/seo/json-ld";
+import { about, contact, getProject } from "@/lib/content";
+import { SITE_URL } from "@/lib/site";
 import type { CVRow } from "@/lib/types";
 
 export const metadata: Metadata = {
@@ -24,8 +26,35 @@ export default function AboutPage() {
     { heading: "Selected Exhibitions", rows: about.cv.selectedExhibitions },
   );
 
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Aglaya Nogina",
+    givenName: "Aglaya",
+    familyName: "Nogina",
+    birthPlace: "Luhansk, Ukraine",
+    nationality: "Ukrainian",
+    jobTitle: "Visual artist",
+    description:
+      "Visual artist working with xerography, relief printing, painting, photography, ceramics, and writing.",
+    url: SITE_URL,
+    email: contact.email,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Düsseldorf",
+      addressCountry: "DE",
+    },
+    alumniOf: [
+      { "@type": "CollegeOrUniversity", name: "Kharkiv Art College" },
+      { "@type": "CollegeOrUniversity", name: "Kyiv National Academy of Fine Arts and Architecture" },
+      { "@type": "CollegeOrUniversity", name: "Kunstakademie Düsseldorf" },
+    ],
+    sameAs: [contact.instagramUrl, contact.patreonUrl],
+  };
+
   return (
     <>
+      <JsonLd data={personJsonLd} />
       <Container className="py-20 md:py-28">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
           <div className="md:col-span-7">

@@ -4,7 +4,9 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { Container } from "@/components/layout/container";
+import { JsonLd } from "@/components/seo/json-ld";
 import { getWriting, writings } from "@/lib/content";
+import { SITE_URL } from "@/lib/site";
 import { hasMdx, loadWritingMdx } from "@/lib/writings-mdx";
 
 type Params = Promise<{ slug: string }>;
@@ -45,8 +47,20 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
     .filter((w) => w.routeSlug !== slug && hasMdx(w.routeSlug))
     .slice(0, 3);
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: writing.title,
+    description: writing.excerpt,
+    author: { "@type": "Person", name: "Aglaya Nogina" },
+    publisher: { "@type": "Person", name: "Aglaya Nogina" },
+    url: `${SITE_URL}${writing.href}`,
+    inLanguage: "en",
+  };
+
   return (
     <>
+      <JsonLd data={articleJsonLd} />
       <Container className="pt-10 md:pt-12 pb-3">
         <Breadcrumbs
           items={[

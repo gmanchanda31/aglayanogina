@@ -114,6 +114,7 @@ function imagesFor(
   section: string,
   slug: string,
   altPrefix: string,
+  altContext?: string,
 ): ImageRef[] {
   const plan = lookupPlan(section, slug);
   if (plan.length === 0) return [];
@@ -139,7 +140,14 @@ function imagesFor(
   return ordered.map((p, i) => ({
     src: `/${p.local}`, // image_plan stores "assets/..." → prepend "/"
     name: p.name,
-    alt: `${altPrefix} — image ${i + 1}`,
+    // Hero image (first one) gets the richer descriptor; subsequent images
+    // include the index for screen-reader users navigating the gallery.
+    alt:
+      i === 0
+        ? altContext
+          ? `${altPrefix} — ${altContext}`
+          : altPrefix
+        : `${altPrefix}${altContext ? `, ${altContext}` : ""} (${i + 1})`,
   }));
 }
 
@@ -294,7 +302,10 @@ function buildEntry<S extends Section>(
   const { metadata, description: rawDesc } = splitMetadataAndDescription(allParas);
   const { description, pullQuote, quoteAttribution } = extractPullQuote(rawDesc);
 
-  const imgs = imagesFor(page, section, rawSlug, title);
+  const medium = metadata.find((m) => m.label === "Medium")?.value;
+  const year = metadata.find((m) => m.label === "Year")?.value;
+  const altContext = [medium, year].filter(Boolean).join(", ");
+  const imgs = imagesFor(page, section, rawSlug, title, altContext || undefined);
 
   return {
     section,
