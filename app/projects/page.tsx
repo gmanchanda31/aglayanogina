@@ -17,6 +17,7 @@ export default function ProjectsPage() {
         <PageHeader
           eyebrow={`${projects.length} works · 2021 — 2025`}
           title="Projects"
+          lede="Selected works in xerography, relief printing, painting, and ceramic — exploring memory, displacement, and the strength of friendship."
         />
       </Container>
 

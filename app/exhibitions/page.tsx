@@ -29,6 +29,7 @@ export default function ExhibitionsPage() {
         <PageHeader
           eyebrow={`${exhibitions.length} shows · 2021 — 2025`}
           title="Exhibitions"
+          lede="Solo and group exhibitions across Düsseldorf, Berlin, Kyiv, Lviv, the Carpathians, and the West Coast of the United States."
         />
       </Container>
 

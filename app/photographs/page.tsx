@@ -33,6 +33,7 @@ export default function PhotographsPage() {
         <PageHeader
           eyebrow={`${totalPhotos} photographs · ${sets.length} archives`}
           title="Photographs"
+          lede="A film and digital archive — places lived in, places visited, faces returned to. Made between Kyiv, Berlin, Istanbul, Goa, and Düsseldorf."
         />
 
         <nav
