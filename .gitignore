@@ -44,7 +44,10 @@ next-env.d.ts
 # All content data has been moved to /data/ (parsed.json + image_plan.json).
 /_scrape/
 
-# dev screenshots (manual + playwright)
-/phase*-*.png
-/.playwright-mcp/
+# dev screenshots (manual + playwright) — anything top-level + the playwright cache
+/audit-*.png
+/fix-*.png
 /og-*.png
+/phase*-*.png
+/homepage-*.png
+/.playwright-mcp/

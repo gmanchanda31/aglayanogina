@@ -42,8 +42,8 @@ export function PhotoMasonry({
               <Image
                 src={image.src}
                 alt={image.alt}
-                width={1200}
-                height={1600}
+                width={image.width}
+                height={image.height}
                 sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
                 priority={eagerFirst && i === 0}
                 className="w-full h-auto block transition-opacity duration-300 group-hover:opacity-90"

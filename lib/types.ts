@@ -12,6 +12,10 @@ export interface ImageRef {
   name: string;
   /** Generated alt text */
   alt: string;
+  /** Intrinsic width in pixels — read from the file at build time. */
+  width: number;
+  /** Intrinsic height in pixels — read from the file at build time. */
+  height: number;
 }
 
 export interface BaseEntry {

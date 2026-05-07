@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { Container } from "@/components/layout/container";
-import { ArtworkImage } from "@/components/artwork/artwork-image";
 import type { Entry, ImageRef } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -26,16 +25,21 @@ interface EntryDetailProps {
   next?: RelatedLink;
 }
 
-const GALLERY_PATTERN: Array<{ colSpan: string; aspect: string }> = [
-  { colSpan: "md:col-span-7", aspect: "aspect-[4/5]" },
-  { colSpan: "md:col-span-5", aspect: "aspect-[3/4]" },
-  { colSpan: "md:col-span-4", aspect: "aspect-square" },
-  { colSpan: "md:col-span-8", aspect: "aspect-[16/10]" },
-  { colSpan: "md:col-span-6", aspect: "aspect-[3/2]" },
-  { colSpan: "md:col-span-6", aspect: "aspect-[3/2]" },
-  { colSpan: "md:col-span-12", aspect: "aspect-[16/9]" },
-  { colSpan: "md:col-span-5", aspect: "aspect-[4/5]" },
-  { colSpan: "md:col-span-7", aspect: "aspect-[3/2]" },
+/**
+ * Gallery slot pattern. Only the column span matters now — image
+ * aspect ratio is whatever the artwork naturally is, so vertical
+ * portraits aren't cropped.
+ */
+const GALLERY_SPANS: string[] = [
+  "md:col-span-7",
+  "md:col-span-5",
+  "md:col-span-4",
+  "md:col-span-8",
+  "md:col-span-6",
+  "md:col-span-6",
+  "md:col-span-12",
+  "md:col-span-5",
+  "md:col-span-7",
 ];
 
 function sizesForSpan(span: string): string {
@@ -69,18 +73,19 @@ export function EntryDetail({
         />
       </Container>
 
-      {/* HERO */}
+      {/* HERO — natural-aspect rendering so vertical artworks aren't cropped */}
       {hero ? (
         <Container className="pt-6 md:pt-10">
-          <figure className="relative w-full">
-            <div className="relative aspect-[3/2] md:aspect-[16/9] border border-mist bg-mist/40">
+          <figure className="mx-auto w-full max-w-[1000px] flex justify-center">
+            <div className="border border-mist bg-mist/40 inline-flex">
               <Image
                 src={hero.src}
                 alt={hero.alt}
-                fill
+                width={hero.width}
+                height={hero.height}
                 priority
-                sizes="(min-width: 1200px) 1200px, 100vw"
-                className="object-cover"
+                sizes="(min-width: 1200px) 1000px, (min-width: 768px) 90vw, 100vw"
+                className="block w-auto h-auto max-w-full max-h-[85vh]"
               />
             </div>
           </figure>
@@ -160,21 +165,26 @@ export function EntryDetail({
         </Container>
       ) : null}
 
-      {/* GALLERY */}
+      {/* GALLERY — natural-aspect images, no cropping */}
       {galleryImages.length > 0 ? (
         <Container className={cn(entry.pullQuote ? "border-t border-mist" : "", "pt-16 md:pt-20")}>
           <p className="label-caps text-stone mb-10 md:mb-12">Gallery</p>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-y-16 gap-x-8 md:gap-x-10 items-start">
             {galleryImages.map((image, i) => {
-              const slot = GALLERY_PATTERN[i % GALLERY_PATTERN.length];
+              const colSpan = GALLERY_SPANS[i % GALLERY_SPANS.length];
               return (
-                <div key={image.src} className={slot.colSpan}>
-                  <ArtworkImage
-                    image={image}
-                    aspect={slot.aspect}
-                    sizes={sizesForSpan(slot.colSpan)}
-                  />
-                </div>
+                <figure key={image.src} className={colSpan}>
+                  <div className="border border-mist bg-mist/40 flex justify-center">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      width={image.width}
+                      height={image.height}
+                      sizes={sizesForSpan(colSpan)}
+                      className="block w-full h-auto"
+                    />
+                  </div>
+                </figure>
               );
             })}
           </div>

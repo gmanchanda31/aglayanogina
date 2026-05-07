@@ -3,7 +3,8 @@ import Image from "next/image";
 import { Container } from "@/components/layout/container";
 import { PatreonAppeal } from "@/components/patreon-appeal";
 import { JsonLd } from "@/components/seo/json-ld";
-import { about, contact, getProject } from "@/lib/content";
+import { about, contact } from "@/lib/content";
+import { HERO_PORTRAIT } from "@/lib/home";
 import { SITE_URL } from "@/lib/site";
 import type { CVRow } from "@/lib/types";
 
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 const sections: Array<{ heading: string; rows: CVRow[] }> = [];
 
 export default function AboutPage() {
-  const portrait = getProject("archipelago")?.images[2] ?? getProject("archipelago")?.hero;
+  const portrait = HERO_PORTRAIT;
 
   sections.length = 0;
   sections.push(
@@ -74,22 +75,20 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {portrait ? (
-            <figure className="md:col-span-5 md:pt-2">
-              <div className="relative aspect-[4/5] border border-mist bg-mist/40">
-                <Image
-                  src={portrait.src}
-                  alt="From the Archipelago series, Aglaya Nogina"
-                  fill
-                  sizes="(min-width: 768px) 40vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-              <figcaption className="label-caps text-stone mt-3">
-                From <span className="not-uppercase tracking-normal italic font-[family-name:var(--font-vollkorn)] text-stone normal-case"> Archipelago</span>, 2023 — 2025
-              </figcaption>
-            </figure>
-          ) : null}
+          <figure className="md:col-span-5 md:pt-2">
+            <div className="relative aspect-[3/4] border border-mist bg-mist/40">
+              <Image
+                src={portrait.src}
+                alt={portrait.alt}
+                fill
+                sizes="(min-width: 768px) 40vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="label-caps text-stone mt-3">
+              In studio · Düsseldorf
+            </figcaption>
+          </figure>
         </div>
       </Container>
 

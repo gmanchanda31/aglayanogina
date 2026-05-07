@@ -38,6 +38,8 @@ interface PlanEntry {
   url: string;
   local: string;
   name: string;
+  width: number;
+  height: number;
 }
 
 const parsed = parsedRaw as unknown as ParsedPage[];
@@ -140,6 +142,8 @@ function imagesFor(
   return ordered.map((p, i) => ({
     src: `/${p.local}`, // image_plan stores "assets/..." → prepend "/"
     name: p.name,
+    width: p.width,
+    height: p.height,
     // Hero image (first one) gets the richer descriptor; subsequent images
     // include the index for screen-reader users navigating the gallery.
     alt:
@@ -451,10 +455,13 @@ export const home: Home = (() => {
   if (!page) return {};
   const plan = imagePlan["/home"] ?? [];
   if (plan.length === 0) return {};
+  const first = plan[0];
   return {
     hero: {
-      src: `/${plan[0].local}`,
-      name: plan[0].name,
+      src: `/${first.local}`,
+      name: first.name,
+      width: first.width,
+      height: first.height,
       alt: "Aglaya Nogina at work — featured artwork",
     },
   };
