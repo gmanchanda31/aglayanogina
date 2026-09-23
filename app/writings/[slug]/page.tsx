@@ -87,23 +87,6 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
         </article>
       </Container>
 
-      {/* Inline Patreon appeal at end of essay */}
-      <Container className="pb-16 md:pb-24">
-        <div className="max-w-[640px] mx-auto pt-12 border-t border-mist text-center">
-          <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-lg md:text-xl">
-            More writing, sketches, and studio notes are shared in the art diary.
-          </p>
-          <a
-            href="https://patreon.com/aglayann"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center label-caps px-5 py-3 border border-ink text-ink hover:bg-ink hover:text-paper transition-colors duration-300"
-          >
-            Read the art diary on Patreon
-          </a>
-        </div>
-      </Container>
-
       {/* Prev / Next */}
       {(prev || next) && (
         <Container className="border-t border-mist">

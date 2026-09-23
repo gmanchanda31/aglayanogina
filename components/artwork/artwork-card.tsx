@@ -10,7 +10,6 @@ interface ArtworkCardProps {
   title: string;
   medium?: string;
   year?: string;
-  aspect?: string;
   sizes: string;
   size?: "sm" | "md" | "lg";
   priority?: boolean;
@@ -23,7 +22,6 @@ export function ArtworkCard({
   title,
   medium,
   year,
-  aspect,
   sizes,
   size,
   priority,
@@ -34,14 +32,12 @@ export function ArtworkCard({
       href={href}
       className={cn("group block focus-visible:outline-none", className)}
     >
-      <div className="transition-opacity duration-300 group-hover:opacity-90">
-        <ArtworkImage
-          image={image}
-          aspect={aspect}
-          sizes={sizes}
-          priority={priority}
-        />
-      </div>
+      <ArtworkImage
+        image={image}
+        sizes={sizes}
+        priority={priority}
+        className="transition-opacity duration-300 group-hover:opacity-90"
+      />
       <ArtworkCaption title={title} medium={medium} year={year} size={size} />
     </Link>
   );

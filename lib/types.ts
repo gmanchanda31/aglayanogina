@@ -92,6 +92,22 @@ export interface WritingEntry extends BaseEntry {
   year?: string;
 }
 
+/**
+ * Editable copy for the header of a listing page (/projects, /exhibitions, …).
+ * One `sectionPage` document per section in Sanity; every field is optional
+ * on the wire so a missing document can never break the build.
+ */
+export interface SectionPage {
+  section: Section;
+  /** Small-caps line above the title. Empty → the page computes a count. */
+  eyebrow?: string;
+  title: string;
+  /** Italic stand-first under the title. */
+  intro?: string;
+  /** <meta name="description"> — falls back to `intro`. */
+  metaDescription?: string;
+}
+
 export interface CVRow {
   year: string;
   detail: string;

@@ -4,6 +4,7 @@ import { homePicks } from "./homePicks";
 import { illustration } from "./illustration";
 import { photographSet } from "./photographSet";
 import { project } from "./project";
+import { sectionPage } from "./sectionPage";
 import { writing } from "./writing";
 
 import { cvRow } from "./objects/cvRow";
@@ -14,6 +15,7 @@ export const schemaTypes = [
   // Singletons (one of each, ever)
   artist,
   homePicks,
+  sectionPage,
 
   // Many-of
   project,

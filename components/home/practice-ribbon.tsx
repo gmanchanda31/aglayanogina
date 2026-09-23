@@ -22,18 +22,18 @@ export function PracticeRibbon() {
                 className="group block focus-visible:outline-none"
               >
                 {tile.image ? (
-                  <div className="relative aspect-square overflow-hidden border border-mist bg-paper">
+                  <div className="relative aspect-square overflow-hidden">
                     <Image
                       src={tile.image.src}
                       alt={tile.image.alt}
                       fill
                       sizes="(min-width: 768px) 18vw, 45vw"
-                      className="object-contain p-2 transition-opacity duration-300 group-hover:opacity-90"
+                      className="object-cover transition-opacity duration-300 group-hover:opacity-90"
                     />
                   </div>
                 ) : (
                   <div className="relative aspect-square border border-mist bg-[#F2EDE4] flex flex-col justify-end p-5 transition-colors duration-300 group-hover:bg-clay/10">
-                    <p className="font-[family-name:var(--font-vollkorn)] italic text-lg md:text-[1.375rem] leading-tight text-ink">
+                    <p className="font-[family-name:var(--font-vollkorn)] italic text-base md:text-[1.125rem] leading-snug text-ink">
                       {tile.cardLine}
                     </p>
                     {tile.cardSubline ? (

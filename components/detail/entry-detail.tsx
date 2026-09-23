@@ -26,28 +26,10 @@ interface EntryDetailProps {
 }
 
 /**
- * Gallery slot pattern. Only the column span matters now — image
- * aspect ratio is whatever the artwork naturally is, so vertical
- * portraits aren't cropped.
+ * Every gallery image is one column wide and keeps its own proportions —
+ * no frames, no forced ratios, nothing cropped.
  */
-const GALLERY_SPANS: string[] = [
-  "md:col-span-7",
-  "md:col-span-5",
-  "md:col-span-4",
-  "md:col-span-8",
-  "md:col-span-6",
-  "md:col-span-6",
-  "md:col-span-12",
-  "md:col-span-5",
-  "md:col-span-7",
-];
-
-function sizesForSpan(span: string): string {
-  const m = span.match(/col-span-(\d+)/);
-  const n = m ? parseInt(m[1], 10) : 12;
-  const pct = Math.round((n / 12) * 100);
-  return `(min-width: 768px) ${pct}vw, 100vw`;
-}
+const GALLERY_SIZES = "(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw";
 
 export function EntryDetail({
   entry,
@@ -77,60 +59,50 @@ export function EntryDetail({
       {hero ? (
         <Container className="pt-6 md:pt-10">
           <figure className="mx-auto w-full max-w-[1000px] flex justify-center">
-            <div className="border border-mist bg-mist/40 inline-flex">
-              <Image
-                src={hero.src}
-                alt={hero.alt}
-                width={hero.width}
-                height={hero.height}
-                priority
-                sizes="(min-width: 1200px) 1000px, (min-width: 768px) 90vw, 100vw"
-                className="block w-auto h-auto max-w-full max-h-[85vh]"
-              />
-            </div>
+            <Image
+              src={hero.src}
+              alt={hero.alt}
+              width={hero.width}
+              height={hero.height}
+              priority
+              sizes="(min-width: 1200px) 1000px, (min-width: 768px) 90vw, 100vw"
+              className="block w-auto h-auto max-w-full max-h-[85vh]"
+            />
           </figure>
         </Container>
       ) : null}
 
-      {/* TITLE + METADATA */}
-      <Container className="pt-16 md:pt-24">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
-          <div className="md:col-span-8">
-            <h1 className="font-[family-name:var(--font-vollkorn)] text-[3.25rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[7rem] leading-[1] tracking-tight">
-              {entry.title}
-            </h1>
-            {entry.metadata[0] ? (
-              <p className="label-caps text-stone mt-6">{entry.metadata[0].value}</p>
-            ) : null}
-          </div>
+      {/* TITLE + METADATA — small, centred, metadata stacked directly below */}
+      <Container className="pt-10 md:pt-14">
+        <div className="max-w-[640px] mx-auto text-center">
+          <h1 className="font-[family-name:var(--font-vollkorn)] text-[1.75rem] md:text-[2rem] leading-[1.2] tracking-tight">
+            {entry.title}
+          </h1>
 
-          {entry.metadata.length > 1 ? (
-            <aside
-              className="md:col-span-4 md:pt-4"
-              aria-label={metaLabel}
-            >
-              <p className="label-caps text-stone mb-4">{metaLabel}</p>
-              <dl className="divide-y divide-mist border-y border-mist">
-                {entry.metadata.slice(1).map((m, i) => (
-                  <div key={i} className="py-3">
-                    {m.label ? (
-                      <dt className="label-caps text-stone text-[11px]">{m.label}</dt>
-                    ) : null}
-                    <dd className="text-ink text-base leading-[1.55]">{m.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </aside>
+          {entry.metadata.length > 0 ? (
+            <dl className="mt-4 space-y-1" aria-label={metaLabel}>
+              {entry.metadata.map((m, i) => (
+                <div
+                  key={i}
+                  className="flex flex-wrap justify-center items-baseline gap-x-2"
+                >
+                  {m.label ? (
+                    <dt className="label-caps text-stone text-[11px]">{m.label}</dt>
+                  ) : null}
+                  <dd className="text-stone text-base leading-[1.55]">{m.value}</dd>
+                </div>
+              ))}
+            </dl>
           ) : null}
         </div>
       </Container>
 
       {/* DESCRIPTION */}
       {(standFirst || restDescription.length > 0) ? (
-        <Container className="pt-16 md:pt-24 pb-4">
+        <Container className="pt-14 md:pt-20 pb-4">
           <div className="max-w-[640px] mx-auto">
             {standFirst ? (
-              <p className="font-[family-name:var(--font-vollkorn)] italic text-xl md:text-[1.5rem] leading-[1.5] text-ink">
+              <p className="font-[family-name:var(--font-vollkorn)] italic text-lg md:text-[1.25rem] leading-[1.55] text-ink">
                 {standFirst}
               </p>
             ) : null}
@@ -148,12 +120,12 @@ export function EntryDetail({
 
       {/* PULL QUOTE */}
       {entry.pullQuote ? (
-        <Container className="border-t border-mist mt-16 md:mt-24">
-          <div className="py-20 md:py-28 max-w-[760px] mx-auto text-center">
+        <Container className="border-t border-mist mt-14 md:mt-20">
+          <div className="py-16 md:py-20 max-w-[700px] mx-auto text-center">
             <blockquote
               className={cn(
                 "font-[family-name:var(--font-vollkorn)] italic leading-[1.4]",
-                "text-[1.625rem] md:text-[2.25rem] text-ink",
+                "text-[1.25rem] md:text-[1.5rem] text-ink",
               )}
             >
               “{entry.pullQuote}”
@@ -169,24 +141,19 @@ export function EntryDetail({
       {galleryImages.length > 0 ? (
         <Container className={cn(entry.pullQuote ? "border-t border-mist" : "", "pt-16 md:pt-20")}>
           <p className="label-caps text-stone mb-10 md:mb-12">Gallery</p>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-y-16 gap-x-8 md:gap-x-10 items-start">
-            {galleryImages.map((image, i) => {
-              const colSpan = GALLERY_SPANS[i % GALLERY_SPANS.length];
-              return (
-                <figure key={image.src} className={colSpan}>
-                  <div className="border border-mist bg-mist/40 flex justify-center">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      width={image.width}
-                      height={image.height}
-                      sizes={sizesForSpan(colSpan)}
-                      className="block w-full h-auto"
-                    />
-                  </div>
-                </figure>
-              );
-            })}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-12 md:gap-y-16 gap-x-8 md:gap-x-10 items-start">
+            {galleryImages.map((image) => (
+              <figure key={image.src}>
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={image.width}
+                  height={image.height}
+                  sizes={GALLERY_SIZES}
+                  className="block w-full h-auto"
+                />
+              </figure>
+            ))}
           </div>
         </Container>
       ) : null}
@@ -207,7 +174,7 @@ export function EntryDetail({
                   <span className="label-caps text-stone inline-flex items-center gap-1.5">
                     <ArrowLeft className="size-3.5" /> {prev.label}
                   </span>
-                  <span className="font-[family-name:var(--font-vollkorn)] italic text-2xl text-stone group-hover:text-ink transition-colors">
+                  <span className="font-[family-name:var(--font-vollkorn)] italic text-lg text-stone group-hover:text-ink transition-colors">
                     {prev.title}
                   </span>
                 </Link>
@@ -222,7 +189,7 @@ export function EntryDetail({
                   <span className="label-caps text-stone inline-flex items-center gap-1.5 self-end">
                     {next.label} <ArrowRight className="size-3.5" />
                   </span>
-                  <span className="font-[family-name:var(--font-vollkorn)] italic text-2xl text-stone group-hover:text-ink transition-colors">
+                  <span className="font-[family-name:var(--font-vollkorn)] italic text-lg text-stone group-hover:text-ink transition-colors">
                     {next.title}
                   </span>
                 </Link>

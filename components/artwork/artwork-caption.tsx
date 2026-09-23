@@ -9,9 +9,9 @@ interface ArtworkCaptionProps {
 }
 
 const titleSizes: Record<NonNullable<ArtworkCaptionProps["size"]>, string> = {
-  sm: "text-lg",
-  md: "text-xl md:text-2xl",
-  lg: "text-2xl md:text-3xl",
+  sm: "text-[0.9375rem]",
+  md: "text-base",
+  lg: "text-[1.125rem]",
 };
 
 export function ArtworkCaption({
@@ -22,17 +22,21 @@ export function ArtworkCaption({
   className,
 }: ArtworkCaptionProps) {
   return (
-    <div className={cn("mt-4 space-y-1.5", className)}>
+    <div className={cn("mt-3 space-y-1", className)}>
       <h3
         className={cn(
-          "font-[family-name:var(--font-vollkorn)] italic leading-tight text-ink",
+          "font-[family-name:var(--font-vollkorn)] italic leading-snug text-ink",
           titleSizes[size],
         )}
       >
         {title}
       </h3>
-      {medium ? <p className="label-caps text-stone">{medium}</p> : null}
-      {year ? <p className="text-stone text-sm">{year}</p> : null}
+      {medium ? (
+        <p className="text-stone text-[0.8125rem] leading-[1.5]">{medium}</p>
+      ) : null}
+      {year ? (
+        <p className="text-stone text-[0.8125rem] leading-[1.5]">{year}</p>
+      ) : null}
     </div>
   );
 }

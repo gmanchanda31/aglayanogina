@@ -21,19 +21,20 @@ export function FeaturedProject() {
         <p className="label-caps text-stone text-center">Currently on view</p>
       </Container>
 
-      {/* Full-bleed cinematic hero — contain so tall artworks aren't cropped */}
+      {/* Hero at its own proportions — no frame, no crop, no letterboxing */}
       {project.hero ? (
-        <figure className="relative w-full overflow-hidden bg-paper">
-          <div className="relative w-full aspect-[3/2] md:aspect-[21/9]">
+        <Container>
+          <figure className="mx-auto w-full max-w-[1000px] flex justify-center">
             <Image
               src={project.hero.src}
               alt={project.hero.alt}
-              fill
-              sizes="100vw"
-              className="object-contain"
+              width={project.hero.width}
+              height={project.hero.height}
+              sizes="(min-width: 1200px) 1000px, (min-width: 768px) 90vw, 100vw"
+              className="block w-auto h-auto max-w-full max-h-[80vh]"
             />
-          </div>
-        </figure>
+          </figure>
+        </Container>
       ) : null}
 
       {/* Title block + metadata */}
@@ -42,18 +43,18 @@ export function FeaturedProject() {
           <div className="md:col-span-7">
             <h2
               id="featured-heading"
-              className="font-[family-name:var(--font-vollkorn)] text-5xl md:text-6xl lg:text-7xl tracking-tight text-ink leading-[1]"
+              className="font-[family-name:var(--font-vollkorn)] text-[1.75rem] md:text-[2rem] tracking-tight text-ink leading-[1.2]"
             >
               {project.title}
             </h2>
             {teaser ? (
-              <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-xl md:text-[1.5rem] leading-[1.4] mt-6 max-w-xl">
+              <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-base md:text-[1.0625rem] leading-[1.55] mt-3 max-w-xl">
                 {teaser}
               </p>
             ) : null}
             <Link
               href={project.href}
-              className="group inline-flex items-center gap-2 mt-10 px-7 py-3 border border-ink text-ink label-caps hover:bg-ink hover:text-paper transition-colors duration-300"
+              className="group inline-flex items-center gap-2 mt-8 px-7 py-3 border border-ink text-ink label-caps hover:bg-ink hover:text-paper transition-colors duration-300"
             >
               View the project
               <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />

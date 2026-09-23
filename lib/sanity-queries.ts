@@ -4,14 +4,26 @@
  * The shape of the returned data is intentionally close to the existing
  * `Entry`, `ProjectEntry`, `WritingEntry` types so the transform layer is thin.
  *
- * Image fields project to { src, width, height, alt } so we get dimensions
- * out of Sanity's metadata sidecar — no _ref parsing needed.
+ * Image fields project the asset reference alongside `hotspot` / `crop` so
+ * lib/content.ts can rebuild the URL through urlFor() and honour the crop
+ * Aglaya sets in the Studio. `src` is the uncropped original, kept as a
+ * fallback for the rare image with no asset reference. Intrinsic dimensions
+ * come from Sanity's metadata sidecar and are adjusted for the crop.
  */
 
-/** Fragment for an imageWithAlt — resolves asset to a usable shape. */
+/**
+ * Fragment for an imageWithAlt.
+ *
+ * `hotspot` and `crop` live on the image object, not the asset — projecting
+ * `asset->url` alone silently discards them, which is why Studio crops used
+ * to have no effect on the site.
+ */
 const IMAGE_WITH_ALT = /* groq */ `{
   alt,
   caption,
+  asset,
+  hotspot,
+  crop,
   "src": asset->url,
   "width": asset->metadata.dimensions.width,
   "height": asset->metadata.dimensions.height
@@ -89,6 +101,18 @@ export const WRITINGS_QUERY = /* groq */ `*[_type == "writing"] | order(year des
   year,
   excerpt,
   body
+}`;
+
+/**
+ * The eyebrow / title / intro block at the top of each listing page.
+ * One document per section, ids fixed as `sectionPage-<section>`.
+ */
+export const SECTION_PAGES_QUERY = /* groq */ `*[_type == "sectionPage"]{
+  section,
+  eyebrow,
+  title,
+  intro,
+  metaDescription
 }`;
 
 export const HOME_PICKS_QUERY = /* groq */ `*[_type == "homePicks" && _id == "homePicks"][0]{

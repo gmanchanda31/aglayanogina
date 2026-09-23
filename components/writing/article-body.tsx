@@ -23,12 +23,12 @@ const components: PortableTextComponents = {
       </p>
     ),
     h2: ({ children }) => (
-      <h2 className="font-[family-name:var(--font-vollkorn)] text-3xl md:text-4xl leading-tight text-ink mt-16 mb-6">
+      <h2 className="font-[family-name:var(--font-vollkorn)] text-[1.375rem] md:text-[1.5rem] leading-snug text-ink mt-14 mb-5">
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="font-[family-name:var(--font-vollkorn)] text-2xl leading-tight text-ink mt-12 mb-4">
+      <h3 className="font-[family-name:var(--font-vollkorn)] text-[1.125rem] md:text-[1.1875rem] leading-snug text-ink mt-10 mb-4">
         {children}
       </h3>
     ),

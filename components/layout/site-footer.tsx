@@ -61,14 +61,6 @@ export function SiteFooter() {
           <p className="mt-4 text-stone text-base leading-[1.65]">
             Available for commissions, exhibitions, and editorial collaborations.
           </p>
-          <a
-            href={contact.patreonUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-block label-caps text-stone border-b border-stone hover:text-ink hover:border-ink transition-colors"
-          >
-            Support on Patreon
-          </a>
         </div>
       </Container>
     </footer>
