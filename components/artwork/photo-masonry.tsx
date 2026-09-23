@@ -37,7 +37,7 @@ export function PhotoMasonry({
               type="button"
               onClick={() => setOpenIndex(i)}
               aria-label={`Open ${image.alt} in viewer`}
-              className="group relative w-full overflow-hidden bg-mist/40 border border-mist block cursor-zoom-in"
+              className="group relative w-full overflow-hidden block cursor-zoom-in"
             >
               <Image
                 src={image.src}

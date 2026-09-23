@@ -4,11 +4,11 @@ import { Container } from "@/components/layout/container";
 import { selectedWorks } from "@/lib/home";
 
 /**
- * 4-tile staggered grid. Layout (desktop):
- *   Row 1: 7-col + 5-col, with the 5-col image dropped lower (mt-24)
- *   Row 2: 5-col + 7-col, with the 7-col image dropped lower (mt-12)
- * Mobile collapses to a single column with no offsets.
+ * 4 works in one even grid — same column width for every card, height
+ * following each artwork's own proportions.
  */
+const CARD_SIZES = "(min-width: 768px) 25vw, (min-width: 640px) 50vw, 100vw";
+
 export function SelectedWorks() {
   const [first, second, third, fourth] = selectedWorks;
   if (!first || !second || !third || !fourth) return null;
@@ -32,62 +32,21 @@ export function SelectedWorks() {
         </header>
       </Container>
 
-      <Container className="space-y-20 md:space-y-32 pb-24 md:pb-32">
-        {/* Row 1 */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
-          {first.hero ? (
-            <ArtworkCard
-              href={first.href}
-              image={first.hero}
-              title={first.title}
-              medium={first.metadata.find((m) => m.label === "Medium")?.value}
-              year={first.metadata.find((m) => m.label === "Year")?.value}
-              aspect="aspect-[4/5]"
-              sizes="(min-width: 768px) 55vw, 100vw"
-              size="lg"
-              className="md:col-span-7"
-            />
-          ) : null}
-          {second.hero ? (
-            <ArtworkCard
-              href={second.href}
-              image={second.hero}
-              title={second.title}
-              medium={second.metadata.find((m) => m.label === "Medium")?.value}
-              year={second.metadata.find((m) => m.label === "Year")?.value}
-              aspect="aspect-[3/4]"
-              sizes="(min-width: 768px) 38vw, 100vw"
-              className="md:col-span-5 md:mt-24"
-            />
-          ) : null}
-        </div>
-
-        {/* Row 2 */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
-          {third.hero ? (
-            <ArtworkCard
-              href={third.href}
-              image={third.hero}
-              title={third.title}
-              medium={third.metadata.find((m) => m.label === "Medium")?.value}
-              year={third.metadata.find((m) => m.label === "Year")?.value}
-              aspect="aspect-[4/5]"
-              sizes="(min-width: 768px) 38vw, 100vw"
-              className="md:col-span-5"
-            />
-          ) : null}
-          {fourth.hero ? (
-            <ArtworkCard
-              href={fourth.href}
-              image={fourth.hero}
-              title={fourth.title}
-              medium={fourth.metadata.find((m) => m.label === "Medium")?.value}
-              year={fourth.metadata.find((m) => m.label === "Year")?.value}
-              aspect="aspect-[3/2]"
-              sizes="(min-width: 768px) 55vw, 100vw"
-              className="md:col-span-7 md:mt-12"
-            />
-          ) : null}
+      <Container className="pb-24 md:pb-32">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 md:gap-x-10 gap-y-14 items-start">
+          {[first, second, third, fourth].map((work) =>
+            work.hero ? (
+              <ArtworkCard
+                key={work.slug}
+                href={work.href}
+                image={work.hero}
+                title={work.title}
+                medium={work.metadata.find((m) => m.label === "Medium")?.value}
+                year={work.metadata.find((m) => m.label === "Year")?.value}
+                sizes={CARD_SIZES}
+              />
+            ) : null,
+          )}
         </div>
       </Container>
     </section>

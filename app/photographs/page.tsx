@@ -3,13 +3,7 @@ import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { PageHeader } from "@/components/layout/page-header";
 import { PhotoMasonry } from "@/components/artwork/photo-masonry";
-import { photographSets } from "@/lib/content";
-
-export const metadata: Metadata = {
-  title: "Photographs",
-  description:
-    "A film and digital archive — places lived in, places visited, faces returned to. Made between Kyiv, Berlin, Istanbul, Goa, and Düsseldorf.",
-};
+import { getSectionPage, photographSets } from "@/lib/content";
 
 const TITLE_OVERRIDES: Record<string, string> = {
   "b-w": "Black & White",
@@ -20,20 +14,34 @@ const TITLE_OVERRIDES: Record<string, string> = {
 
 const ORDER = ["colour", "b-w", "turkey", "india"];
 
+const sets = ORDER
+  .map((slug) => photographSets.find((s) => s.routeSlug === slug))
+  .filter((s): s is NonNullable<typeof s> => Boolean(s));
+
+const totalPhotos = sets.reduce((n, s) => n + s.images.length, 0);
+
+const page = getSectionPage("photographs", {
+  eyebrow: `${totalPhotos} photographs · ${sets.length} archives`,
+  title: "Photographs",
+  intro:
+    "A film and digital archive — places lived in, places visited, faces returned to. Made between Kyiv, Berlin, Istanbul, Goa, and Düsseldorf.",
+  metaDescription:
+    "A film and digital archive — places lived in, places visited, faces returned to. Made between Kyiv, Berlin, Istanbul, Goa, and Düsseldorf.",
+});
+
+export const metadata: Metadata = {
+  title: page.title,
+  description: page.metaDescription,
+};
+
 export default function PhotographsPage() {
-  const sets = ORDER
-    .map((slug) => photographSets.find((s) => s.routeSlug === slug))
-    .filter((s): s is NonNullable<typeof s> => Boolean(s));
-
-  const totalPhotos = sets.reduce((n, s) => n + s.images.length, 0);
-
   return (
     <>
       <Container className="pt-20 pb-12 md:pt-28 md:pb-16">
         <PageHeader
-          eyebrow={`${totalPhotos} photographs · ${sets.length} archives`}
-          title="Photographs"
-          lede="A film and digital archive — places lived in, places visited, faces returned to. Made between Kyiv, Berlin, Istanbul, Goa, and Düsseldorf."
+          eyebrow={page.eyebrow}
+          title={page.title}
+          lede={page.intro}
         />
 
         <nav

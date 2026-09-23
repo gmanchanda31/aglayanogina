@@ -9,8 +9,12 @@ import { deskStructure } from "./desk/structure";
  * Setup steps live in studio/README.md.
  */
 
-/** Document types that are singletons — only one of each ever exists. */
-const SINGLETONS = ["artist", "homePicks"] as const;
+/**
+ * Document types that are singletons — one fixed document per id, never
+ * created from the Studio. `sectionPage` is five of them (one per listing
+ * page), seeded by scripts/seed-section-pages.mjs.
+ */
+const SINGLETONS = ["artist", "homePicks", "sectionPage"] as const;
 
 export default defineConfig({
   name: "aglaya-nogina",
@@ -28,7 +32,8 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
     // Strip "Create new" / "Duplicate" / "Delete" from the singletons so
-    // Aglaya can't accidentally create a second Homepage or Artist doc.
+    // Aglaya can't accidentally create a second Homepage, Artist, or
+    // page-intro document.
     templates: (templates) =>
       templates.filter(
         (t) => !SINGLETONS.includes(t.schemaType as (typeof SINGLETONS)[number]),

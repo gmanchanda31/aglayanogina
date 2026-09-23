@@ -20,18 +20,18 @@ export function PageHeader({
       {eyebrow ? <p className="label-caps text-stone">{eyebrow}</p> : null}
       <h1
         className={cn(
-          "font-[family-name:var(--font-vollkorn)] tracking-tight text-ink leading-[1] mt-3",
-          "text-[3.5rem] sm:text-[4.5rem] md:text-[5.5rem]",
+          "font-[family-name:var(--font-vollkorn)] tracking-tight text-ink leading-[1.2] mt-2",
+          "text-[1.75rem] md:text-[2rem]",
         )}
       >
         {title}
       </h1>
       {lede ? (
-        <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-xl md:text-2xl leading-[1.45] mt-6 max-w-2xl">
+        <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-base md:text-[1.0625rem] leading-[1.55] mt-3 max-w-2xl">
           {lede}
         </p>
       ) : null}
-      {actions ? <div className="mt-8">{actions}</div> : null}
+      {actions ? <div className="mt-6">{actions}</div> : null}
     </div>
   );
 }

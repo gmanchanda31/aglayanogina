@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { aboutNav, contact, navSections, siteName } from "@/lib/site-config";
+import { aboutNav, navSections, siteName } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 import { Container } from "./container";
 
@@ -40,7 +40,7 @@ export function SiteHeader() {
           <Link
             href="/"
             aria-label={`${siteName} — home`}
-            className="inline-flex items-center font-[family-name:var(--font-vollkorn)] text-base md:text-lg uppercase tracking-[0.18em] leading-none text-ink h-8"
+            className="inline-flex items-center font-[family-name:var(--font-vollkorn)] text-base uppercase tracking-[0.16em] leading-none text-ink h-8"
           >
             {siteName}
           </Link>
@@ -65,16 +65,6 @@ export function SiteHeader() {
                 </li>
               );
             })}
-            <li className="ml-1 inline-flex h-8 items-center">
-              <a
-                href={contact.patreonUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="label-caps inline-flex items-center h-full leading-none px-3.5 border border-ink text-ink hover:bg-ink hover:text-paper transition-colors duration-300"
-              >
-                Support
-              </a>
-            </li>
           </ul>
 
           <button
@@ -115,7 +105,7 @@ function MobileNav({ open, pathname }: { open: boolean; pathname: string }) {
               href={link.href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "font-[family-name:var(--font-vollkorn)] text-4xl py-3 border-b border-mist transition-colors",
+                "font-[family-name:var(--font-vollkorn)] text-xl py-3 border-b border-mist transition-colors",
                 active ? "text-ink" : "text-stone hover:text-ink",
               )}
             >
@@ -123,18 +113,6 @@ function MobileNav({ open, pathname }: { open: boolean; pathname: string }) {
             </Link>
           );
         })}
-
-        <a
-          href={contact.patreonUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-10 inline-flex items-center justify-center label-caps px-5 py-4 border border-ink text-ink hover:bg-ink hover:text-paper transition-colors duration-300"
-        >
-          Support on Patreon
-        </a>
-        <p className="mt-4 text-stone text-sm leading-[1.6] max-w-sm">
-          Aglaya&apos;s practice is supported by readers and patrons. Joining the art diary helps her keep making.
-        </p>
       </Container>
     </div>
   );

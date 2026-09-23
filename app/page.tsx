@@ -4,7 +4,6 @@ import { JournalPair } from "@/components/home/journal-pair";
 import { PracticeRibbon } from "@/components/home/practice-ribbon";
 import { SelectedWorks } from "@/components/home/selected-works";
 import { StatementBlock } from "@/components/home/statement-block";
-import { StudioSupport } from "@/components/home/studio-support";
 
 export default function HomePage() {
   return (
@@ -15,7 +14,6 @@ export default function HomePage() {
       <FeaturedProject />
       <SelectedWorks />
       <JournalPair />
-      <StudioSupport />
     </>
   );
 }

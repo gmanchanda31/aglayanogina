@@ -2,49 +2,45 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/layout/container";
+import { siteName } from "@/lib/site-config";
 import { HERO_ITALIC, HERO_PORTRAIT, HERO_TAGLINE } from "@/lib/home";
 
 export function HomeHero() {
   return (
-    <Container className="py-20 md:py-28 lg:py-32">
+    <Container className="py-16 md:py-20 lg:py-24">
+      {/* The header wordmark carries the name visually; this keeps the
+          document outline and SEO intact without a display-size heading. */}
+      <h1 className="sr-only">{siteName}</h1>
+
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center">
-        {/* Portrait */}
+        {/* Portrait — natural proportions, no frame, no crop */}
         <figure className="md:col-span-5">
-          <div className="relative aspect-[3/4] border border-mist bg-mist/40">
-            <Image
-              src={HERO_PORTRAIT.src}
-              alt={HERO_PORTRAIT.alt}
-              fill
-              priority
-              sizes="(min-width: 768px) 40vw, 100vw"
-              className="object-cover"
-            />
-          </div>
+          <Image
+            src={HERO_PORTRAIT.src}
+            alt={HERO_PORTRAIT.alt}
+            width={HERO_PORTRAIT.width}
+            height={HERO_PORTRAIT.height}
+            priority
+            sizes="(min-width: 768px) 40vw, 100vw"
+            className="block w-full h-auto"
+          />
         </figure>
 
-        {/* Name + statement + CTAs */}
+        {/* Statement + CTAs */}
         <div className="md:col-span-7 flex flex-col items-start">
-          <h1
-            className="font-[family-name:var(--font-vollkorn)] text-[3.5rem] sm:text-[5rem] md:text-[6.5rem] lg:text-[7.5rem] leading-[0.95] tracking-tight text-ink"
-          >
-            AGLAYA
-            <br />
-            NOGINA
-          </h1>
-
           {HERO_ITALIC ? (
-            <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-xl md:text-2xl lg:text-[1.625rem] leading-[1.4] mt-8 max-w-[36ch]">
+            <p className="font-[family-name:var(--font-vollkorn)] italic text-ink text-lg md:text-xl leading-[1.5] max-w-[38ch]">
               {HERO_ITALIC}
             </p>
           ) : null}
 
           {HERO_TAGLINE ? (
-            <p className={`label-caps text-stone max-w-md leading-[1.6] ${HERO_ITALIC ? "mt-8" : "mt-10"}`}>
+            <p className={`label-caps text-stone max-w-md leading-[1.6] ${HERO_ITALIC ? "mt-6" : ""}`}>
               {HERO_TAGLINE}
             </p>
           ) : null}
 
-          <div className="flex flex-wrap gap-4 mt-10">
+          <div className="flex flex-wrap gap-4 mt-8">
             <Link
               href="/projects"
               className="group inline-flex items-center gap-2 px-7 py-3 bg-ink text-paper label-caps hover:bg-clay transition-colors duration-300"

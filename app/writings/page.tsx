@@ -3,12 +3,20 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { PageHeader } from "@/components/layout/page-header";
-import { writings } from "@/lib/content";
+import { getSectionPage, writings } from "@/lib/content";
+
+const page = getSectionPage("writings", {
+  eyebrow: `${writings.length} essays`,
+  title: "Writings",
+  intro:
+    "Lyrical essays and short prose — sometimes companion pieces to the visual work, sometimes their own quiet thing.",
+  metaDescription:
+    "Essays and short prose by Aglaya Nogina — purgatory waiting rooms, botanical bridges, mirror diaries, the small physics of remembering.",
+});
 
 export const metadata: Metadata = {
-  title: "Writings",
-  description:
-    "Essays and short prose by Aglaya Nogina — purgatory waiting rooms, botanical bridges, mirror diaries, the small physics of remembering.",
+  title: page.title,
+  description: page.metaDescription,
 };
 
 export default function WritingsPage() {
@@ -16,9 +24,9 @@ export default function WritingsPage() {
     <>
       <Container className="pt-20 pb-12 md:pt-28 md:pb-16">
         <PageHeader
-          eyebrow={`${writings.length} essays`}
-          title="Writings"
-          lede="Lyrical essays and short prose — sometimes companion pieces to the visual work, sometimes their own quiet thing."
+          eyebrow={page.eyebrow}
+          title={page.title}
+          lede={page.intro}
         />
       </Container>
 

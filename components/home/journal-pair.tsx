@@ -29,7 +29,7 @@ export function JournalPair() {
               key={writing.routeSlug}
               className="flex flex-col items-center text-center px-2 md:px-6"
             >
-              <h3 className="font-[family-name:var(--font-vollkorn)] text-3xl md:text-[2.25rem] leading-tight">
+              <h3 className="font-[family-name:var(--font-vollkorn)] text-[1.25rem] md:text-[1.375rem] leading-snug">
                 <Link
                   href={writing.href}
                   className="hover:text-clay transition-colors"
@@ -37,12 +37,12 @@ export function JournalPair() {
                   {writing.title}
                 </Link>
               </h3>
-              <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-lg md:text-xl leading-[1.5] mt-6 max-w-sm">
+              <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-base leading-[1.55] mt-4 max-w-sm">
                 {teaser}
               </p>
               <Link
                 href={writing.href}
-                className="mt-8 label-caps text-stone hover:text-ink border-b border-stone hover:border-ink pb-1 transition-colors"
+                className="mt-6 label-caps text-stone hover:text-ink border-b border-stone hover:border-ink pb-1 transition-colors"
               >
                 Read essay
               </Link>

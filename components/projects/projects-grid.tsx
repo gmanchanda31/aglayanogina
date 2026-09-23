@@ -1,20 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AsymmetricGrid } from "@/components/artwork/asymmetric-grid";
+import { WorkGrid } from "@/components/artwork/work-grid";
 import { cn } from "@/lib/utils";
 import type { ProjectEntry, ProjectKind } from "@/lib/types";
-
-const PATTERN = [
-  { colSpan: "md:col-span-7", aspect: "aspect-[4/5]" },
-  { colSpan: "md:col-span-5", aspect: "aspect-square" },
-  { colSpan: "md:col-span-4", aspect: "aspect-[3/4]" },
-  { colSpan: "md:col-span-5", aspect: "aspect-[4/5]" },
-  { colSpan: "md:col-span-3", aspect: "aspect-square" },
-  { colSpan: "md:col-span-6", aspect: "aspect-[3/2]" },
-  { colSpan: "md:col-span-6", aspect: "aspect-[3/2]" },
-  { colSpan: "md:col-span-12", aspect: "aspect-[16/9]" },
-];
 
 const FILTERS: Array<{ label: string; kind: ProjectKind | "All" }> = [
   { label: "All", kind: "All" },
@@ -78,9 +67,9 @@ export function ProjectsGrid({ projects }: Props) {
 
       <div className="mt-12 md:mt-16">
         {filtered.length > 0 ? (
-          <AsymmetricGrid entries={filtered} pattern={PATTERN} />
+          <WorkGrid entries={filtered} />
         ) : (
-          <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-xl py-16">
+          <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-lg py-16">
             No projects under {active}. Try another filter.
           </p>
         )}

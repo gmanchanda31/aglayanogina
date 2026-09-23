@@ -14,7 +14,7 @@
  * Phase 3a; Phase 3b swaps them to PortableText from Sanity.
  */
 
-import { sanityClient } from "./sanity-client";
+import { sanityClient, urlFor } from "./sanity-client";
 import {
   ARTIST_QUERY,
   EXHIBITIONS_QUERY,
@@ -22,6 +22,7 @@ import {
   ILLUSTRATIONS_QUERY,
   PHOTOGRAPH_SETS_QUERY,
   PROJECTS_QUERY,
+  SECTION_PAGES_QUERY,
   WRITINGS_QUERY,
 } from "./sanity-queries";
 import type {
@@ -36,6 +37,8 @@ import type {
   PhotographSet,
   ProjectEntry,
   ProjectKind,
+  Section,
+  SectionPage,
   WritingEntry,
 } from "./types";
 
@@ -54,10 +57,30 @@ export {
 /*                            Raw Sanity types                                */
 /* -------------------------------------------------------------------------- */
 
+/** Fractional insets (0-1) set by the Studio's "Edit hotspot and crop" tool. */
+interface SanityCrop {
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+}
+
+interface SanityHotspot {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 interface SanityImage {
   alt?: string;
   caption?: string;
+  asset?: { _ref: string; _type: "reference" } | null;
+  hotspot?: SanityHotspot | null;
+  crop?: SanityCrop | null;
+  /** Uncropped original URL — fallback only; prefer the urlFor() build. */
   src: string | null;
+  /** Intrinsic dimensions of the original asset, before any crop. */
   width: number | null;
   height: number | null;
 }
@@ -141,6 +164,14 @@ interface SanityPhotographSetDoc {
   images?: SanityImage[];
 }
 
+interface SanitySectionPageDoc {
+  section?: Section;
+  eyebrow?: string;
+  title?: string;
+  intro?: string;
+  metaDescription?: string;
+}
+
 interface SanityWritingDoc {
   _id: string;
   title: string;
@@ -158,14 +189,54 @@ function normalizeSlug(slug: string): string {
   return slug.replace(/-+$/, "");
 }
 
-function toImageRef(img: SanityImage | undefined, fallbackAlt: string): ImageRef | undefined {
-  if (!img?.src || !img.width || !img.height) return undefined;
+/**
+ * Dimensions of the image *after* the Studio crop is applied.
+ *
+ * Mirrors the rounding @sanity/image-url uses to build the `rect=` param, so
+ * the width/height we hand <Image> match the bytes the CDN actually returns.
+ */
+function croppedDimensions(
+  width: number,
+  height: number,
+  crop: SanityCrop | null | undefined,
+): { width: number; height: number } {
+  if (!crop) return { width, height };
+  const left = Math.round(crop.left * width);
+  const top = Math.round(crop.top * height);
   return {
-    src: img.src,
-    name: img.src.split("/").pop() ?? "image",
+    width: Math.max(1, Math.round(width - crop.right * width - left)),
+    height: Math.max(1, Math.round(height - crop.bottom * height - top)),
+  };
+}
+
+/** Filename for sort stability — strips the `?rect=…` the crop adds. */
+function fileNameFromSrc(src: string): string {
+  return src.split("?")[0].split("/").pop() ?? "image";
+}
+
+function toImageRef(img: SanityImage | undefined, fallbackAlt: string): ImageRef | undefined {
+  if (!img?.width || !img.height) return undefined;
+
+  // Build through urlFor() so hotspot/crop reach the CDN. With no explicit
+  // size the builder emits only `rect=`, i.e. the crop at its natural
+  // proportions — no forced aspect ratio.
+  const src = img.asset?._ref
+    ? urlFor({
+        asset: img.asset,
+        ...(img.hotspot ? { hotspot: img.hotspot } : {}),
+        ...(img.crop ? { crop: img.crop } : {}),
+      }).url()
+    : img.src;
+  if (!src) return undefined;
+
+  const { width, height } = croppedDimensions(img.width, img.height, img.crop);
+
+  return {
+    src,
+    name: fileNameFromSrc(src),
     alt: img.alt || fallbackAlt,
-    width: img.width,
-    height: img.height,
+    width,
+    height,
   };
 }
 
@@ -232,6 +303,7 @@ const [
   illustrationsDocs,
   photographSetsDocs,
   writingsDocs,
+  sectionPageDocs,
 ] = await Promise.all([
   sanityClient.fetch<SanityArtistDoc | null>(ARTIST_QUERY),
   sanityClient.fetch<SanityHomePicksDoc | null>(HOME_PICKS_QUERY),
@@ -240,6 +312,7 @@ const [
   sanityClient.fetch<SanityEntryDoc[]>(ILLUSTRATIONS_QUERY),
   sanityClient.fetch<SanityPhotographSetDoc[]>(PHOTOGRAPH_SETS_QUERY),
   sanityClient.fetch<SanityWritingDoc[]>(WRITINGS_QUERY),
+  sanityClient.fetch<SanitySectionPageDoc[]>(SECTION_PAGES_QUERY),
 ]);
 
 /* -------------------------------------------------------------------------- */
@@ -327,6 +400,46 @@ export function getIllustration(slug: string) {
 }
 export function getPhotographSet(slug: string) {
   return photographSets.find((e) => e.routeSlug === slug);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            Listing page copy                               */
+/* -------------------------------------------------------------------------- */
+
+const sectionPagesBySection = new Map<Section, SanitySectionPageDoc>(
+  sectionPageDocs
+    .filter((doc): doc is SanitySectionPageDoc & { section: Section } =>
+      Boolean(doc.section),
+    )
+    .map((doc) => [doc.section, doc]),
+);
+
+/** Trimmed value, or undefined when the field is empty in the Studio. */
+function filled(value: string | undefined): string | undefined {
+  const trimmed = value?.trim();
+  return trimmed ? trimmed : undefined;
+}
+
+/**
+ * Header copy for a listing page, read from its `sectionPage` document with
+ * the page's own strings as fallbacks. Every field falls back independently,
+ * so an empty eyebrow in the Studio restores the computed "N works · …" line
+ * while the edited title and intro still apply.
+ */
+export function getSectionPage(
+  section: Section,
+  fallback: Omit<SectionPage, "section">,
+): SectionPage {
+  const doc = sectionPagesBySection.get(section);
+  const intro = filled(doc?.intro) ?? fallback.intro;
+  return {
+    section,
+    eyebrow: filled(doc?.eyebrow) ?? fallback.eyebrow,
+    title: filled(doc?.title) ?? fallback.title,
+    intro,
+    metaDescription:
+      filled(doc?.metaDescription) ?? intro ?? fallback.metaDescription,
+  };
 }
 
 /* -------------------------------------------------------------------------- */

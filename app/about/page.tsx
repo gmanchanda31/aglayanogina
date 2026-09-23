@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Container } from "@/components/layout/container";
-import { PatreonAppeal } from "@/components/patreon-appeal";
 import { JsonLd } from "@/components/seo/json-ld";
 import { about, contact } from "@/lib/content";
 import { HERO_PORTRAIT } from "@/lib/home";
@@ -50,7 +49,7 @@ export default function AboutPage() {
       { "@type": "CollegeOrUniversity", name: "Kyiv National Academy of Fine Arts and Architecture" },
       { "@type": "CollegeOrUniversity", name: "Kunstakademie Düsseldorf" },
     ],
-    sameAs: [contact.instagramUrl, contact.patreonUrl],
+    sameAs: [contact.instagramUrl],
   };
 
   return (
@@ -90,10 +89,6 @@ export default function AboutPage() {
             </figcaption>
           </figure>
         </div>
-      </Container>
-
-      <Container className="pb-4 md:pb-6">
-        <PatreonAppeal />
       </Container>
 
       <Container className="py-20 md:py-28">

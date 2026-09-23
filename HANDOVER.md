@@ -20,7 +20,7 @@ It now opens like a native app.
 
 ## What you'll see
 
-The studio has two sections at the top, then five lists below:
+The studio has two sections at the top, then five sections below:
 
 - **Homepage** — what's featured on the front page (featured project, four
   selected works, two journal essays, the optional italic line and tagline).
@@ -31,11 +31,38 @@ The studio has two sections at the top, then five lists below:
 
 Then:
 
-- **Projects** (8) — your bodies of work
-- **Exhibitions** (9) — your shows
-- **Illustration series** (5)
-- **Photograph archives** (4)
-- **Writings** (11) — your essays
+- **Projects** — your bodies of work
+- **Exhibitions** — your shows
+- **Illustration series**
+- **Photograph archives**
+- **Writings** — your essays
+
+Each of those five opens into a small folder with two things inside:
+
+- **Page intro** — the text at the very top of that section's page: the
+  small grey line, the heading, and the sentence underneath it.
+- **All projects** / **All exhibitions** / … — the works themselves.
+
+---
+
+## Changing the text at the top of a section page
+
+This is the copy you see above the images on, say,
+aglayanogina.art/projects — the small grey "8 works · 2021 — 2025", the
+heading **Projects**, and the line "Selected works in xerography, relief
+printing, painting, and ceramic…".
+
+1. Click **Projects** in the sidebar
+2. Click **Page intro**
+3. Edit any of the three fields:
+   - **Eyebrow** — the small grey line above the heading. Leave it empty
+     and the website counts the works for you.
+   - **Title** — the heading
+   - **Intro** — the sentence or two underneath
+4. **Publish**
+
+Same for Exhibitions, Illustration series, Photograph archives and
+Writings. There are exactly five of these — you never add or delete them.
 
 ---
 
@@ -52,7 +79,7 @@ Within ~60 seconds, your change is live at aglayanogina.art.
 
 ## Adding a new project / exhibition / illustration
 
-1. Click the section (e.g. **Projects**)
+1. Click the section (e.g. **Projects**) → **All projects**
 2. Click **+ Create**
 3. Fill in:
    - **Title** (e.g. "Lost Beauty")
@@ -69,7 +96,7 @@ Within ~60 seconds, your change is live at aglayanogina.art.
 
 ## Adding a new writing
 
-1. Click **Writings** → **+ Create**
+1. Click **Writings** → **All writings** → **+ Create**
 2. Title + slug
 3. **Excerpt** — one or two sentences shown on the writings index
 4. **Body** — your essay. Format options:
@@ -84,8 +111,8 @@ Within ~60 seconds, your change is live at aglayanogina.art.
 
 ## Adding photographs to an existing archive
 
-1. Click **Photograph archives** → pick the archive (Colour, B&W, Turkey,
-   India)
+1. Click **Photograph archives** → **All archives** → pick the archive
+   (Colour, B&W, Turkey, India)
 2. Scroll to **Photographs**
 3. Click **+ Add** to upload more from your camera roll
 4. Drag photos to reorder
@@ -121,9 +148,14 @@ Click **Homepage** in the sidebar. You can change:
   start something and aren't ready, just close the tab.
 - **Image upload**: works from camera roll, drag-and-drop on desktop, or
   the camera if you're in mobile Safari.
-- **Image focal point**: after upload, click the image and tap the spot
-  you want centered when it's cropped to a square thumbnail. Useful for
-  portraits.
+- **Image size and shape**: the website never crops your work. Every
+  image is shown at its own proportions, at the width of its column —
+  upload a tall image and it stays tall. You don't have to make them all
+  the same shape.
+- **Image focal point / crop**: after upload, click the image, then
+  **Edit hotspot and crop**. Anything you crop there now shows on the
+  website exactly as you set it. Leave it alone and the full image is
+  used.
 - **Reordering**: hold the drag handle (the dots on the left) and drag
   to reorder lists of items (gallery photos, selected works, etc.).
 - **Markdown / HTML**: the body editor doesn't take markdown. Use the
@@ -139,7 +171,8 @@ Click **Homepage** in the sidebar. You can change:
 |---|---|
 | Homepage | https://aglayanogina.art/ |
 | Artist | https://aglayanogina.art/about |
-| Projects | https://aglayanogina.art/projects |
+| Projects → Page intro | the text at the top of /projects |
+| Projects → All projects | https://aglayanogina.art/projects |
 |   each project | https://aglayanogina.art/projects/&lt;slug&gt; |
 | Exhibitions | https://aglayanogina.art/exhibitions |
 |   each show | https://aglayanogina.art/exhibitions/&lt;slug&gt; |
