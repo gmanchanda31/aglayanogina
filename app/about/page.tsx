@@ -81,9 +81,9 @@ export default function AboutPage() {
               sizes="(min-width: 1200px) 480px, (min-width: 768px) 40vw, 100vw"
               className="block w-full h-auto"
             />
-            <figcaption className="label-caps text-stone mt-3">
-              In studio · Düsseldorf
-            </figcaption>
+            {portrait.caption ? (
+              <figcaption className="label-caps text-stone mt-3">{portrait.caption}</figcaption>
+            ) : null}
           </figure>
         </div>
       </Container>

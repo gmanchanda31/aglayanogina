@@ -16,6 +16,7 @@ import {
   homePicks,
   photographSets,
   portrait,
+  siteTagline,
 } from "./content";
 import type { ImageRef, ProjectEntry, WritingEntry } from "./types";
 
@@ -29,13 +30,21 @@ export const HERO_ITALIC: string = homePicks.heroItalic;
 /** Hero tagline — comes from Sanity (with a sensible fallback). */
 export const HERO_TAGLINE: string = homePicks.heroTagline;
 
+/** Where the portrait was taken — shown under it until the Studio sets a caption. */
+const PORTRAIT_FALLBACK_CAPTION = "In studio · Düsseldorf";
+
 /** Studio portrait — Sanity-uploaded; falls back to the bundled studio shot. */
-export const HERO_PORTRAIT: ImageRef = portrait ?? {
+const portraitRef: ImageRef = portrait ?? {
   src: "/assets/home/home/001_a2f83c866258b1c4ae29ff098079fb6ef408549a.jpg",
   name: "studio-portrait.jpg",
   alt: "Aglaya Nogina in her Düsseldorf studio, in front of a large monochrome xerography print on textile",
   width: 1254,
   height: 1672,
+};
+
+export const HERO_PORTRAIT: ImageRef = {
+  ...portraitRef,
+  caption: portraitRef.caption ?? PORTRAIT_FALLBACK_CAPTION,
 };
 
 /* -------------------------------------------------------------------------- */
@@ -85,13 +94,20 @@ export const practiceTiles: PracticeTile[] = [
 /* -------------------------------------------------------------------------- */
 
 /**
- * Centered statement on the homepage — three real bio paragraphs from
- * the About page, kept separate so they read the way they were written.
+ * Centered statement on the homepage — the real bio paragraphs from the
+ * About page, kept separate so they read the way they were written.
+ *
+ * The intro paragraph is HERO_BIO: on desktop it sits beside the hero
+ * portrait, so the statement only repeats it below lg (where the hero has
+ * no room for it).
  */
-export const STATEMENT_PARAGRAPHS: string[] = [
-  about.intro,
-  ...about.paragraphs,
-].filter(Boolean);
+export const STATEMENT_PARAGRAPHS: string[] = about.paragraphs.filter(Boolean);
+
+/** Short bio — the artist doc's intro paragraph ("Aglaya Nogina was born…") */
+export const HERO_BIO: string = about.intro;
+
+/** Places line under the bio ("Luhansk → Kharkiv → Kyiv → Düsseldorf") */
+export const HERO_META: string = siteTagline;
 
 /* -------------------------------------------------------------------------- */
 /*                            FEATURED PROJECT                                */

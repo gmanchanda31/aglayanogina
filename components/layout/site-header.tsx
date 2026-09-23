@@ -60,7 +60,7 @@ export function SiteHeader() {
             {siteName}
           </Link>
 
-          <ul className="hidden md:flex items-center gap-7 lg:gap-9">
+          <ul className="hidden lg:flex items-center gap-7 xl:gap-9">
             {allLinks.map((link) => {
               const active = isActive(link.href, pathname);
               return (
@@ -89,7 +89,7 @@ export function SiteHeader() {
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
             onClick={() => setMobileOpen((v) => !v)}
-            className="md:hidden inline-flex items-center gap-2 h-11 -mr-2 px-2 label-caps text-ink"
+            className="lg:hidden inline-flex items-center gap-2 h-11 -mr-2 px-2 label-caps text-ink"
           >
             {mobileOpen ? <X className="size-5" aria-hidden /> : <Menu className="size-5" aria-hidden />}
             <span>{mobileOpen ? "Close" : "Menu"}</span>
@@ -111,7 +111,7 @@ function MobileNav({ open, pathname }: { open: boolean; pathname: string }) {
       // Open/close choreography lives in the Motion block of globals.css;
       // inert keeps the closed sheet out of the tab order and the a11y tree
       inert={!open}
-      className="md:hidden fixed inset-x-0 top-[var(--header-h)] bottom-0 z-30 bg-paper overflow-y-auto"
+      className="lg:hidden fixed inset-x-0 top-[var(--header-h)] bottom-0 z-30 bg-paper overflow-y-auto"
     >
       <Container className="flex flex-col gap-1 pt-10 pb-12">
         {allLinks.map((link) => {

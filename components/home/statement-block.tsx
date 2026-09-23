@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
-import { STATEMENT_PARAGRAPHS } from "@/lib/home";
+import { HERO_BIO, STATEMENT_PARAGRAPHS } from "@/lib/home";
 
 export function StatementBlock() {
-  if (STATEMENT_PARAGRAPHS.length === 0) return null;
+  if (STATEMENT_PARAGRAPHS.length === 0 && !HERO_BIO) return null;
   return (
     <Container as="section" className="py-24 md:py-32">
       <div className="max-w-[720px] mx-auto text-center space-y-5 md:space-y-6">
@@ -12,6 +12,15 @@ export function StatementBlock() {
           data-reveal="line"
           className="block w-12 h-px bg-clay mx-auto mb-10 md:mb-12"
         />
+        {/* Desktop shows the bio beside the hero portrait instead */}
+        {HERO_BIO ? (
+          <p
+            data-reveal="text"
+            className="lg:hidden font-[family-name:var(--font-vollkorn)] text-[1.25rem] md:text-[1.375rem] leading-[1.55] text-ink"
+          >
+            {HERO_BIO}
+          </p>
+        ) : null}
         {STATEMENT_PARAGRAPHS.map((para, i) => (
           <p
             key={i}

@@ -153,6 +153,7 @@ body {
   --dur-page: 360ms;
   --dur-morph: 480ms;
   --dur-settle: 720ms;
+  --dur-entrance: 440ms;
 
   /* Bare transition-* utilities pick these up site-wide */
   --default-transition-duration: 200ms;
@@ -194,6 +195,34 @@ html[data-motion="on"] [data-reveal-state="pending"][data-reveal="line"] {
     translate var(--dur-settle) var(--ease-gallery),
     scale var(--dur-settle) var(--ease-gallery);
   transition-delay: calc(var(--reveal-i, 0) * var(--stagger));
+}
+
+/* Home hero first-load entrance. Armed by the inline head script in
+   app/layout.tsx (html[data-entrance]); text only — the portrait is the LCP
+   element and never animates. Desktop: 4 steps, 40 + 3 × 70 + 440 ≈ 690ms.
+   Below lg step 3 (bio, places) is display:none, so step 4 closes the gap. */
+@keyframes motion-hero-rise {
+  from {
+    opacity: 0;
+    translate: 0 var(--reveal-rise-text);
+  }
+}
+@keyframes motion-line-draw {
+  from { scale: 0 1; }
+}
+html[data-entrance="on"] [data-hero-step] {
+  animation: motion-hero-rise var(--dur-entrance) var(--ease-gallery) both;
+  animation-delay: calc(40ms + var(--hero-i, 0) * var(--stagger));
+}
+[data-hero-step="2"] { --hero-i: 1; }
+[data-hero-step="3"] { --hero-i: 2; }
+[data-hero-step="4"] { --hero-i: 3; }
+@media (width < 64rem) {
+  [data-hero-step="4"] { --hero-i: 2; }
+}
+html[data-entrance="on"] [data-hero-line] {
+  transform-origin: left center;
+  animation: motion-line-draw var(--dur-settle) var(--ease-gallery) 40ms both;
 }
 
 /* Artwork hover — opacity only */

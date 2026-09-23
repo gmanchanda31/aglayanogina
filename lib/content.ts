@@ -255,6 +255,7 @@ function toImageRef(img: SanityImage | undefined, fallbackAlt: string): ImageRef
     alt: img.alt || fallbackAlt,
     width,
     height,
+    ...(img.caption?.trim() ? { caption: img.caption.trim() } : {}),
   };
 }
 

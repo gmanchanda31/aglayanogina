@@ -16,6 +16,8 @@ export interface ImageRef {
   width: number;
   /** Intrinsic height in pixels — read from the file at build time. */
   height: number;
+  /** Optional caption set in the Studio (e.g. what the work in shot is) */
+  caption?: string;
 }
 
 export interface BaseEntry {
