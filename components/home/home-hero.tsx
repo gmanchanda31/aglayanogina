@@ -12,8 +12,8 @@ import { cn } from "@/lib/utils";
  * The portrait's width is derived from the height available to it
  * (viewport − header − the copy it has to leave room for) times its own
  * ratio, so it is never cropped and always has a box before it loads.
- * Desktop (lg+): portrait left, a compact wall label beside its foot —
- * statement, tagline, bio, places, links — the links level with the caption.
+ * Desktop (lg+): portrait left, a compact wall label beside it —
+ * statement, tagline, bio, places, links — optically centred on the image.
  * Mobile + tablet: stacked, portrait capped so the statement and both links
  * land in the fold; the bio moves to the statement block below.
  *
@@ -57,10 +57,11 @@ export function HomeHero() {
           ) : null}
         </figure>
 
-        {/* Copy — one compact wall label. On desktop it sits at the portrait's
-            foot, the links sharing the caption's baseline; the bio + places
-            line only appear there (below lg the statement block carries the bio). */}
-        <div className="flex flex-col lg:flex-1 lg:justify-end lg:max-w-[26rem]">
+        {/* Copy — one compact wall label. On desktop it is centred on the
+            portrait, lifted slightly above true centre (the bottom padding) so
+            it doesn't read as sagging; the bio + places line only appear there
+            (below lg the statement block carries the bio). */}
+        <div className="flex flex-col lg:flex-1 lg:justify-center lg:pb-[8vh] lg:max-w-[26rem]">
           {HERO_ITALIC ? (
             <p
               data-hero-step="1"
@@ -106,9 +107,6 @@ export function HomeHero() {
               "flex flex-col items-start gap-y-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8",
               (HERO_ITALIC || HERO_TAGLINE) && "mt-7",
               (HERO_BIO || HERO_META) && "lg:mt-8",
-              // Link text shares the caption's baseline (link-draw adds pb-1 for
-              // its underline); without a caption the underline meets the image foot
-              caption && "lg:-mb-1",
             )}
           >
             <Link
