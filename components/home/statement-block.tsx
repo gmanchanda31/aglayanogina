@@ -9,11 +9,13 @@ export function StatementBlock() {
       <div className="max-w-[720px] mx-auto text-center space-y-5 md:space-y-6">
         <span
           aria-hidden
+          data-reveal="line"
           className="block w-12 h-px bg-clay mx-auto mb-10 md:mb-12"
         />
         {STATEMENT_PARAGRAPHS.map((para, i) => (
           <p
             key={i}
+            data-reveal="text"
             className="font-[family-name:var(--font-vollkorn)] text-[1.25rem] md:text-[1.375rem] leading-[1.55] text-ink"
           >
             {para}
@@ -22,7 +24,7 @@ export function StatementBlock() {
         <div className="pt-6">
           <Link
             href="/about"
-            className="inline-block label-caps text-stone hover:text-ink border-b border-stone hover:border-ink pb-1 transition-colors"
+            className="link-draw inline-block label-caps text-stone hover:text-ink"
           >
             More about Aglaya
           </Link>

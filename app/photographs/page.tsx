@@ -5,18 +5,10 @@ import { PageHeader } from "@/components/layout/page-header";
 import { PhotoMasonry } from "@/components/artwork/photo-masonry";
 import { getSectionPage, photographSets } from "@/lib/content";
 
-const TITLE_OVERRIDES: Record<string, string> = {
-  "b-w": "Black & White",
-  colour: "Colour",
-  turkey: "Turkey",
-  india: "India",
-};
+/** The index previews each archive; the full set lives on its own page. */
+const PREVIEW_COUNT = 9;
 
-const ORDER = ["colour", "b-w", "turkey", "india"];
-
-const sets = ORDER
-  .map((slug) => photographSets.find((s) => s.routeSlug === slug))
-  .filter((s): s is NonNullable<typeof s> => Boolean(s));
+const sets = photographSets;
 
 const totalPhotos = sets.reduce((n, s) => n + s.images.length, 0);
 
@@ -46,16 +38,16 @@ export default function PhotographsPage() {
 
         <nav
           aria-label="Photograph archives"
-          className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3"
+          className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-1 md:gap-y-3"
         >
           {sets.map((s) => (
             <Link
               key={s.routeSlug}
               href={`#${s.routeSlug}`}
-              className="label-caps text-stone hover:text-ink transition-colors"
+              className="label-caps text-stone hover:text-ink transition-colors inline-flex items-center min-h-11 md:min-h-0"
             >
-              {TITLE_OVERRIDES[s.routeSlug] ?? s.title}
-              <span className="ml-2 text-stone/60">({s.images.length})</span>
+              {s.title}
+              <span className="ml-2 text-stone/60 nums">{s.images.length}</span>
             </Link>
           ))}
         </nav>
@@ -65,36 +57,39 @@ export default function PhotographsPage() {
         <div className="border-t border-mist" />
       </Container>
 
-      <Container className="pt-16 md:pt-20">
-        <div className="space-y-24 md:space-y-32">
+      <Container className="pt-12 md:pt-16">
+        <div className="space-y-20 md:space-y-24">
           {sets.map((set, idx) => (
             <section
               key={set.slug}
               id={set.routeSlug}
               aria-labelledby={`${set.routeSlug}-heading`}
-              className="scroll-mt-24"
+              className="scroll-mt-[calc(var(--header-h)+1.5rem)]"
             >
-              <header className="mb-10 md:mb-12 flex items-end justify-between gap-6">
-                <div>
-                  <p className="label-caps text-stone">
-                    Archive {String(idx + 1).padStart(2, "0")}
-                  </p>
-                  <h2
-                    id={`${set.routeSlug}-heading`}
-                    className="font-[family-name:var(--font-vollkorn)] mt-2 text-4xl md:text-5xl tracking-tight text-ink"
-                  >
-                    {TITLE_OVERRIDES[set.routeSlug] ?? set.title}
-                  </h2>
-                </div>
-                <Link
-                  href={set.href}
-                  className="label-caps text-stone hover:text-ink border-b border-stone hover:border-ink pb-1 transition-colors"
-                >
-                  View archive
-                </Link>
+              <header className="mb-8 md:mb-10">
+                <h2 id={`${set.routeSlug}-heading`} className="title-section text-ink">
+                  <Link href={set.href} className="hover:text-stone">
+                    {set.title}
+                  </Link>
+                  <span className="ml-3 label-caps text-stone nums">
+                    {set.images.length}
+                  </span>
+                </h2>
               </header>
 
-              <PhotoMasonry images={set.images} eagerFirst={idx === 0} />
+              <PhotoMasonry
+                images={set.images.slice(0, PREVIEW_COUNT)}
+                eagerFirst={idx === 0}
+                label={set.title}
+              />
+
+              <div className="mt-6 md:mt-8 flex justify-center">
+                <Link href={set.href} className="link-draw label-caps text-stone hover:text-ink">
+                  {set.images.length > PREVIEW_COUNT
+                    ? `View all ${set.images.length} photographs`
+                    : "View archive"}
+                </Link>
+              </div>
             </section>
           ))}
         </div>

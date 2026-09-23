@@ -33,8 +33,8 @@ export default function IllustrationsPage() {
         <div className="border-t border-mist" />
       </Container>
 
-      <Container className="py-16 md:py-20">
-        <WorkGrid entries={illustrations} />
+      <Container className="pt-12 md:pt-16">
+        <WorkGrid entries={illustrations} section="illustrations" />
       </Container>
     </>
   );

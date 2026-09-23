@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArtworkImage } from "./artwork-image";
 import { ArtworkCaption } from "./artwork-caption";
+import { SharedArt, artTransitionName } from "@/components/motion/shared-art";
 import type { ImageRef } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -14,6 +15,8 @@ interface ArtworkCardProps {
   size?: "sm" | "md" | "lg";
   priority?: boolean;
   className?: string;
+  /** Listing section — keys the card→detail image morph. Omit on home. */
+  section?: "projects" | "exhibitions" | "illustrations";
 }
 
 export function ArtworkCard({
@@ -26,18 +29,30 @@ export function ArtworkCard({
   size,
   priority,
   className,
+  section,
 }: ArtworkCardProps) {
+  const img = (
+    <ArtworkImage
+      image={image}
+      sizes={sizes}
+      priority={priority}
+      // Focus ring sits on the artwork itself, not around image + caption
+      className="group-focus-visible:outline-2 group-focus-visible:outline-offset-4 group-focus-visible:outline-clay"
+      data-artwork-img
+    />
+  );
   return (
     <Link
       href={href}
+      data-artwork-card
+      data-section={section}
       className={cn("group block focus-visible:outline-none", className)}
     >
-      <ArtworkImage
-        image={image}
-        sizes={sizes}
-        priority={priority}
-        className="transition-opacity duration-300 group-hover:opacity-90"
-      />
+      {section ? (
+        <SharedArt name={artTransitionName(href)}>{img}</SharedArt>
+      ) : (
+        img
+      )}
       <ArtworkCaption title={title} medium={medium} year={year} size={size} />
     </Link>
   );

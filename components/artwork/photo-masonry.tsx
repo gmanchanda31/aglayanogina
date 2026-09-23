@@ -11,18 +11,22 @@ interface PhotoMasonryProps {
   className?: string;
   /** Whether the first image should load eagerly */
   eagerFirst?: boolean;
+  /** Set title, shown in the lightbox caption */
+  label?: string;
 }
 
 export function PhotoMasonry({
   images,
   className,
   eagerFirst,
+  label,
 }: PhotoMasonryProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <>
       <div
+        data-work-grid
         className={cn(
           "columns-1 sm:columns-2 lg:columns-3 gap-4 md:gap-6 [column-fill:_balance]",
           className,
@@ -31,13 +35,16 @@ export function PhotoMasonry({
         {images.map((image, i) => (
           <figure
             key={image.src}
+            data-grid-item
             className="mb-4 md:mb-6 break-inside-avoid"
           >
             <button
               type="button"
               onClick={() => setOpenIndex(i)}
               aria-label={`Open ${image.alt} in viewer`}
-              className="group relative w-full overflow-hidden block cursor-zoom-in"
+              data-artwork-card
+              data-lightbox-index={i}
+              className="relative w-full overflow-hidden block cursor-zoom-in"
             >
               <Image
                 src={image.src}
@@ -46,7 +53,8 @@ export function PhotoMasonry({
                 height={image.height}
                 sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
                 priority={eagerFirst && i === 0}
-                className="w-full h-auto block transition-opacity duration-300 group-hover:opacity-90"
+                data-artwork-img
+                className="w-full h-auto block"
               />
             </button>
           </figure>
@@ -58,6 +66,7 @@ export function PhotoMasonry({
         index={openIndex}
         onClose={() => setOpenIndex(null)}
         onIndexChange={setOpenIndex}
+        label={label}
       />
     </>
   );

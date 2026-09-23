@@ -17,13 +17,8 @@ export function PageHeader({
 }: PageHeaderProps) {
   return (
     <div className={cn("max-w-3xl", className)}>
-      {eyebrow ? <p className="label-caps text-stone">{eyebrow}</p> : null}
-      <h1
-        className={cn(
-          "font-[family-name:var(--font-vollkorn)] tracking-tight text-ink leading-[1.2] mt-2",
-          "text-[1.75rem] md:text-[2rem]",
-        )}
-      >
+      {eyebrow ? <p className="label-caps text-stone nums">{eyebrow}</p> : null}
+      <h1 className="title-page text-ink mt-2">
         {title}
       </h1>
       {lede ? (

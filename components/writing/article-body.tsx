@@ -22,6 +22,9 @@ const components: PortableTextComponents = {
         {children}
       </p>
     ),
+    marker: ({ children }) => (
+      <p className="label-caps text-stone nums mt-14 mb-6 first:mt-0">{children}</p>
+    ),
     h2: ({ children }) => (
       <h2 className="font-[family-name:var(--font-vollkorn)] text-[1.375rem] md:text-[1.5rem] leading-snug text-ink mt-14 mb-5">
         {children}
@@ -76,12 +79,54 @@ const components: PortableTextComponents = {
  * Adds a drop cap to the first letter of the first text block.
  * Mutates a copy — we don't touch the input.
  */
+type TextBlock = {
+  _type?: string;
+  style?: string;
+  children?: Array<{ _type?: string; text?: string; marks?: string[] }>;
+};
+
+/** Paragraphs shorter than this ("story 1") are section markers, not prose. */
+const MIN_PROSE_LENGTH = 60;
+
+function blockText(block: TextBlock): string {
+  return (block.children ?? []).map((c) => c.text ?? "").join("").trim();
+}
+
+/**
+ * Short standalone lines at the head of a section ("story 1", "story 2")
+ * are styled as quiet section labels rather than body paragraphs.
+ */
+function withSectionMarkers(body: PortableTextBody): PortableTextBody {
+  return body.map((node) => {
+    const block = node as TextBlock;
+    if (block?._type !== "block") return node;
+    // Migrated essays carry a manual `dropCap` mark; the drop cap is placed
+    // automatically below, so strip stray ones (they land on "story 1").
+    const stripped: TextBlock = {
+      ...block,
+      children: (block.children ?? []).map((c) =>
+        c.marks?.includes("dropCap")
+          ? { ...c, marks: c.marks.filter((m) => m !== "dropCap") }
+          : c,
+      ),
+    };
+    node = stripped as typeof node;
+    if (block.style && block.style !== "normal") return node;
+    const text = blockText(block);
+    return /^(story|part|chapter)\s+\d+\.?$/i.test(text)
+      ? ({ ...stripped, style: "marker" } as typeof node)
+      : node;
+  });
+}
+
 function withFirstLetterDropCap(body: PortableTextBody): PortableTextBody {
   if (!body || body.length === 0) return body;
   const out = [...body];
   for (let i = 0; i < out.length; i++) {
-    const block = out[i] as { _type?: string; children?: Array<{ _type?: string; text?: string; marks?: string[] }> };
+    const block = out[i] as TextBlock;
     if (block?._type !== "block") continue;
+    if (block.style && block.style !== "normal") continue;
+    if (blockText(block).length < MIN_PROSE_LENGTH) continue;
     const children = block.children ?? [];
     const firstSpan = children.find((c) => c._type === "span" && (c.text ?? "").length > 0);
     if (!firstSpan || !firstSpan.text) continue;
@@ -103,7 +148,7 @@ interface ArticleBodyProps {
 }
 
 export function ArticleBody({ body }: ArticleBodyProps) {
-  const withDropCap = withFirstLetterDropCap(body);
+  const withDropCap = withFirstLetterDropCap(withSectionMarkers(body));
   // PortableText accepts a value of any[]; cast through unknown to satisfy the lib's signature
   return <PortableText value={withDropCap as never} components={components} />;
 }

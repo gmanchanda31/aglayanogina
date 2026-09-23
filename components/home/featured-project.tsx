@@ -18,7 +18,7 @@ export function FeaturedProject() {
     >
       {/* Eyebrow */}
       <Container className="pt-16 md:pt-20 pb-10 md:pb-12">
-        <p className="label-caps text-stone text-center">Currently on view</p>
+        <p className="label-caps text-stone text-center">Featured project</p>
       </Container>
 
       {/* Hero at its own proportions — no frame, no crop, no letterboxing */}
@@ -40,10 +40,10 @@ export function FeaturedProject() {
       {/* Title block + metadata */}
       <Container className="py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
-          <div className="md:col-span-7">
+          <div className="md:col-span-7" data-reveal="text">
             <h2
               id="featured-heading"
-              className="font-[family-name:var(--font-vollkorn)] text-[1.75rem] md:text-[2rem] tracking-tight text-ink leading-[1.2]"
+              className="title-page text-ink"
             >
               {project.title}
             </h2>
@@ -54,28 +54,31 @@ export function FeaturedProject() {
             ) : null}
             <Link
               href={project.href}
-              className="group inline-flex items-center gap-2 mt-8 px-7 py-3 border border-ink text-ink label-caps hover:bg-ink hover:text-paper transition-colors duration-300"
+              data-dir="next"
+              className="link-draw inline-flex items-center gap-2 mt-8 label-caps text-ink"
             >
               View the project
-              <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+              <span data-arrow className="inline-flex">
+                <ArrowRight className="size-3.5" aria-hidden />
+              </span>
             </Link>
           </div>
 
-          <dl className="md:col-span-5 md:pt-6 grid grid-cols-1 gap-y-5 divide-y divide-mist border-y border-mist">
+          <dl className="md:col-span-5 md:pt-2 grid grid-cols-1 gap-y-5">
             {medium ? (
-              <div className="pt-5 first:pt-0">
+              <div>
                 <dt className="label-caps text-stone">Medium</dt>
                 <dd className="text-ink text-base mt-2 leading-[1.55]">{medium}</dd>
               </div>
             ) : null}
             {years ? (
-              <div className="pt-5">
+              <div>
                 <dt className="label-caps text-stone">Years</dt>
-                <dd className="text-ink text-base mt-2">{years}</dd>
+                <dd className="text-ink text-base mt-2 nums">{years}</dd>
               </div>
             ) : null}
             {exhibitionLine ? (
-              <div className="pt-5 pb-5">
+              <div>
                 <dt className="label-caps text-stone">Exhibition</dt>
                 <dd className="text-ink text-base mt-2 leading-[1.55]">{exhibitionLine}</dd>
               </div>

@@ -14,6 +14,7 @@
  * Phase 3a; Phase 3b swaps them to PortableText from Sanity.
  */
 
+import { formatYearRange } from "./utils";
 import { sanityClient, urlFor } from "./sanity-client";
 import {
   ARTIST_QUERY,
@@ -186,7 +187,24 @@ interface SanityWritingDoc {
 /* -------------------------------------------------------------------------- */
 
 function normalizeSlug(slug: string): string {
-  return slug.replace(/-+$/, "");
+  return slug
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/** Pull quotes are wrapped in quote marks by the template — strip any the
+ *  source already carries, plus trailing clause punctuation left by the scrape. */
+function cleanQuote(text: string | undefined): string | undefined {
+  if (!text) return text;
+  return text
+    .trim()
+    .replace(/^["“„«']+/, "")
+    .replace(/["”»']+$/, "")
+    .replace(/[,;:]+$/, "")
+    .trim();
 }
 
 /**
@@ -265,7 +283,7 @@ function extractDescription(body: PortableNode[] | undefined): {
   for (const node of body) {
     if (node._type === "pullQuote") {
       if (!pullQuote) {
-        pullQuote = node.text;
+        pullQuote = cleanQuote(node.text);
         quoteAttribution = node.attribution;
       }
       continue;
@@ -285,7 +303,7 @@ function extractDescription(body: PortableNode[] | undefined): {
 function buildMetadata(doc: SanityEntryDoc): MetadataLine[] {
   const lines: MetadataLine[] = [];
   if (doc.medium) lines.push({ label: "Medium", value: doc.medium });
-  if (doc.year) lines.push({ label: "Year", value: doc.year });
+  if (doc.year) lines.push({ label: "Year", value: formatYearRange(doc.year) });
   if (doc.dimensions) lines.push({ label: "Dimensions", value: doc.dimensions });
   if (doc.location) lines.push({ label: "Location", value: doc.location });
   return lines;
@@ -370,6 +388,21 @@ export const illustrations: IllustrationEntry[] = illustrationsDocs.map((doc) =>
   return { ...base, metadata } as IllustrationEntry;
 });
 
+/** Display order + titles for the photograph archives — one source for the
+ *  index page, the set pages and their prev/next. Unlisted sets go last. */
+const PHOTO_SET_ORDER = ["colour", "b-w", "turkey", "india"];
+const PHOTO_SET_TITLES: Record<string, string> = {
+  "b-w": "Black & White",
+  colour: "Colour",
+  turkey: "Turkey",
+  india: "India",
+};
+
+function photoSetRank(routeSlug: string): number {
+  const i = PHOTO_SET_ORDER.indexOf(routeSlug);
+  return i === -1 ? PHOTO_SET_ORDER.length : i;
+}
+
 export const photographSets: PhotographSet[] = photographSetsDocs.map((doc) => {
   const slug = doc.slug;
   const routeSlug = normalizeSlug(slug);
@@ -378,12 +411,12 @@ export const photographSets: PhotographSet[] = photographSetsDocs.map((doc) => {
     section: "photographs",
     slug,
     routeSlug,
-    title: doc.title,
+    title: PHOTO_SET_TITLES[routeSlug] ?? doc.title,
     href: `/photographs/${routeSlug}`,
     hero: images[0],
     images,
-  };
-});
+  } satisfies PhotographSet;
+}).sort((a, b) => photoSetRank(a.routeSlug) - photoSetRank(b.routeSlug));
 
 /* -------------------------------------------------------------------------- */
 /*                              Lookups                                       */
@@ -507,6 +540,29 @@ function bodyToParagraphs(body: PortableNode[] | undefined): string[] {
   return out;
 }
 
+/**
+ * Listing excerpt when the Studio has none: the first real paragraph (skipping
+ * "story 1"-style markers), cut at a word boundary with an ellipsis.
+ */
+function excerptFrom(paragraphs: string[], max = 200): string {
+  const first = paragraphs.find((p) => p.length >= 60) ?? paragraphs[0] ?? "";
+  return first.length <= max ? first : cutAtWord(first, max);
+}
+
+function cutAtWord(text: string, max: number): string {
+  const cut = text.slice(0, max);
+  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[\s,;:—–-]+$/, "")}…`;
+}
+
+/** Excerpts that are only a section marker ("story 1", "part1") fall back to
+ *  the body; migrated excerpts hard-cut at 200 chars end on a whole word. */
+const MIN_EXCERPT = 20;
+function tidyExcerpt(excerpt: string | undefined, paragraphs: string[]): string {
+  const text = excerpt?.trim();
+  if (!text || text.length < MIN_EXCERPT) return excerptFrom(paragraphs);
+  return text.length >= 199 && !/[.!?…”"]$/.test(text) ? cutAtWord(text, text.length) : text;
+}
+
 export const writings: WritingEntry[] = writingsDocs.map((doc) => {
   const paragraphs = bodyToParagraphs(doc.body);
   const slug = doc.slug;
@@ -519,7 +575,7 @@ export const writings: WritingEntry[] = writingsDocs.map((doc) => {
     href: `/writings/${routeSlug}`,
     images: [],
     paragraphs,
-    excerpt: doc.excerpt ?? paragraphs[0]?.slice(0, 200) ?? "",
+    excerpt: tidyExcerpt(doc.excerpt, paragraphs),
     body: (doc.body ?? []) as unknown[],
     year: doc.year,
   };
@@ -564,7 +620,8 @@ export const homePicks: HomePicks = (() => {
       if (!pick.writing) return null;
       const writing = getWriting(normalizeSlug(pick.writing.slug));
       if (!writing) return null;
-      const teaser = pick.teaser?.trim() || writing.excerpt;
+      const own = pick.teaser?.trim();
+      const teaser = own && own.length >= MIN_EXCERPT ? own : writing.excerpt;
       return { writing, teaser };
     })
     .filter(

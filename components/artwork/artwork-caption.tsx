@@ -35,7 +35,7 @@ export function ArtworkCaption({
         <p className="text-stone text-[0.8125rem] leading-[1.5]">{medium}</p>
       ) : null}
       {year ? (
-        <p className="text-stone text-[0.8125rem] leading-[1.5]">{year}</p>
+        <p className="text-stone text-[0.8125rem] leading-[1.5] nums">{year}</p>
       ) : null}
     </div>
   );

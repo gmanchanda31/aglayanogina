@@ -14,33 +14,36 @@ export function PracticeRibbon() {
           The practice
         </h2>
 
-        <ul className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
+        {/* Every tile shares one baseline and one maximum height; each image
+            keeps its own proportions — nothing cropped, nothing boxed. */}
+        <ul
+          data-work-grid
+          className="grid grid-cols-2 md:grid-cols-5 gap-x-4 md:gap-x-6 gap-y-8"
+        >
           {practiceTiles.map((tile) => (
-            <li key={tile.label}>
-              <Link
-                href={tile.href}
-                className="group block focus-visible:outline-none"
-              >
-                {tile.image ? (
-                  <div className="relative aspect-square overflow-hidden">
+            <li key={tile.label} data-grid-item>
+              <Link href={tile.href} className="group block">
+                <div className={`flex items-end ${tile.image ? "h-32" : "min-h-0"} md:h-40`}>
+                  {tile.image ? (
                     <Image
                       src={tile.image.src}
                       alt={tile.image.alt}
-                      fill
+                      width={tile.image.width}
+                      height={tile.image.height}
                       sizes="(min-width: 768px) 18vw, 45vw"
-                      className="object-cover transition-opacity duration-300 group-hover:opacity-90"
+                      className="block w-auto h-auto max-w-full max-h-full transition-opacity duration-300 group-hover:opacity-90"
                     />
-                  </div>
-                ) : (
-                  <div className="relative aspect-square border border-mist bg-[#F2EDE4] flex flex-col justify-end p-5 transition-colors duration-300 group-hover:bg-clay/10">
-                    <p className="font-[family-name:var(--font-vollkorn)] italic text-base md:text-[1.125rem] leading-snug text-ink">
-                      {tile.cardLine}
-                    </p>
-                    {tile.cardSubline ? (
-                      <p className="label-caps text-stone mt-2">{tile.cardSubline}</p>
-                    ) : null}
-                  </div>
-                )}
+                  ) : (
+                    <div>
+                      <p className="font-[family-name:var(--font-vollkorn)] italic text-base md:text-[1.125rem] leading-snug text-ink">
+                        {tile.cardLine}
+                      </p>
+                      {tile.cardSubline ? (
+                        <p className="label-caps text-stone mt-1 nums">{tile.cardSubline}</p>
+                      ) : null}
+                    </div>
+                  )}
+                </div>
                 <p className="label-caps text-stone group-hover:text-ink transition-colors mt-3">
                   {tile.label}
                 </p>

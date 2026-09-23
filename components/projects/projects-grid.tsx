@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { addTransitionType, startTransition, useMemo, useState } from "react";
 import { WorkGrid } from "@/components/artwork/work-grid";
+import { FILTER_TRANSITION } from "@/components/motion/shared-art";
 import { cn } from "@/lib/utils";
 import type { ProjectEntry, ProjectKind } from "@/lib/types";
 
@@ -47,17 +48,22 @@ export function ProjectsGrid({ projects }: Props) {
             <button
               key={label}
               type="button"
-              onClick={() => setActive(kind)}
+              onClick={() =>
+                startTransition(() => {
+                  addTransitionType(FILTER_TRANSITION);
+                  setActive(kind);
+                })
+              }
               aria-pressed={isActive}
               className={cn(
-                "inline-flex items-center label-caps px-3.5 py-1.5 border transition-colors",
+                "inline-flex items-center min-h-11 md:min-h-9 label-caps px-4 border transition-colors",
                 isActive
                   ? "border-clay text-ink"
                   : "border-mist text-stone hover:border-stone hover:text-ink",
               )}
             >
               {label}
-              <span className={cn("ml-2", isActive ? "text-clay" : "text-stone/60")}>
+              <span className={cn("ml-2 nums", isActive ? "text-clay" : "text-stone/60")}>
                 {count}
               </span>
             </button>
@@ -65,9 +71,9 @@ export function ProjectsGrid({ projects }: Props) {
         })}
       </div>
 
-      <div className="mt-12 md:mt-16">
+      <div className="mt-12 md:mt-16" data-filter-state={active}>
         {filtered.length > 0 ? (
-          <WorkGrid entries={filtered} />
+          <WorkGrid entries={filtered} section="projects" />
         ) : (
           <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-lg py-16">
             No projects under {active}. Try another filter.

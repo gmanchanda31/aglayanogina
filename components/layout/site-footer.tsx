@@ -2,11 +2,15 @@ import Link from "next/link";
 import { contact, siteCity, siteName } from "@/lib/content";
 import { Container } from "./container";
 
+/** 44px tap rows on mobile; compact list from md up */
+const footerLink =
+  "label-caps text-stone hover:text-ink transition-colors inline-flex items-center min-h-11 md:min-h-0";
+
 export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-mist mt-32">
+    <footer className="border-t border-mist mt-24 md:mt-32">
       <Container className="py-16 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
         <div>
           <Link
@@ -24,13 +28,10 @@ export function SiteFooter() {
 
         <div>
           <p className="label-caps text-ink">Connect</p>
-          <ul className="mt-4 space-y-2">
+          <ul className="mt-3 md:mt-4 md:space-y-2">
             <li>
-              <a
-                href={contact.emailHref}
-                className="label-caps text-stone hover:text-ink transition-colors"
-              >
-                Email
+              <a href={contact.emailHref} className={footerLink}>
+                <span className="normal-case tracking-normal text-sm">{contact.email}</span>
               </a>
             </li>
             <li>
@@ -38,7 +39,7 @@ export function SiteFooter() {
                 href={contact.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="label-caps text-stone hover:text-ink transition-colors"
+                className={footerLink}
               >
                 Instagram
               </a>
@@ -48,7 +49,7 @@ export function SiteFooter() {
                 href={contact.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="label-caps text-stone hover:text-ink transition-colors"
+                className={footerLink}
               >
                 WhatsApp
               </a>

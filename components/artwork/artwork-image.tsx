@@ -8,6 +8,8 @@ interface ArtworkImageProps {
   sizes: string;
   priority?: boolean;
   className?: string;
+  /** Motion hook — marks the artwork <img> inside a card */
+  "data-artwork-img"?: boolean;
 }
 
 /**
@@ -20,6 +22,7 @@ export function ArtworkImage({
   sizes,
   priority,
   className,
+  ...rest
 }: ArtworkImageProps) {
   return (
     <Image
@@ -30,6 +33,7 @@ export function ArtworkImage({
       sizes={sizes}
       priority={priority}
       className={cn("block w-full h-auto", className)}
+      {...rest}
     />
   );
 }

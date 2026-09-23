@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { Container } from "@/components/layout/container";
+import { PrevNext } from "@/components/layout/prev-next";
+import { ReadingProgress } from "@/components/motion/reading-progress";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ArticleBody } from "@/components/writing/article-body";
 import { getWriting, writings } from "@/lib/content";
@@ -39,8 +40,9 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
   const prev = idx > 0 ? writings[idx - 1] : undefined;
   const next = idx < writings.length - 1 ? writings[idx + 1] : undefined;
 
-  // Other writings to surface at the bottom (3 closest to current index)
-  const more = writings.filter((w) => w.routeSlug !== slug).slice(0, 3);
+  // Three more essays, skipping the ones prev/next already link to
+  const shown = new Set([slug, prev?.routeSlug, next?.routeSlug]);
+  const more = writings.filter((w) => !shown.has(w.routeSlug)).slice(0, 3);
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -56,6 +58,7 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
   return (
     <>
       <JsonLd data={articleJsonLd} />
+      <ReadingProgress />
       <Container className="pt-10 md:pt-12 pb-3">
         <Breadcrumbs
           items={[
@@ -69,10 +72,10 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
       <Container className="pt-12 md:pt-16">
         <header className="max-w-[760px] mx-auto text-center">
           <p className="label-caps text-stone">Essay</p>
-          <h1 className="font-[family-name:var(--font-vollkorn)] text-[3.5rem] sm:text-[5rem] md:text-[6rem] leading-[1.02] tracking-tight mt-4">
+          <h1 className="title-page mt-2">
             {writing.title}
           </h1>
-          <p className="label-caps text-stone mt-10">— Aglaya Nogina</p>
+          <p className="label-caps text-stone mt-6">Aglaya Nogina</p>
         </header>
       </Container>
 
@@ -81,64 +84,35 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
       </Container>
 
       {/* Article body */}
-      <Container className="pb-16 md:pb-24">
+      <Container>
         <article className="max-w-[640px] mx-auto">
           <ArticleBody body={writing.body} />
         </article>
       </Container>
 
-      {/* Prev / Next */}
-      {(prev || next) && (
-        <Container className="border-t border-mist">
-          <nav aria-label="More writings" className="py-12 grid grid-cols-2 gap-4">
-            <div>
-              {prev ? (
-                <Link
-                  href={prev.href}
-                  className="group inline-flex flex-col gap-1 text-left hover:text-ink"
-                >
-                  <span className="label-caps text-stone inline-flex items-center gap-1.5">
-                    <ArrowLeft className="size-3.5" /> Previous
-                  </span>
-                  <span className="font-[family-name:var(--font-vollkorn)] italic text-2xl text-stone group-hover:text-ink transition-colors">
-                    {prev.title}
-                  </span>
-                </Link>
-              ) : null}
-            </div>
-            <div className="flex justify-end">
-              {next ? (
-                <Link
-                  href={next.href}
-                  className="group inline-flex flex-col gap-1 text-right hover:text-ink"
-                >
-                  <span className="label-caps text-stone inline-flex items-center gap-1.5 self-end">
-                    Next <ArrowRight className="size-3.5" />
-                  </span>
-                  <span className="font-[family-name:var(--font-vollkorn)] italic text-2xl text-stone group-hover:text-ink transition-colors">
-                    {next.title}
-                  </span>
-                </Link>
-              ) : null}
-            </div>
-          </nav>
-        </Container>
-      )}
+      {prev || next ? (
+        <PrevNext
+          prev={prev ? { href: prev.href, title: prev.title } : undefined}
+          next={next ? { href: next.href, title: next.title } : undefined}
+          indexHref="/writings"
+          indexLabel="All writings"
+          label="More writings"
+        />
+      ) : null}
 
       {/* More writings */}
       {more.length > 0 && (
-        <Container className="border-t border-mist py-16 md:py-20">
+        <Container className="border-t border-mist pt-16 md:pt-20">
           <p className="label-caps text-stone mb-10">More writings</p>
-          <ul className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          <ul data-work-grid className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
             {more.map((w) => (
-              <li key={w.slug}>
+              <li key={w.slug} data-grid-item>
                 <Link href={w.href} className="group block">
-                  <h3 className="font-[family-name:var(--font-vollkorn)] italic text-2xl leading-tight text-ink group-hover:text-clay transition-colors">
+                  <h3 className="title-section italic text-ink underline decoration-transparent decoration-1 underline-offset-4 group-hover:decoration-ink/40">
                     {w.title}
                   </h3>
                   <p className="text-stone text-sm leading-[1.6] mt-3 line-clamp-3">
                     {w.excerpt}
-                    {w.excerpt.length === 200 ? "…" : ""}
                   </p>
                 </Link>
               </li>

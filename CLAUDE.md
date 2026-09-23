@@ -400,6 +400,32 @@ These flow into the footer and the Patreon CTAs.
   `/projects/ceramic` (URL) — fine to leave both untouched.
 - **Long unbroken metadata strings get split automatically** by
   `splitCamelRuns()`. Don't rely on that for normal text — write spaces.
+- **Titles use `title-page` / `title-section`** (`app/globals.css`). Don't
+  reintroduce display sizes — Aglaya asked for a restrained type scale.
+
+---
+
+## Motion
+
+Subtle and opt-in: opacity + ≤8px translate only. No scale/zoom, parallax
+or bounce on artwork. No new animation libraries.
+
+- **Tokens** (durations, easings) live in the `Motion` block at the bottom of
+  `app/globals.css`. Use them, not raw ms values.
+- **Scroll reveal:** `components/motion/motion-runtime.tsx` (one
+  IntersectionObserver, mounted in the root layout). Opt in with
+  `data-reveal` (`"text"`, `"fade"`, `"line"`); grid children with
+  `data-grid-item` are picked up automatically. Content is visible without
+  JS, under reduced motion, and in automated browsers. Never put
+  `data-reveal` on a hero/LCP image.
+- **Page transitions:** React `<ViewTransition>` via
+  `experimental.viewTransition` (`next.config.ts`,
+  `components/motion/page-transition.tsx`). Card → detail hero morph uses
+  `SharedArt` with names from `artTransitionName(href)` — names must be
+  unique per page, so the home page doesn't use it.
+- **Don't add `onLoad` to the detail hero image** — it stops React waiting for
+  the image during the morph.
+- Everything is disabled under `prefers-reduced-motion`.
 
 ---
 

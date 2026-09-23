@@ -3,9 +3,12 @@ import { Container } from "@/components/layout/container";
 import { PageHeader } from "@/components/layout/page-header";
 import { WorkGrid } from "@/components/artwork/work-grid";
 import { exhibitions, getSectionPage } from "@/lib/content";
+import { yearSpan } from "@/lib/utils";
+
+const span = yearSpan(exhibitions.map((e) => e.metadata.find((m) => m.label === "Year")?.value));
 
 const page = getSectionPage("exhibitions", {
-  eyebrow: `${exhibitions.length} shows · 2021 — 2025`,
+  eyebrow: [`${exhibitions.length} shows`, span].filter(Boolean).join(" · "),
   title: "Exhibitions",
   intro:
     "Solo and group exhibitions across Düsseldorf, Berlin, Kyiv, Lviv, the Carpathians, and the West Coast of the United States.",
@@ -33,8 +36,8 @@ export default function ExhibitionsPage() {
         <div className="border-t border-mist" />
       </Container>
 
-      <Container className="py-16 md:py-20">
-        <WorkGrid entries={exhibitions} />
+      <Container className="pt-12 md:pt-16">
+        <WorkGrid entries={exhibitions} section="exhibitions" />
       </Container>
     </>
   );

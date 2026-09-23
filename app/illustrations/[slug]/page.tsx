@@ -38,8 +38,8 @@ export default async function IllustrationDetailPage({ params }: { params: Param
       sectionLabel="Illustrations"
       sectionHref="/illustrations"
       metaLabel="Series"
-      prev={prev ? { href: prev.href, label: "Previous", title: prev.title } : undefined}
-      next={next ? { href: next.href, label: "Next", title: next.title } : undefined}
+      prev={prev ? { href: prev.href, title: prev.title } : undefined}
+      next={next ? { href: next.href, title: next.title } : undefined}
     />
   );
 }

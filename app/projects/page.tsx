@@ -3,9 +3,12 @@ import { Container } from "@/components/layout/container";
 import { PageHeader } from "@/components/layout/page-header";
 import { ProjectsGrid } from "@/components/projects/projects-grid";
 import { getSectionPage, projects } from "@/lib/content";
+import { yearSpan } from "@/lib/utils";
+
+const span = yearSpan(projects.map((p) => p.metadata.find((m) => m.label === "Year")?.value));
 
 const page = getSectionPage("projects", {
-  eyebrow: `${projects.length} works · 2021 — 2025`,
+  eyebrow: [`${projects.length} works`, span].filter(Boolean).join(" · "),
   title: "Projects",
   intro:
     "Selected works in xerography, relief printing, painting, and ceramic — exploring memory, displacement, and the strength of friendship.",
@@ -33,7 +36,7 @@ export default function ProjectsPage() {
         <div className="border-t border-mist" />
       </Container>
 
-      <Container className="py-12 md:py-16">
+      <Container className="pt-12 md:pt-16">
         <ProjectsGrid projects={projects} />
       </Container>
     </>

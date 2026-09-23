@@ -47,6 +47,16 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Header height — fixed so the mobile sheet and scroll offsets can read it */
+:root {
+  --header-h: 4rem;
+}
+@media (width >= 48rem) {
+  :root {
+    --header-h: 5rem;
+  }
+}
+
 body {
   background-color: var(--color-paper);
   color: var(--color-ink);
@@ -76,6 +86,37 @@ body {
   overflow-wrap: anywhere;
 }
 
+/* Page titles — one size everywhere (listing, detail, essay, about, 404) */
+@utility title-page {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  @media (width >= 48rem) {
+    font-size: 2rem;
+  }
+}
+
+/* Section / list-item titles one step below the page title */
+@utility title-section {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  text-wrap: balance;
+  @media (width >= 48rem) {
+    font-size: 1.375rem;
+  }
+}
+
+/* Lining, tabular figures for years, counts and ranges (Vollkorn defaults
+   to old-style figures, which read "1" as "I") */
+@utility nums {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
 @utility serif {
   font-family: var(--font-serif);
 }
@@ -92,6 +133,311 @@ body {
   border-radius: var(--radius);
 }
 
+/* ── Motion ── ------------------------------------------------------------
+   Owned by motion. Everything decelerates; nothing overshoots. Artwork only
+   fades and rises (≤ 8px) — never scales, never zooms (zoom is a crop).
+   Content is visible by default: the reveal runtime only marks elements
+   that start below the fold as `pending`, so no-JS and reduced-motion
+   visitors see everything immediately.
+   ------------------------------------------------------------------------ */
+
+@theme static {
+  --ease-gallery: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  --dur-instant: 120ms;
+  --dur-quick: 200ms;
+  --dur-base: 320ms;
+  --dur-exit: 180ms;
+  --dur-page: 360ms;
+  --dur-morph: 480ms;
+  --dur-settle: 720ms;
+
+  /* Bare transition-* utilities pick these up site-wide */
+  --default-transition-duration: 200ms;
+  --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --reveal-rise: 8px;
+  --reveal-rise-text: 6px;
+  --stagger: 70ms;
+}
+
+@keyframes motion-fade-in {
+  from { opacity: 0; }
+}
+
+@keyframes motion-fade-out {
+  to { opacity: 0; }
+}
+
+/* Scroll reveal — state set by components/motion/motion-runtime.tsx, and
+   only while html[data-motion="on"] is set (the runtime sets it once it's running) */
+html[data-motion="on"] [data-reveal-state="pending"] {
+  opacity: 0;
+  translate: 0 var(--reveal-rise);
+}
+html[data-motion="on"] [data-reveal-state="pending"][data-reveal="text"] {
+  translate: 0 var(--reveal-rise-text);
+}
+html[data-motion="on"] [data-reveal-state="pending"][data-reveal="fade"] {
+  translate: none;
+}
+html[data-motion="on"] [data-reveal-state="pending"][data-reveal="line"] {
+  opacity: 1;
+  translate: none;
+  scale: 0 1;
+}
+[data-reveal-state="in"] {
+  transition:
+    opacity var(--dur-settle) var(--ease-gallery),
+    translate var(--dur-settle) var(--ease-gallery),
+    scale var(--dur-settle) var(--ease-gallery);
+  transition-delay: calc(var(--reveal-i, 0) * var(--stagger));
+}
+
+/* Artwork hover — opacity only */
+[data-artwork-img] {
+  transition: opacity var(--dur-base) var(--ease-soft);
+}
+@media (hover: hover) {
+  [data-artwork-card]:hover [data-artwork-img] {
+    opacity: 0.92;
+  }
+}
+
+/* Prev / next arrow nudge */
+[data-arrow] {
+  display: inline-flex;
+  transition: translate var(--dur-base) var(--ease-gallery);
+}
+@media (hover: hover) {
+  [data-dir="prev"]:hover [data-arrow] { translate: -4px 0; }
+  [data-dir="next"]:hover [data-arrow] { translate: 4px 0; }
+}
+[data-dir="prev"]:focus-visible [data-arrow] { translate: -4px 0; }
+[data-dir="next"]:focus-visible [data-arrow] { translate: 4px 0; }
+
+/* Text link: a quiet resting underline (so links read as links on touch),
+   with an ink line drawn over it from the left on hover. Single-line links
+   only — prose links keep a plain border. */
+@utility link-draw {
+  position: relative;
+  padding-bottom: 0.25rem;
+  transition: color var(--dur-quick) var(--ease-soft);
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: currentColor;
+    pointer-events: none;
+  }
+  &::before {
+    opacity: 0.35;
+  }
+  &::after {
+    scale: 0 1;
+    transform-origin: left center;
+    transition: scale var(--dur-base) var(--ease-gallery);
+  }
+  &:hover::after,
+  &:focus-visible::after {
+    scale: 1 1;
+  }
+}
+
+/* Mobile nav sheet. `visibility` takes the closed sheet out of the tab
+   order even before `inert` is applied. */
+[data-mobile-nav] {
+  opacity: 0;
+  translate: 0 -4px;
+  visibility: hidden;
+  transition:
+    opacity var(--dur-exit) var(--ease-exit),
+    translate var(--dur-exit) var(--ease-exit),
+    visibility 0s linear var(--dur-exit);
+}
+[data-mobile-nav][data-open="true"] {
+  opacity: 1;
+  translate: none;
+  visibility: visible;
+  transition:
+    opacity var(--dur-base) var(--ease-gallery),
+    translate var(--dur-base) var(--ease-gallery),
+    visibility 0s;
+}
+[data-mobile-nav] a {
+  opacity: 0;
+  translate: 0 var(--reveal-rise-text);
+  transition:
+    opacity var(--dur-exit) var(--ease-exit),
+    translate var(--dur-exit) var(--ease-exit);
+}
+[data-mobile-nav][data-open="true"] a {
+  opacity: 1;
+  translate: none;
+  transition:
+    opacity var(--dur-base) var(--ease-gallery),
+    translate var(--dur-base) var(--ease-gallery),
+    color var(--dur-quick) var(--ease-soft);
+  transition-delay: calc(60ms + var(--i, 0) * 40ms);
+}
+[data-mobile-nav] a:nth-child(2) { --i: 1; }
+[data-mobile-nav] a:nth-child(3) { --i: 2; }
+[data-mobile-nav] a:nth-child(4) { --i: 3; }
+[data-mobile-nav] a:nth-child(5) { --i: 4; }
+[data-mobile-nav] a:nth-child(6) { --i: 5; }
+[data-mobile-nav] a:nth-child(n + 7) { --i: 6; }
+
+/* Essay reading progress — scroll-driven, no JS. Sits on the header's
+   bottom hairline. Absent where scroll timelines aren't supported. */
+.reading-progress {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  .reading-progress {
+    display: block;
+    position: fixed;
+    inset-inline: 0;
+    top: calc(var(--header-h, 64px) - 1px);
+    z-index: 41;
+    height: 1px;
+    background-color: var(--color-clay);
+    transform-origin: left center;
+    pointer-events: none;
+    animation: motion-progress linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+@keyframes motion-progress {
+  from { scale: 0 1; }
+  to { scale: 1 1; }
+}
+
+/* View transitions (React <ViewTransition>, experimental.viewTransition).
+   Page change: old content leaves quickly, new content settles in. The
+   header is its own layer above both so sliding snapshots never cover it. */
+body > header {
+  view-transition-name: site-header;
+}
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 10;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+::view-transition-old(.page-exit) {
+  animation: motion-fade-out var(--dur-exit) var(--ease-exit) both;
+}
+::view-transition-new(.page-enter) {
+  animation: motion-fade-in var(--dur-page) var(--ease-gallery) 60ms both;
+}
+
+/* Shared artwork: grid card ⇄ detail hero. The old snapshot holds while the
+   new one fades over it, so an undecoded hero never shows as a blank frame. */
+::view-transition-group(.art-morph) {
+  animation-duration: var(--dur-morph);
+  animation-timing-function: var(--ease-gallery);
+}
+::view-transition-image-pair(.art-morph) {
+  isolation: auto;
+}
+::view-transition-old(.art-morph) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-new(.art-morph) {
+  animation: motion-fade-in var(--dur-morph) var(--ease-gallery) both;
+  mix-blend-mode: normal;
+}
+
+/* Lightbox (components/artwork/lightbox.tsx), scoped by html[data-lb-vt].
+   The page underneath doesn't animate; the viewer sits above the header. */
+html[data-lb-vt]::view-transition-old(root) {
+  display: none;
+}
+html[data-lb-vt]::view-transition-new(root) {
+  animation: none;
+}
+::view-transition-group(lightbox),
+::view-transition-group(lb-photo),
+::view-transition-group(lb-stage) {
+  z-index: 20;
+}
+::view-transition-group(lb-photo) {
+  z-index: 30;
+  animation-duration: var(--dur-morph);
+  animation-timing-function: var(--ease-gallery);
+}
+::view-transition-old(lb-photo),
+::view-transition-new(lb-photo) {
+  animation-duration: var(--dur-morph);
+  animation-timing-function: var(--ease-gallery);
+}
+html[data-lb-vt="open"]::view-transition-new(lightbox) {
+  animation: motion-fade-in var(--dur-base) var(--ease-gallery) both;
+}
+html[data-lb-vt="close"]::view-transition-old(lightbox) {
+  animation: motion-fade-out var(--dur-exit) var(--ease-exit) both;
+}
+::view-transition-group(lb-stage) {
+  z-index: 30;
+  animation: none;
+}
+::view-transition-image-pair(lb-stage) {
+  isolation: auto;
+}
+::view-transition-old(lb-stage),
+::view-transition-new(lb-stage) {
+  mix-blend-mode: normal;
+}
+html[data-lb-vt="next"]::view-transition-old(lb-stage) {
+  animation: motion-lb-out-next var(--dur-quick) var(--ease-exit) both;
+}
+html[data-lb-vt="next"]::view-transition-new(lb-stage) {
+  animation: motion-lb-in-next var(--dur-base) var(--ease-gallery) both;
+}
+html[data-lb-vt="prev"]::view-transition-old(lb-stage) {
+  animation: motion-lb-out-prev var(--dur-quick) var(--ease-exit) both;
+}
+html[data-lb-vt="prev"]::view-transition-new(lb-stage) {
+  animation: motion-lb-in-prev var(--dur-base) var(--ease-gallery) both;
+}
+@keyframes motion-lb-out-next { to { opacity: 0; translate: -8px 0; } }
+@keyframes motion-lb-in-next { from { opacity: 0; translate: 8px 0; } }
+@keyframes motion-lb-out-prev { to { opacity: 0; translate: 8px 0; } }
+@keyframes motion-lb-in-prev { from { opacity: 0; translate: -8px 0; } }
+
+/* /projects filter: survivors glide, the rest fade (projects-grid.tsx) */
+::view-transition-group(.art-reflow) {
+  animation-duration: var(--dur-morph);
+  animation-timing-function: var(--ease-gallery);
+}
+::view-transition-new(.art-enter) {
+  animation: motion-fade-in var(--dur-base) var(--ease-gallery) var(--dur-exit) both;
+}
+::view-transition-old(.art-exit) {
+  animation: motion-fade-out var(--dur-exit) var(--ease-exit) both;
+}
+
+@media print {
+  [data-reveal-state] {
+    opacity: 1 !important;
+    translate: none !important;
+    scale: none !important;
+  }
+}
+
 /* Honor reduced motion preference globally */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -102,4 +448,22 @@ body {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  [data-reveal-state] {
+    opacity: 1 !important;
+    translate: none !important;
+    scale: none !important;
+  }
+
+  /* Progress maps to the reader's own scroll — it isn't autonomous motion */
+  .reading-progress {
+    animation-duration: auto !important;
+  }
 }
+/* ── /Motion ── */

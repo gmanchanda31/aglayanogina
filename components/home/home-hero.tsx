@@ -40,18 +40,18 @@ export function HomeHero() {
             </p>
           ) : null}
 
-          <div className="flex flex-wrap gap-4 mt-8">
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 mt-8">
             <Link
               href="/projects"
-              className="group inline-flex items-center gap-2 px-7 py-3 bg-ink text-paper label-caps hover:bg-clay transition-colors duration-300"
+              data-dir="next"
+              className="link-draw inline-flex items-center gap-2 label-caps text-ink"
             >
               View selected works
-              <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+              <span data-arrow className="inline-flex">
+                <ArrowRight className="size-3.5" aria-hidden />
+              </span>
             </Link>
-            <Link
-              href="/writings"
-              className="inline-flex items-center px-7 py-3 border border-ink text-ink label-caps hover:bg-ink hover:text-paper transition-colors duration-300"
-            >
+            <Link href="/writings" className="link-draw label-caps text-stone hover:text-ink">
               Read the writings
             </Link>
           </div>

@@ -25,26 +25,30 @@ export function SelectedWorks() {
           </h2>
           <Link
             href="/projects"
-            className="label-caps text-stone hover:text-ink border-b border-stone hover:border-ink pb-1 transition-colors"
+            className="link-draw label-caps text-stone hover:text-ink"
           >
             All projects
           </Link>
         </header>
       </Container>
 
-      <Container className="pb-24 md:pb-32">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 md:gap-x-10 gap-y-14 items-start">
+      <Container className="pb-20 md:pb-24">
+        <div
+          data-work-grid
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 md:gap-x-10 gap-y-14 items-start"
+        >
           {[first, second, third, fourth].map((work) =>
             work.hero ? (
-              <ArtworkCard
-                key={work.slug}
-                href={work.href}
-                image={work.hero}
-                title={work.title}
-                medium={work.metadata.find((m) => m.label === "Medium")?.value}
-                year={work.metadata.find((m) => m.label === "Year")?.value}
-                sizes={CARD_SIZES}
-              />
+              <div key={work.slug} data-grid-item>
+                <ArtworkCard
+                  href={work.href}
+                  image={work.hero}
+                  title={work.title}
+                  medium={work.metadata.find((m) => m.label === "Medium")?.value}
+                  year={work.metadata.find((m) => m.label === "Year")?.value}
+                  sizes={CARD_SIZES}
+                />
+              </div>
             ) : null,
           )}
         </div>

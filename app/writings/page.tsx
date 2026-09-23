@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { PageHeader } from "@/components/layout/page-header";
 import { getSectionPage, writings } from "@/lib/content";
@@ -34,28 +34,29 @@ export default function WritingsPage() {
         <div className="border-t border-mist" />
       </Container>
 
-      <Container className="py-12 md:py-16">
+      <Container className="pt-4 md:pt-6">
         <ul className="divide-y divide-mist">
           {writings.map((w) => (
             <li key={w.slug}>
               <Link
                 href={w.href}
-                className="group block py-8 md:py-10 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-10 items-baseline"
+                data-dir="next"
+                className="group py-8 md:py-10 grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-10 items-baseline"
               >
-                <p className="md:col-span-2 label-caps text-stone">Essay</p>
-                <div className="md:col-span-8">
-                  <h2 className="font-[family-name:var(--font-vollkorn)] text-3xl md:text-4xl leading-[1.15] text-ink group-hover:text-clay transition-colors">
+                <div className="md:col-span-10">
+                  <h2 className="title-section text-ink underline decoration-transparent decoration-1 underline-offset-4 group-hover:decoration-ink/40">
                     {w.title}
                   </h2>
-                  <p className="mt-3 text-stone text-base md:text-[1.0625rem] leading-[1.6] max-w-2xl">
+                  <p className="mt-2 text-stone text-base leading-[1.6] max-w-2xl">
                     {w.excerpt}
-                    {w.excerpt && w.paragraphs[0] && w.excerpt.length === 200 ? "…" : ""}
                   </p>
                 </div>
                 <div className="md:col-span-2 flex md:justify-end">
-                  <span className="label-caps text-stone group-hover:text-ink transition-colors inline-flex items-center gap-1">
+                  <span className="label-caps text-stone group-hover:text-ink inline-flex items-center gap-1.5">
                     Read
-                    <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <span data-arrow className="inline-flex">
+                      <ArrowRight className="size-3.5" aria-hidden />
+                    </span>
                   </span>
                 </div>
               </Link>

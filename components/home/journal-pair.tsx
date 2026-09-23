@@ -10,7 +10,7 @@ export function JournalPair() {
       aria-labelledby="journal-heading"
       className="border-t border-mist"
     >
-      <Container className="py-24 md:py-32">
+      <Container className="pt-20 md:pt-24 pb-4">
         <h2
           id="journal-heading"
           className="label-caps text-ink text-center mb-16 md:mb-20"
@@ -27,12 +27,13 @@ export function JournalPair() {
           {journalPicks.map(({ writing, teaser }) => (
             <article
               key={writing.routeSlug}
+              data-reveal="text"
               className="flex flex-col items-center text-center px-2 md:px-6"
             >
-              <h3 className="font-[family-name:var(--font-vollkorn)] text-[1.25rem] md:text-[1.375rem] leading-snug">
+              <h3 className="title-section">
                 <Link
                   href={writing.href}
-                  className="hover:text-clay transition-colors"
+                  className="hover:text-stone"
                 >
                   {writing.title}
                 </Link>
@@ -42,7 +43,7 @@ export function JournalPair() {
               </p>
               <Link
                 href={writing.href}
-                className="mt-6 label-caps text-stone hover:text-ink border-b border-stone hover:border-ink pb-1 transition-colors"
+                className="link-draw mt-6 label-caps text-stone hover:text-ink"
               >
                 Read essay
               </Link>
@@ -53,7 +54,7 @@ export function JournalPair() {
         <div className="text-center mt-16 md:mt-20">
           <Link
             href="/writings"
-            className="label-caps text-stone hover:text-ink border-b border-stone hover:border-ink pb-1 transition-colors"
+            className="link-draw label-caps text-stone hover:text-ink"
           >
             All writings
           </Link>

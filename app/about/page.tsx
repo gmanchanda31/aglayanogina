@@ -6,6 +6,7 @@ import { about, contact } from "@/lib/content";
 import { HERO_PORTRAIT } from "@/lib/home";
 import { SITE_URL } from "@/lib/site";
 import type { CVRow } from "@/lib/types";
+import { formatYearRange } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "About",
@@ -13,18 +14,15 @@ export const metadata: Metadata = {
     "Aglaya Nogina — visual artist born in Luhansk, working in xerography, relief printing, painting, photography, and writing. Currently studies at Kunstakademie Düsseldorf.",
 };
 
-const sections: Array<{ heading: string; rows: CVRow[] }> = [];
+const sections: Array<{ heading: string; rows: CVRow[] }> = [
+  { heading: "Education", rows: about.cv.education },
+  { heading: "Publications", rows: about.cv.publications },
+  { heading: "Solo Exhibitions", rows: about.cv.soloExhibitions },
+  { heading: "Selected Exhibitions", rows: about.cv.selectedExhibitions },
+];
 
 export default function AboutPage() {
   const portrait = HERO_PORTRAIT;
-
-  sections.length = 0;
-  sections.push(
-    { heading: "Education", rows: about.cv.education },
-    { heading: "Publications", rows: about.cv.publications },
-    { heading: "Solo Exhibitions", rows: about.cv.soloExhibitions },
-    { heading: "Selected Exhibitions", rows: about.cv.selectedExhibitions },
-  );
 
   const personJsonLd = {
     "@context": "https://schema.org",
@@ -55,13 +53,13 @@ export default function AboutPage() {
   return (
     <>
       <JsonLd data={personJsonLd} />
-      <Container className="py-20 md:py-28">
+      <Container className="pt-20 pb-16 md:pt-28 md:pb-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
           <div className="md:col-span-7">
-            <h1 className="font-[family-name:var(--font-vollkorn)] text-[3.5rem] sm:text-[4.5rem] md:text-[5rem] leading-[1] tracking-tight">
+            <h1 className="title-page">
               About
             </h1>
-            <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-xl md:text-2xl leading-[1.45] mt-8 max-w-2xl">
+            <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-lg md:text-xl leading-[1.5] mt-6 max-w-2xl">
               {about.intro}
             </p>
             {about.paragraphs.map((para, i) => (
@@ -75,15 +73,14 @@ export default function AboutPage() {
           </div>
 
           <figure className="md:col-span-5 md:pt-2">
-            <div className="relative aspect-[3/4] border border-mist bg-mist/40">
-              <Image
-                src={portrait.src}
-                alt={portrait.alt}
-                fill
-                sizes="(min-width: 768px) 40vw, 100vw"
-                className="object-cover"
-              />
-            </div>
+            <Image
+              src={portrait.src}
+              alt={portrait.alt}
+              width={portrait.width}
+              height={portrait.height}
+              sizes="(min-width: 1200px) 480px, (min-width: 768px) 40vw, 100vw"
+              className="block w-full h-auto"
+            />
             <figcaption className="label-caps text-stone mt-3">
               In studio · Düsseldorf
             </figcaption>
@@ -91,7 +88,7 @@ export default function AboutPage() {
         </div>
       </Container>
 
-      <Container className="py-20 md:py-28">
+      <Container className="pt-8 md:pt-12">
         <div className="space-y-16 md:space-y-20">
           {sections.map((section) =>
             section.rows.length > 0 ? (
@@ -119,13 +116,13 @@ function CVSection({ heading, rows }: { heading: string; rows: CVRow[] }) {
             className="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-8 py-4 md:py-5"
           >
             <span
-              className="md:col-span-3 font-[family-name:var(--font-vollkorn)] italic text-stone text-base md:text-lg"
+              className="md:col-span-3 font-[family-name:var(--font-vollkorn)] italic text-stone text-base md:text-lg nums"
               aria-hidden={!row.year}
             >
-              {row.year || "·"}
+              {row.year ? formatYearRange(row.year) : "·"}
             </span>
             <span className="md:col-span-9 text-ink text-base leading-[1.55]">
-              {row.detail}
+              {formatYearRange(row.detail)}
             </span>
           </li>
         ))}

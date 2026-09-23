@@ -4,6 +4,8 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { MotionRuntime } from "@/components/motion/motion-runtime";
+import { PageTransition } from "@/components/motion/page-transition";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -64,6 +66,9 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${vollkorn.variable} ${inter.variable}`}
+      // Next turns off smooth scrolling during route changes when this is set,
+      // so navigation lands at the top instead of gliding there
+      data-scroll-behavior="smooth"
     >
       <body className="min-h-screen bg-paper text-ink">
         <a
@@ -74,9 +79,10 @@ export default function RootLayout({
         </a>
         <SiteHeader />
         <main id="main" className="flex-1">
-          {children}
+          <PageTransition>{children}</PageTransition>
         </main>
         <SiteFooter />
+        <MotionRuntime />
         <Analytics />
         <SpeedInsights />
       </body>

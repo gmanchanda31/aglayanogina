@@ -2,6 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx"],
+  experimental: {
+    // React <ViewTransition> on route changes (components/motion/*)
+    viewTransition: true,
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     // Layouts cap at 1200 — generating 3840 variants is wasted CPU and bytes

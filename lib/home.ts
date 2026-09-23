@@ -11,6 +11,7 @@
 
 import {
   about,
+  getPhotographSet,
   getProject,
   homePicks,
   photographSets,
@@ -55,6 +56,9 @@ function tileImage(project: ProjectEntry | undefined, label: string): ImageRef |
   return { ...project.hero, alt: `${label} — ${project.title}` };
 }
 
+// The tile has always shown the black & white archive's first frame
+const bwSet = getPhotographSet("b-w") ?? photographSets[0];
+
 export const practiceTiles: PracticeTile[] = [
   { label: "Print",       href: "/projects",           image: tileImage(getProject("archipelago"),         "Print") },
   { label: "Painting",    href: "/projects",           image: tileImage(getProject("terra-memoria-mundi"), "Painting") },
@@ -62,8 +66,8 @@ export const practiceTiles: PracticeTile[] = [
   {
     label: "Photography",
     href: "/photographs",
-    image: photographSets[0]?.hero
-      ? { ...photographSets[0].hero, alt: "Photography — colour archive" }
+    image: bwSet?.hero
+      ? { ...bwSet.hero, alt: "Photography — black & white archive" }
       : null,
   },
   {
