@@ -384,16 +384,6 @@ The home page is Aglaya's portrait beside her about text
 (`components/about/artist-intro.tsx`, shared with the top of /about). Edit
 the text in the Studio's artist document; nothing else lives on home.
 
-### (Old notes)
-
-The home page is one work on the wall plus a text index of every project
-(recent → past) and a closing line. The opening work, its exhibition line and
-the closing line are set in Sanity Studio → **Homepage**; with no work picked
-it falls back to the most recent project. The index is derived from
-`projects` (already sorted) — there is nothing to hand-pick. Components:
-`components/home/home-work.tsx`, `components/home/home-index.tsx`; data:
-`lib/home.ts`.
-
 ### Update site-wide details (contact, social, navigation)
 
 `lib/content.ts` near the top:
