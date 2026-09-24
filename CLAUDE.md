@@ -43,9 +43,11 @@ before making changes, and update it when conventions change.
 | `mist` | `#E8E2D8` | Hairlines, image borders, dividers |
 | `stone` | `#6B655E` | Secondary text — captions, dates, metadata |
 
-**One font, one size, one style (Aglaya's rule).** Arimo 400, 16px/1.5,
-regular case, upright — no bold, no italic, no caps, no size contrast.
-Hierarchy comes only from colour (ink/stone), spacing and position.
+**One font, one size, one style, one colour (Aglaya's rule).** Arimo 400,
+16px/1.5, regular case, upright, ink — no bold, no italic, no caps, no size
+contrast, no grey text (paper only inside the dark lightbox). Hierarchy
+comes only from spacing and position. Pages are one left-aligned column:
+no centred fragments, no stray labels ("Gallery", counts, "Essay").
 Every text element still uses one of six semantic roles in
 `app/globals.css` (`type-title`, `type-heading`, `type-lead`, `type-body`,
 `type-ui`, `type-meta`) — they render identically today, so markup keeps its
@@ -377,6 +379,12 @@ To add a new exhibition row:
 3. Build + push.
 
 ### Update the home page
+
+The home page is Aglaya's portrait beside her about text
+(`components/about/artist-intro.tsx`, shared with the top of /about). Edit
+the text in the Studio's artist document; nothing else lives on home.
+
+### (Old notes)
 
 The home page is one work on the wall plus a text index of every project
 (recent → past) and a closing line. The opening work, its exhibition line and

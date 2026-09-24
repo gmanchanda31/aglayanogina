@@ -24,7 +24,6 @@ export default function WritingsPage() {
     <>
       <Container className="pt-section pb-block">
         <PageHeader
-          eyebrow={page.eyebrow}
           title={page.title}
           lede={page.intro}
         />
@@ -47,12 +46,12 @@ export default function WritingsPage() {
                   <h2 className="type-heading text-ink underline decoration-transparent decoration-1 underline-offset-4 group-hover:decoration-ink/40">
                     {w.title}
                   </h2>
-                  <p className="type-body text-stone mt-tight max-w-2xl">
+                  <p className="type-body text-ink mt-tight max-w-2xl">
                     {w.excerpt}
                   </p>
                 </div>
                 <div className="md:col-span-2 flex md:justify-end">
-                  <span className="type-ui text-stone group-hover:text-ink inline-flex items-center gap-1.5">
+                  <span className="type-ui text-ink inline-flex items-center gap-1.5">
                     Read
                     <span data-arrow className="inline-flex">
                       <ArrowRight className="size-3.5" aria-hidden />

@@ -72,7 +72,7 @@ export function SiteHeader() {
                       "type-ui inline-flex items-center h-full leading-none transition-colors relative",
                       active
                         ? "text-ink after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-px after:bg-clay"
-                        : "text-stone hover:text-ink",
+                        : "text-ink",
                     )}
                   >
                     {link.title}
@@ -123,7 +123,7 @@ function MobileNav({ open, pathname }: { open: boolean; pathname: string }) {
               aria-current={active ? "page" : undefined}
               className={cn(
                 "type-lead py-3 border-b border-mist",
-                active ? "text-ink" : "text-stone hover:text-ink",
+                active ? "text-ink" : "text-ink",
               )}
             >
               {link.title}

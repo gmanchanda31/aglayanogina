@@ -53,14 +53,6 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-/**
- * Arms the home hero's first-load entrance before first paint. No JS,
- * reduced motion or an automated browser leaves it off, so the hero is
- * simply static. Disarmed after a few seconds so soft navigations back to
- * `/` rely on the page crossfade instead of replaying it.
- */
-const ENTRANCE_SCRIPT = `(function(){try{var d=document.documentElement;if(navigator.webdriver||matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.setAttribute("data-entrance","on");setTimeout(function(){d.removeAttribute("data-entrance")},2500)}catch(e){}})()`;
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -71,12 +63,7 @@ export default function RootLayout({
       // Next turns off smooth scrolling during route changes when this is set,
       // so navigation lands at the top instead of gliding there
       data-scroll-behavior="smooth"
-      // ENTRANCE_SCRIPT adds data-entrance before hydration
-      suppressHydrationWarning
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: ENTRANCE_SCRIPT }} />
-      </head>
       <body className="min-h-screen bg-paper text-ink">
         <a
           href="#main"

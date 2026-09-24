@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 
 interface PageHeaderProps {
-  eyebrow?: string;
   title: string;
   lede?: string;
   className?: string;
@@ -9,7 +8,6 @@ interface PageHeaderProps {
 }
 
 export function PageHeader({
-  eyebrow,
   title,
   lede,
   className,
@@ -17,12 +15,11 @@ export function PageHeader({
 }: PageHeaderProps) {
   return (
     <div className={cn("max-w-3xl", className)}>
-      {eyebrow ? <p className="type-meta text-stone nums">{eyebrow}</p> : null}
       <h1 className="type-title text-ink">
         {title}
       </h1>
       {lede ? (
-        <p className="type-lead text-stone mt-tight max-w-2xl">
+        <p className="type-lead text-ink mt-tight max-w-2xl">
           {lede}
         </p>
       ) : null}

@@ -1,7 +1,7 @@
 /**
  * Type-system guard. Every piece of text uses one of the six roles in
  * app/globals.css (type-title, type-heading, type-lead, type-body, type-ui,
- * type-meta) — one font, one size, one style: Inter 400, regular case.
+ * type-meta) — one font, one size, one style, one colour: Arimo 400 in ink.
  *
  * Fails if a component sets size, family, weight, tracking, line-height or
  * case directly, or reintroduces caps / a serif.
@@ -23,6 +23,7 @@ const RULES = [
   [/\bfont-(thin|extralight|light|medium|semibold|bold|extrabold|black)\b|fontWeight:\s*[5-9]00/, "one weight (400) only"],
   [/\bitalic\b|fontStyle:\s*["']italic/, "one style — no italic"],
   [/\bleading-(?!none\b)/, "no raw line-heights — the roles own leading"],
+  [/\btext-(stone|clay|mist)\b|\btext-ink\/\d/, "one text colour — ink (paper only on the dark lightbox)"],
 ];
 
 function walk(dir) {

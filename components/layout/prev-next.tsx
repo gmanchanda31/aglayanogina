@@ -32,13 +32,13 @@ export function PrevNext({ prev, next, indexHref, indexLabel, label }: PrevNextP
         <div className="flex">
           {prev ? (
             <Link href={prev.href} data-dir="prev" className="group inline-flex flex-col gap-1.5 text-left">
-              <span className="type-meta text-stone inline-flex items-center gap-1.5">
+              <span className="type-meta text-ink inline-flex items-center gap-1.5">
                 <span data-arrow className="inline-flex">
                   <ArrowLeft className="size-3.5" aria-hidden />
                 </span>
                 Previous
               </span>
-              <span className="type-heading text-stone group-hover:text-ink">
+              <span className="type-heading text-ink">
                 {prev.title}
               </span>
             </Link>
@@ -46,7 +46,7 @@ export function PrevNext({ prev, next, indexHref, indexLabel, label }: PrevNextP
         </div>
 
         <div className="col-span-2 row-start-2 md:col-span-1 md:row-start-1 md:col-start-2 flex justify-center md:pt-0.5">
-          <Link href={indexHref} className="link-draw type-ui text-stone hover:text-ink">
+          <Link href={indexHref} className="link-draw type-ui text-ink">
             {indexLabel}
           </Link>
         </div>
@@ -54,13 +54,13 @@ export function PrevNext({ prev, next, indexHref, indexLabel, label }: PrevNextP
         <div className="flex justify-end md:col-start-3 md:row-start-1">
           {next ? (
             <Link href={next.href} data-dir="next" className="group inline-flex flex-col gap-1.5 text-right">
-              <span className="type-meta text-stone inline-flex items-center gap-1.5 self-end">
+              <span className="type-meta text-ink inline-flex items-center gap-1.5 self-end">
                 Next
                 <span data-arrow className="inline-flex">
                   <ArrowRight className="size-3.5" aria-hidden />
                 </span>
               </span>
-              <span className="type-heading text-stone group-hover:text-ink">
+              <span className="type-heading text-ink">
                 {next.title}
               </span>
             </Link>

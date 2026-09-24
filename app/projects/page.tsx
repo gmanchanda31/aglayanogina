@@ -26,7 +26,6 @@ export default function ProjectsPage() {
     <>
       <Container className="pt-section pb-block">
         <PageHeader
-          eyebrow={page.eyebrow}
           title={page.title}
           lede={page.intro}
         />

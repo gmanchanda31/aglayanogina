@@ -70,22 +70,16 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
 
       {/* Article header */}
       <Container className="pt-section">
-        <header className="max-w-[760px] mx-auto text-center">
-          <p className="type-meta text-stone">Essay</p>
+        <header className="max-w-[640px]">
           <h1 className="type-title">
             {writing.title}
           </h1>
-          <p className="type-meta text-stone mt-tight">Aglaya Nogina</p>
         </header>
       </Container>
 
-      <Container className="my-block">
-        <div className="mx-auto h-px w-16 bg-mist" />
-      </Container>
-
       {/* Article body */}
-      <Container>
-        <article className="max-w-[640px] mx-auto">
+      <Container className="pt-block">
+        <article className="max-w-[640px]">
           <ArticleBody body={writing.body} />
         </article>
       </Container>
@@ -103,7 +97,7 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
       {/* More writings */}
       {more.length > 0 && (
         <Container className="border-t border-mist pt-section">
-          <p className="type-meta text-stone mb-tight">More writings</p>
+          <p className="type-meta text-ink mb-tight">More writings</p>
           <ul data-work-grid className="grid grid-cols-1 md:grid-cols-3 gap-block">
             {more.map((w) => (
               <li key={w.slug} data-grid-item>
@@ -111,7 +105,7 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
                   <h3 className="type-heading text-ink underline decoration-transparent decoration-1 underline-offset-4 group-hover:decoration-ink/40">
                     {w.title}
                   </h3>
-                  <p className="type-body text-stone mt-tight line-clamp-3">
+                  <p className="type-body text-ink mt-tight line-clamp-3">
                     {w.excerpt}
                   </p>
                 </Link>

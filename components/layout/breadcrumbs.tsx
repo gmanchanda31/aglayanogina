@@ -9,7 +9,7 @@ interface BreadcrumbsProps {
 
 export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
   return (
-    <nav aria-label="Breadcrumb" className={cn("type-meta text-stone", className)}>
+    <nav aria-label="Breadcrumb" className={cn("type-meta text-ink", className)}>
       <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
         {items.map((item, i) => {
           const isLast = i === items.length - 1;
@@ -18,7 +18,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
               {item.href && !isLast ? (
                 <Link
                   href={item.href}
-                  className="hover:text-ink transition-colors"
+                  className="transition-colors"
                 >
                   {item.label}
                 </Link>
@@ -27,7 +27,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
                   {item.label}
                 </span>
               )}
-              {!isLast ? <ChevronRight className="size-3 text-stone" aria-hidden /> : null}
+              {!isLast ? <ChevronRight className="size-3 text-ink" aria-hidden /> : null}
             </li>
           );
         })}

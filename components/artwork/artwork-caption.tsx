@@ -14,7 +14,7 @@ export function ArtworkCaption({ title, year, className }: ArtworkCaptionProps) 
   return (
     <div className={cn("mt-2 mb-4 min-w-0", className)}>
       <h3 className="type-ui text-ink truncate">{title}</h3>
-      <p className="type-meta text-stone nums truncate" aria-hidden={year ? undefined : true}>
+      <p className="type-meta text-ink nums truncate" aria-hidden={year ? undefined : true}>
         {year ?? " "}
       </p>
     </div>

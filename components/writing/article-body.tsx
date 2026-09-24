@@ -22,7 +22,7 @@ const components: PortableTextComponents = {
       </p>
     ),
     marker: ({ children }) => (
-      <p className="type-meta text-stone nums mt-section mb-tight first:mt-0">{children}</p>
+      <p className="type-meta text-ink nums mt-section mb-tight first:mt-0">{children}</p>
     ),
     h2: ({ children }) => (
       <h2 className="type-heading text-ink mt-section mb-tight">
@@ -35,7 +35,7 @@ const components: PortableTextComponents = {
       </h3>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="type-body text-stone border-l-2 border-mist pl-6 my-block">
+      <blockquote className="type-body text-ink border-l-2 border-mist pl-6 my-block">
         {children}
       </blockquote>
     ),
@@ -53,7 +53,7 @@ const components: PortableTextComponents = {
           {...(external
             ? { target: "_blank", rel: "noopener noreferrer" }
             : {})}
-          className="border-b border-stone hover:border-ink hover:text-ink transition-colors"
+          className="border-b border-stone hover:border-ink transition-colors"
         >
           {children}
         </a>

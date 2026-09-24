@@ -4,7 +4,7 @@ import { Container } from "./container";
 
 /** 44px tap rows on mobile; compact list from md up */
 const footerLink =
-  "type-ui text-stone hover:text-ink transition-colors inline-flex items-center min-h-11 md:min-h-0";
+  "type-ui text-ink transition-colors inline-flex items-center min-h-11 md:min-h-0";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -20,10 +20,10 @@ export function SiteFooter() {
           >
             {siteName}
           </Link>
-          <p className="mt-tight type-ui text-stone">
+          <p className="mt-tight type-ui text-ink">
             {siteCity}
           </p>
-          <p className="type-meta text-stone">© {year} Aglaya Nogina</p>
+          <p className="type-meta text-ink">© {year} Aglaya Nogina</p>
         </div>
 
         <div>
@@ -59,7 +59,7 @@ export function SiteFooter() {
 
         <div>
           <p className="type-meta text-ink">Studio</p>
-          <p className="mt-tight type-ui text-stone">
+          <p className="mt-tight type-ui text-ink">
             Available for commissions, exhibitions, and editorial collaborations.
           </p>
         </div>

@@ -26,7 +26,6 @@ export default function ExhibitionsPage() {
     <>
       <Container className="pt-section pb-block">
         <PageHeader
-          eyebrow={page.eyebrow}
           title={page.title}
           lede={page.intro}
         />

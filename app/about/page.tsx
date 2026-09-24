@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Container } from "@/components/layout/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { about, contact } from "@/lib/content";
-import { HERO_PORTRAIT } from "@/lib/home";
+import { ArtistIntro } from "@/components/about/artist-intro";
 import { SITE_URL } from "@/lib/site";
 import type { CVRow } from "@/lib/types";
 import { formatYearRange } from "@/lib/utils";
@@ -22,8 +21,6 @@ const sections: Array<{ heading: string; rows: CVRow[] }> = [
 ];
 
 export default function AboutPage() {
-  const portrait = HERO_PORTRAIT;
-
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -53,40 +50,7 @@ export default function AboutPage() {
   return (
     <>
       <JsonLd data={personJsonLd} />
-      <Container className="pt-section">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-block items-start">
-          <div className="md:col-span-7">
-            <h1 className="type-title">
-              About
-            </h1>
-            <p className="type-lead text-stone mt-tight max-w-2xl">
-              {about.intro}
-            </p>
-            {about.paragraphs.map((para, i) => (
-              <p
-                key={i}
-                className="type-body text-ink mt-block max-w-2xl"
-              >
-                {para}
-              </p>
-            ))}
-          </div>
-
-          <figure className="md:col-span-5">
-            <Image
-              src={portrait.src}
-              alt={portrait.alt}
-              width={portrait.width}
-              height={portrait.height}
-              sizes="(min-width: 1200px) 480px, (min-width: 768px) 40vw, 100vw"
-              className="block w-full h-auto"
-            />
-            {portrait.caption ? (
-              <figcaption className="type-meta text-stone mt-tight">{portrait.caption}</figcaption>
-            ) : null}
-          </figure>
-        </div>
-      </Container>
+      <ArtistIntro heading={<h1 className="type-title mb-tight">About</h1>} />
 
       <Container className="pt-section">
         <div className="space-y-section">
@@ -116,7 +80,7 @@ function CVSection({ heading, rows }: { heading: string; rows: CVRow[] }) {
             className="grid grid-cols-1 md:grid-cols-12 md:items-baseline md:gap-x-block py-tight"
           >
             <span
-              className="md:col-span-3 type-meta text-stone nums"
+              className="md:col-span-3 type-meta text-ink nums"
               aria-hidden={!row.year}
             >
               {row.year ? formatYearRange(row.year) : "·"}

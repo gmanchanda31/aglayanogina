@@ -6,7 +6,6 @@ import { Container } from "@/components/layout/container";
 import { PrevNext } from "@/components/layout/prev-next";
 import { SharedArt, artTransitionName } from "@/components/motion/shared-art";
 import type { Entry, ImageRef } from "@/lib/types";
-import { cn } from "@/lib/utils";
 
 interface RelatedLink {
   href: string;
@@ -36,8 +35,6 @@ export function EntryDetail({
 }: EntryDetailProps) {
   const hero = entry.hero;
   const galleryImages: ImageRef[] = entry.images.slice(1);
-  const standFirst = entry.description[0];
-  const restDescription = entry.description.slice(1);
   // Hero opens the viewer at 0; gallery images follow it
   const viewerImages: ImageRef[] = hero ? [hero, ...galleryImages] : galleryImages;
   // A plain <img> (no onLoad, unlike next/image) lets React hold the
@@ -72,10 +69,12 @@ export function EntryDetail({
         />
       </Container>
 
-      {/* HERO — natural-aspect rendering so vertical artworks aren't cropped */}
+      {/* One left-aligned column: hero, title, details, description,
+          quote, gallery. No labels or centred fragments — one font, one
+          size, one colour; only spacing separates the parts. */}
       {hero && heroProps ? (
         <Container className="pt-block">
-          <figure className="mx-auto w-full max-w-[1000px] flex justify-center">
+          <figure className="w-full max-w-[1000px] flex">
             <LightboxTrigger
               index={0}
               label={`Open ${entry.title} in viewer`}
@@ -90,73 +89,37 @@ export function EntryDetail({
         </Container>
       ) : null}
 
-      {/* TITLE + METADATA — small, centred, metadata stacked directly below */}
       <Container className="pt-block">
-        <div className="max-w-[640px] mx-auto text-center">
-          <h1 className="type-title">
-            {entry.title}
-          </h1>
-
+        <div className="max-w-[640px]">
+          <h1 className="type-title">{entry.title}</h1>
           {entry.metadata.length > 0 ? (
-            <dl className="mt-tight" aria-label={metaLabel}>
+            <dl aria-label={metaLabel}>
               {entry.metadata.map((m, i) => (
-                <div
-                  key={i}
-                  className="flex flex-wrap justify-center items-baseline gap-x-2"
-                >
-                  {m.label ? (
-                    <dt className="type-meta text-stone">{m.label}</dt>
-                  ) : null}
+                <div key={i}>
+                  {m.label ? <dt className="sr-only">{m.label}</dt> : null}
                   <dd className="type-meta text-ink nums">{m.value}</dd>
                 </div>
               ))}
             </dl>
           ) : null}
+
+          {entry.description.map((para, i) => (
+            <p key={i} className="type-body text-ink mt-block">
+              {para}
+            </p>
+          ))}
+
+          {entry.pullQuote ? (
+            <blockquote className="type-body text-ink mt-block">
+              <p>“{entry.pullQuote}”</p>
+              {entry.quoteAttribution ? <p>— {entry.quoteAttribution}</p> : null}
+            </blockquote>
+          ) : null}
         </div>
       </Container>
 
-      {/* DESCRIPTION */}
-      {(standFirst || restDescription.length > 0) ? (
-        <Container className="pt-section">
-          <div className="max-w-[640px] mx-auto">
-            {standFirst ? (
-              <p className="type-lead text-ink">
-                {standFirst}
-              </p>
-            ) : null}
-            {restDescription.map((para, i) => (
-              <p
-                key={i}
-                className="type-body text-ink mt-block"
-              >
-                {para}
-              </p>
-            ))}
-          </div>
-        </Container>
-      ) : null}
-
-      {/* PULL QUOTE */}
-      {entry.pullQuote ? (
-        <Container className="border-t border-mist mt-section">
-          <div className="py-section max-w-[700px] mx-auto text-center">
-            <blockquote
-              data-reveal="fade"
-              className="type-lead text-ink"
-            >
-              “{entry.pullQuote}”
-            </blockquote>
-            {entry.quoteAttribution ? (
-              <p className="type-meta text-stone mt-tight">— {entry.quoteAttribution}</p>
-            ) : null}
-          </div>
-        </Container>
-      ) : null}
-
-      {/* GALLERY — uniform 4:5 tiles; each opens the viewer uncropped */}
       {galleryImages.length > 0 ? (
-        <Container className={cn(entry.pullQuote ? "border-t border-mist" : "", "pt-section")}>
-          <p className="type-meta text-stone mb-tight">Gallery</p>
+        <Container className="pt-section">
           <GalleryGrid
             images={galleryImages}
             startIndex={hero ? 1 : 0}
