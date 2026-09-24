@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
+import { ArtTile } from "./art-tile";
+import { GALLERY_SIZES } from "./gallery-grid";
 import { Lightbox } from "./lightbox";
 import { cn } from "@/lib/utils";
 import type { ImageRef } from "@/lib/types";
@@ -9,12 +10,19 @@ import type { ImageRef } from "@/lib/types";
 interface PhotoMasonryProps {
   images: ImageRef[];
   className?: string;
-  /** Whether the first image should load eagerly */
+  /** Whether the first row should load eagerly */
   eagerFirst?: boolean;
   /** Set title, shown in the lightbox caption */
   label?: string;
 }
 
+/** Tiles in the first row at sm+ */
+const FIRST_ROW = 3;
+
+/**
+ * A photo set as the site-wide 4:5 grid, read left to right in Studio
+ * order. Each tile opens the set's viewer, which shows the photo uncropped.
+ */
 export function PhotoMasonry({
   images,
   className,
@@ -27,34 +35,22 @@ export function PhotoMasonry({
     <>
       <div
         data-work-grid
-        className={cn(
-          "columns-1 sm:columns-2 lg:columns-3 gap-4 md:gap-6 [column-fill:_balance]",
-          className,
-        )}
+        className={cn("grid grid-cols-2 sm:grid-cols-3 gap-1", className)}
       >
         {images.map((image, i) => (
-          <figure
-            key={image.src}
-            data-grid-item
-            className="mb-4 md:mb-6 break-inside-avoid"
-          >
+          <figure key={image.src} data-grid-item>
             <button
               type="button"
               onClick={() => setOpenIndex(i)}
               aria-label={`Open ${image.alt} in viewer`}
               data-artwork-card
               data-lightbox-index={i}
-              className="relative w-full overflow-hidden block cursor-zoom-in"
+              className="block w-full cursor-zoom-in"
             >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                width={image.width}
-                height={image.height}
-                sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
-                priority={eagerFirst && i === 0}
-                data-artwork-img
-                className="w-full h-auto block"
+              <ArtTile
+                image={image}
+                sizes={GALLERY_SIZES}
+                priority={eagerFirst && i < FIRST_ROW}
               />
             </button>
           </figure>

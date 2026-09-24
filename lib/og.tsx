@@ -7,6 +7,9 @@ import { SITE_HOST } from "@/lib/site";
 export const OG_SIZE = { width: 1200, height: 630 } as const;
 export const OG_CONTENT_TYPE = "image/png";
 
+/** Every line on the card is the same size; hierarchy is colour and position */
+const OG_TEXT_SIZE = 40;
+
 const COLOR = {
   paper: "#FAF7F2",
   ink: "#0F0E0D",
@@ -15,7 +18,7 @@ const COLOR = {
   stone: "#6B655E",
 };
 
-/** Read a TTF bundled at /public/fonts/<file>.ttf */
+/** Read a font file bundled at /public/fonts/<file> */
 async function loadFont(file: string): Promise<ArrayBuffer> {
   const abs = path.join(process.cwd(), "public", "fonts", file);
   const buf = await fs.readFile(abs);
@@ -26,15 +29,18 @@ async function loadFont(file: string): Promise<ArrayBuffer> {
 
 type OGFonts = NonNullable<ConstructorParameters<typeof ImageResponse>[1]>["fonts"];
 
-/** Inter only: Regular for meta and the lede, Medium for titles */
+/** Arimo Regular only — one font, one size, one style, like the site.
+ *  Three subsets registered under one name; Satori falls back per glyph. */
 async function loadInter(): Promise<OGFonts> {
-  const [regular, medium] = await Promise.all([
-    loadFont("Inter-Regular.ttf"),
-    loadFont("Inter-Medium.ttf"),
+  const [latin, latinExt, cyrillic] = await Promise.all([
+    loadFont("arimo-latin-400.woff"),
+    loadFont("arimo-latin-ext-400.woff"),
+    loadFont("arimo-cyrillic-400.woff"),
   ]);
   return [
-    { name: "Inter", data: regular, weight: 400, style: "normal" },
-    { name: "Inter", data: medium, weight: 500, style: "normal" },
+    { name: "Arimo", data: latin, weight: 400, style: "normal" },
+    { name: "Arimo", data: latinExt, weight: 400, style: "normal" },
+    { name: "Arimo", data: cyrillic, weight: 400, style: "normal" },
   ];
 }
 
@@ -93,7 +99,7 @@ export async function landingOG({ eyebrow, title, lede, imagePath }: LandingOGPr
           width: "100%",
           height: "100%",
           backgroundColor: COLOR.paper,
-          fontFamily: "Inter",
+          fontFamily: "Arimo",
         }}
       >
         {/* Left text column */}
@@ -108,9 +114,9 @@ export async function landingOG({ eyebrow, title, lede, imagePath }: LandingOGPr
         >
           <div
             style={{
-              fontFamily: "Inter",
-              fontWeight: 500,
-              fontSize: 22,
+              fontFamily: "Arimo",
+              fontWeight: 400,
+              fontSize: OG_TEXT_SIZE,
               color: COLOR.ink,
             }}
           >
@@ -121,9 +127,9 @@ export async function landingOG({ eyebrow, title, lede, imagePath }: LandingOGPr
             {eyebrow ? (
               <div
                 style={{
-                  fontFamily: "Inter",
+                  fontFamily: "Arimo",
                   fontWeight: 400,
-                  fontSize: 22,
+                  fontSize: OG_TEXT_SIZE,
                   color: COLOR.stone,
                 }}
               >
@@ -133,11 +139,10 @@ export async function landingOG({ eyebrow, title, lede, imagePath }: LandingOGPr
 
             <div
               style={{
-                fontFamily: "Inter",
-                fontWeight: 500,
-                fontSize: imageDataUri ? 80 : 108,
+                fontFamily: "Arimo",
+                fontWeight: 400,
+                fontSize: OG_TEXT_SIZE,
                 lineHeight: 1.05,
-                letterSpacing: "-0.025em",
                 color: COLOR.ink,
               }}
             >
@@ -147,9 +152,9 @@ export async function landingOG({ eyebrow, title, lede, imagePath }: LandingOGPr
             {lede ? (
               <div
                 style={{
-                  fontFamily: "Inter",
+                  fontFamily: "Arimo",
                   fontWeight: 400,
-                  fontSize: 28,
+                  fontSize: OG_TEXT_SIZE,
                   lineHeight: 1.4,
                   color: COLOR.stone,
                   maxWidth: 640,
@@ -169,9 +174,9 @@ export async function landingOG({ eyebrow, title, lede, imagePath }: LandingOGPr
           >
             <div
               style={{
-                fontFamily: "Inter",
+                fontFamily: "Arimo",
                 fontWeight: 400,
-                fontSize: 20,
+                fontSize: OG_TEXT_SIZE,
                 color: COLOR.stone,
               }}
             >
@@ -256,7 +261,7 @@ export async function detailOG({ section, title, meta, imagePath }: DetailOGProp
           width: "100%",
           height: "100%",
           backgroundColor: COLOR.paper,
-          fontFamily: "Inter",
+          fontFamily: "Arimo",
         }}
       >
         {/* Left image (full bleed) */}
@@ -288,9 +293,9 @@ export async function detailOG({ section, title, meta, imagePath }: DetailOGProp
         >
           <div
             style={{
-              fontFamily: "Inter",
-              fontWeight: 500,
-              fontSize: 22,
+              fontFamily: "Arimo",
+              fontWeight: 400,
+              fontSize: OG_TEXT_SIZE,
               color: COLOR.ink,
             }}
           >
@@ -300,9 +305,9 @@ export async function detailOG({ section, title, meta, imagePath }: DetailOGProp
           <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
             <div
               style={{
-                fontFamily: "Inter",
+                fontFamily: "Arimo",
                 fontWeight: 400,
-                fontSize: 22,
+                fontSize: OG_TEXT_SIZE,
                 color: COLOR.clay,
               }}
             >
@@ -311,11 +316,10 @@ export async function detailOG({ section, title, meta, imagePath }: DetailOGProp
 
             <div
               style={{
-                fontFamily: "Inter",
-                fontWeight: 500,
-                fontSize: title.length > 22 ? 64 : 80,
+                fontFamily: "Arimo",
+                fontWeight: 400,
+                fontSize: OG_TEXT_SIZE,
                 lineHeight: 1.08,
-                letterSpacing: "-0.025em",
                 color: COLOR.ink,
               }}
             >
@@ -325,9 +329,9 @@ export async function detailOG({ section, title, meta, imagePath }: DetailOGProp
             {meta ? (
               <div
                 style={{
-                  fontFamily: "Inter",
+                  fontFamily: "Arimo",
                   fontWeight: 400,
-                  fontSize: 22,
+                  fontSize: OG_TEXT_SIZE,
                   color: COLOR.stone,
                   lineHeight: 1.5,
                 }}
@@ -347,9 +351,9 @@ export async function detailOG({ section, title, meta, imagePath }: DetailOGProp
             <div style={{ width: 56, height: 1, backgroundColor: COLOR.clay }} />
             <div
               style={{
-                fontFamily: "Inter",
+                fontFamily: "Arimo",
                 fontWeight: 400,
-                fontSize: 18,
+                fontSize: OG_TEXT_SIZE,
                 color: COLOR.stone,
               }}
             >

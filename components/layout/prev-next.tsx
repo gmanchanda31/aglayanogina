@@ -23,11 +23,11 @@ interface PrevNextProps {
  */
 export function PrevNext({ prev, next, indexHref, indexLabel, label }: PrevNextProps) {
   return (
-    <Container className="border-t border-mist mt-24 md:mt-32">
+    <Container className="border-t border-mist mt-section">
       <nav
         aria-label={label}
         data-prev-next
-        className="py-12 grid grid-cols-2 md:grid-cols-3 items-start gap-x-6 gap-y-10"
+        className="py-block grid grid-cols-2 md:grid-cols-3 items-start gap-x-block gap-y-block"
       >
         <div className="flex">
           {prev ? (

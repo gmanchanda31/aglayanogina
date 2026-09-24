@@ -14,6 +14,7 @@
  * Phase 3a; Phase 3b swaps them to PortableText from Sanity.
  */
 
+import { byRecency, compareChrono } from "./chrono";
 import { formatYearRange } from "./utils";
 import { sanityClient, urlFor } from "./sanity-client";
 import {
@@ -111,6 +112,8 @@ interface SanityEntryDoc {
   title: string;
   slug: string;
   year?: string;
+  /** YYYY-MM-DD — breaks ties between entries sharing a year */
+  sortDate?: string;
   medium?: string;
   location?: string;
   dimensions?: string;
@@ -161,6 +164,8 @@ interface SanityPhotographSetDoc {
   _id: string;
   title: string;
   slug: string;
+  year?: string;
+  sortDate?: string;
   blurb?: string;
   images?: SanityImage[];
 }
@@ -178,6 +183,7 @@ interface SanityWritingDoc {
   title: string;
   slug: string;
   year?: string;
+  sortDate?: string;
   excerpt?: string;
   body?: PortableNode[];
 }
@@ -232,22 +238,39 @@ function fileNameFromSrc(src: string): string {
   return src.split("?")[0].split("/").pop() ?? "image";
 }
 
+/** Grid tiles are 4:5 site-wide (components/artwork/art-tile.tsx). Largest
+ *  tile is ~380 CSS px, so 960 covers 2x DPR with room to spare. */
+const TILE_RATIO = 4 / 5;
+const TILE_MAX_WIDTH = 960;
+
 function toImageRef(img: SanityImage | undefined, fallbackAlt: string): ImageRef | undefined {
   if (!img?.width || !img.height) return undefined;
 
   // Build through urlFor() so hotspot/crop reach the CDN. With no explicit
   // size the builder emits only `rect=`, i.e. the crop at its natural
   // proportions — no forced aspect ratio.
-  const src = img.asset?._ref
-    ? urlFor({
+  const source = img.asset?._ref
+    ? {
         asset: img.asset,
         ...(img.hotspot ? { hotspot: img.hotspot } : {}),
         ...(img.crop ? { crop: img.crop } : {}),
-      }).url()
-    : img.src;
+      }
+    : undefined;
+  const src = source ? urlFor(source).url() : img.src;
   if (!src) return undefined;
 
   const { width, height } = croppedDimensions(img.width, img.height, img.crop);
+
+  // A fixed w×h makes the builder cut crop-then-hotspot, so the tile frames
+  // what she chose in the Studio. Never upscale past the cropped source.
+  const tileWidth = Math.round(Math.min(TILE_MAX_WIDTH, width, height * TILE_RATIO));
+  const tile = source
+    ? urlFor(source)
+        .width(tileWidth)
+        .height(Math.round(tileWidth / TILE_RATIO))
+        .fit("crop")
+        .url()
+    : undefined;
 
   return {
     src,
@@ -256,6 +279,7 @@ function toImageRef(img: SanityImage | undefined, fallbackAlt: string): ImageRef
     width,
     height,
     ...(img.caption?.trim() ? { caption: img.caption.trim() } : {}),
+    ...(tile ? { tile } : {}),
   };
 }
 
@@ -367,12 +391,12 @@ function buildEntry<S extends "projects" | "exhibitions" | "illustrations">(
   };
 }
 
-export const projects: ProjectEntry[] = projectsDocs.map((doc) => ({
+export const projects: ProjectEntry[] = byRecency(projectsDocs, (doc) => doc).map((doc) => ({
   ...buildEntry("projects", doc),
   kinds: doc.kinds ?? [],
 }));
 
-export const exhibitions: ExhibitionEntry[] = exhibitionsDocs.map((doc) => {
+export const exhibitions: ExhibitionEntry[] = byRecency(exhibitionsDocs, (doc) => doc).map((doc) => {
   const base = buildEntry("exhibitions", doc);
   // Fold venue/city/curator into the metadata stack
   const metadata = [...base.metadata];
@@ -382,15 +406,16 @@ export const exhibitions: ExhibitionEntry[] = exhibitionsDocs.map((doc) => {
   return { ...base, metadata } as ExhibitionEntry;
 });
 
-export const illustrations: IllustrationEntry[] = illustrationsDocs.map((doc) => {
+export const illustrations: IllustrationEntry[] = byRecency(illustrationsDocs, (doc) => doc).map((doc) => {
   const base = buildEntry("illustrations", doc);
   const metadata = [...base.metadata];
   if (doc.client) metadata.push({ label: "Client", value: doc.client });
   return { ...base, metadata } as IllustrationEntry;
 });
 
-/** Display order + titles for the photograph archives — one source for the
- *  index page, the set pages and their prev/next. Unlisted sets go last. */
+/** Titles for the photograph archives, and their order while the sets carry
+ *  no year — dated sets sort most recent first; the rest follow this list,
+ *  unlisted ones last. One source for the index, set pages and prev/next. */
 const PHOTO_SET_ORDER = ["colour", "b-w", "turkey", "india"];
 const PHOTO_SET_TITLES: Record<string, string> = {
   "b-w": "Black & White",
@@ -404,20 +429,26 @@ function photoSetRank(routeSlug: string): number {
   return i === -1 ? PHOTO_SET_ORDER.length : i;
 }
 
-export const photographSets: PhotographSet[] = photographSetsDocs.map((doc) => {
-  const slug = doc.slug;
-  const routeSlug = normalizeSlug(slug);
-  const images = toImageRefArray(doc.images, doc.title);
-  return {
-    section: "photographs",
-    slug,
-    routeSlug,
-    title: PHOTO_SET_TITLES[routeSlug] ?? doc.title,
-    href: `/photographs/${routeSlug}`,
-    hero: images[0],
-    images,
-  } satisfies PhotographSet;
-}).sort((a, b) => photoSetRank(a.routeSlug) - photoSetRank(b.routeSlug));
+export const photographSets: PhotographSet[] = [...photographSetsDocs]
+  .sort(
+    (a, b) =>
+      compareChrono(a, b) ||
+      photoSetRank(normalizeSlug(a.slug)) - photoSetRank(normalizeSlug(b.slug)),
+  )
+  .map((doc) => {
+    const slug = doc.slug;
+    const routeSlug = normalizeSlug(slug);
+    const images = toImageRefArray(doc.images, doc.title);
+    return {
+      section: "photographs",
+      slug,
+      routeSlug,
+      title: PHOTO_SET_TITLES[routeSlug] ?? doc.title,
+      href: `/photographs/${routeSlug}`,
+      hero: images[0],
+      images,
+    } satisfies PhotographSet;
+  });
 
 /* -------------------------------------------------------------------------- */
 /*                              Lookups                                       */
@@ -480,14 +511,19 @@ export function getSectionPage(
 /*                                 About                                      */
 /* -------------------------------------------------------------------------- */
 
+/** CV rows most recent first; rows sharing a date keep their Studio order. */
+function cvRows(rows: CVRow[] | undefined): CVRow[] {
+  return byRecency(rows ?? [], (row) => ({ year: row.year, title: "" }));
+}
+
 export const about: About = {
   intro: artistDoc?.intro ?? "",
   paragraphs: artistDoc?.paragraphs ?? [],
   cv: {
-    education: artistDoc?.education ?? [],
-    publications: artistDoc?.publications ?? [],
-    soloExhibitions: artistDoc?.soloExhibitions ?? [],
-    selectedExhibitions: artistDoc?.selectedExhibitions ?? [],
+    education: cvRows(artistDoc?.education),
+    publications: cvRows(artistDoc?.publications),
+    soloExhibitions: cvRows(artistDoc?.soloExhibitions),
+    selectedExhibitions: cvRows(artistDoc?.selectedExhibitions),
   },
 };
 
@@ -564,7 +600,7 @@ function tidyExcerpt(excerpt: string | undefined, paragraphs: string[]): string 
   return text.length >= 199 && !/[.!?…”"]$/.test(text) ? cutAtWord(text, text.length) : text;
 }
 
-export const writings: WritingEntry[] = writingsDocs.map((doc) => {
+export const writings: WritingEntry[] = byRecency(writingsDocs, (doc) => doc).map((doc) => {
   const paragraphs = bodyToParagraphs(doc.body);
   const slug = doc.slug;
   const routeSlug = normalizeSlug(slug);

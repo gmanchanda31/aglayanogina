@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArtworkImage } from "./artwork-image";
+import { ArtTile } from "./art-tile";
 import { ArtworkCaption } from "./artwork-caption";
 import { SharedArt, artTransitionName } from "@/components/motion/shared-art";
 import type { ImageRef } from "@/lib/types";
@@ -9,7 +9,6 @@ interface ArtworkCardProps {
   href: string;
   image: ImageRef;
   title: string;
-  medium?: string;
   year?: string;
   sizes: string;
   priority?: boolean;
@@ -22,7 +21,6 @@ export function ArtworkCard({
   href,
   image,
   title,
-  medium,
   year,
   sizes,
   priority,
@@ -30,13 +28,12 @@ export function ArtworkCard({
   section,
 }: ArtworkCardProps) {
   const img = (
-    <ArtworkImage
+    <ArtTile
       image={image}
       sizes={sizes}
       priority={priority}
       // Focus ring sits on the artwork itself, not around image + caption
       className="group-focus-visible:outline-2 group-focus-visible:outline-offset-4 group-focus-visible:outline-clay"
-      data-artwork-img
     />
   );
   return (
@@ -51,7 +48,7 @@ export function ArtworkCard({
       ) : (
         img
       )}
-      <ArtworkCaption title={title} medium={medium} year={year} />
+      <ArtworkCaption title={title} year={year} />
     </Link>
   );
 }

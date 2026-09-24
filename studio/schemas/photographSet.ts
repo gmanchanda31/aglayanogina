@@ -24,6 +24,19 @@ export const photographSet = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
+      name: "year",
+      title: "Year / range",
+      type: "string",
+      description: "Optional. When set, archives run newest first; e.g. 2023 or 2019 — 2024",
+    }),
+    defineField({
+      name: "sortDate",
+      title: "Date for ordering",
+      type: "date",
+      description:
+        "Optional. Lists run newest first by Year; set this only when two entries share a year, to say which came later. The day can be 01.",
+    }),
+    defineField({
       name: "blurb",
       title: "Short blurb",
       type: "text",

@@ -17,16 +17,16 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <Container className="py-24 md:py-32">
+    <Container className="py-section">
       <div className="max-w-2xl mx-auto text-center">
         <p className="type-meta text-stone">Something went wrong</p>
-        <h1 className="type-title text-ink mt-4">
+        <h1 className="type-title text-ink mt-tight">
           A page came loose from the binding.
         </h1>
-        <p className="type-body text-stone mt-6">
+        <p className="type-body text-stone mt-tight">
           An unexpected error stopped this page from loading. Try again, or head back to the index.
         </p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+        <div className="mt-block flex flex-wrap items-center justify-center gap-x-block gap-y-tight">
           <button
             type="button"
             onClick={reset}
@@ -42,7 +42,7 @@ export default function GlobalError({
           </Link>
         </div>
         {error.digest ? (
-          <p className="type-meta text-stone/60 mt-12">Reference: {error.digest}</p>
+          <p className="type-meta text-stone/60 mt-block">Reference: {error.digest}</p>
         ) : null}
       </div>
     </Container>

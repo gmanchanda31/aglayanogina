@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 export default function PhotographsPage() {
   return (
     <>
-      <Container className="pt-20 pb-12 md:pt-28 md:pb-16">
+      <Container className="pt-section pb-block">
         <PageHeader
           eyebrow={page.eyebrow}
           title={page.title}
@@ -38,7 +38,7 @@ export default function PhotographsPage() {
 
         <nav
           aria-label="Photograph archives"
-          className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-1 md:gap-y-3"
+          className="mt-block flex flex-wrap items-center gap-x-block"
         >
           {sets.map((s) => (
             <Link
@@ -57,8 +57,8 @@ export default function PhotographsPage() {
         <div className="border-t border-mist" />
       </Container>
 
-      <Container className="pt-12 md:pt-16">
-        <div className="space-y-20 md:space-y-24">
+      <Container className="pt-block">
+        <div className="space-y-section">
           {sets.map((set, idx) => (
             <section
               key={set.slug}
@@ -66,7 +66,7 @@ export default function PhotographsPage() {
               aria-labelledby={`${set.routeSlug}-heading`}
               className="scroll-mt-[calc(var(--header-h)+1.5rem)]"
             >
-              <header className="mb-8 md:mb-10">
+              <header className="mb-tight">
                 <h2 id={`${set.routeSlug}-heading`} className="type-heading text-ink">
                   <Link href={set.href} className="hover:text-stone">
                     {set.title}
@@ -80,10 +80,12 @@ export default function PhotographsPage() {
               <PhotoMasonry
                 images={set.images.slice(0, PREVIEW_COUNT)}
                 eagerFirst={idx === 0}
+                // Nine fills 3 × 3; at 2 columns drop the odd one out
+                className="max-sm:[&>*:nth-child(n+9)]:hidden"
                 label={set.title}
               />
 
-              <div className="mt-6 md:mt-8 flex justify-center">
+              <div className="mt-block flex justify-center">
                 <Link href={set.href} className="link-draw type-ui text-stone hover:text-ink">
                   {set.images.length > PREVIEW_COUNT
                     ? `View all ${set.images.length} photographs`

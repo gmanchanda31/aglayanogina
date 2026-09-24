@@ -53,26 +53,26 @@ export default function AboutPage() {
   return (
     <>
       <JsonLd data={personJsonLd} />
-      <Container className="pt-20 pb-16 md:pt-28 md:pb-20">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
+      <Container className="pt-section">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-block items-start">
           <div className="md:col-span-7">
             <h1 className="type-title">
               About
             </h1>
-            <p className="type-lead text-stone mt-6 max-w-2xl">
+            <p className="type-lead text-stone mt-tight max-w-2xl">
               {about.intro}
             </p>
             {about.paragraphs.map((para, i) => (
               <p
                 key={i}
-                className="type-body text-ink mt-6 max-w-2xl"
+                className="type-body text-ink mt-block max-w-2xl"
               >
                 {para}
               </p>
             ))}
           </div>
 
-          <figure className="md:col-span-5 md:pt-2">
+          <figure className="md:col-span-5">
             <Image
               src={portrait.src}
               alt={portrait.alt}
@@ -82,14 +82,14 @@ export default function AboutPage() {
               className="block w-full h-auto"
             />
             {portrait.caption ? (
-              <figcaption className="type-meta text-stone mt-3">{portrait.caption}</figcaption>
+              <figcaption className="type-meta text-stone mt-tight">{portrait.caption}</figcaption>
             ) : null}
           </figure>
         </div>
       </Container>
 
-      <Container className="pt-8 md:pt-12">
-        <div className="space-y-16 md:space-y-20">
+      <Container className="pt-section">
+        <div className="space-y-section">
           {sections.map((section) =>
             section.rows.length > 0 ? (
               <CVSection
@@ -108,12 +108,12 @@ export default function AboutPage() {
 function CVSection({ heading, rows }: { heading: string; rows: CVRow[] }) {
   return (
     <section>
-      <h2 className="type-heading text-ink mb-8 md:mb-10">{heading}</h2>
+      <h2 className="type-heading text-ink mb-tight">{heading}</h2>
       <ul className="divide-y divide-mist">
         {rows.map((row, i) => (
           <li
             key={i}
-            className="grid grid-cols-1 md:grid-cols-12 md:items-baseline gap-2 md:gap-8 py-4 md:py-5"
+            className="grid grid-cols-1 md:grid-cols-12 md:items-baseline md:gap-x-block py-tight"
           >
             <span
               className="md:col-span-3 type-meta text-stone nums"

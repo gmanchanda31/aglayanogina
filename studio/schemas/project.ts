@@ -34,6 +34,13 @@ export const project = defineType({
       description: "e.g. 2024 or 2023 — 2025",
     }),
     defineField({
+      name: "sortDate",
+      title: "Date for ordering",
+      type: "date",
+      description:
+        "Optional. Lists run newest first by Year; set this only when two entries share a year, to say which came later. The day can be 01.",
+    }),
+    defineField({
       name: "medium",
       title: "Medium",
       type: "string",

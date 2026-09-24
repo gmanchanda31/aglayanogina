@@ -18,6 +18,12 @@ export interface ImageRef {
   height: number;
   /** Optional caption set in the Studio (e.g. what the work in shot is) */
   caption?: string;
+  /**
+   * 4:5 grid-tile URL, cut by Sanity at the tile's exact size so the Studio
+   * crop and hotspot decide the framing. Absent for non-Sanity images —
+   * the tile then centre-crops `src`. Never used by the lightbox or hero.
+   */
+  tile?: string;
 }
 
 export interface BaseEntry {

@@ -427,12 +427,14 @@ export function Lightbox({ images, index, onClose, onIndexChange, label }: Light
             className="relative"
             style={{ aspectRatio: ratio, width: `min(100cqw, ${ratio} * 100cqh)` }}
           >
+            {/* Cached grid tile (possibly a 4:5 crop) until the full image decodes.
+                Cover, so it fills the box like the morph snapshot does. */}
             {/* eslint-disable-next-line @next/next/no-img-element -- cached grid thumbnail, src set imperatively */}
             <img
               ref={underlayRef}
               alt=""
               aria-hidden
-              className="absolute inset-0 size-full object-contain select-none"
+              className="absolute inset-0 size-full object-cover select-none"
             />
             <Image
               src={current.src}

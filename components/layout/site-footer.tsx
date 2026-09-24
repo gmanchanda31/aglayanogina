@@ -10,8 +10,8 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-mist mt-24 md:mt-32">
-      <Container className="py-16 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+    <footer className="border-t border-mist mt-section">
+      <Container className="py-block grid grid-cols-1 md:grid-cols-3 gap-block">
         <div>
           <Link
             href="/"
@@ -20,15 +20,15 @@ export function SiteFooter() {
           >
             {siteName}
           </Link>
-          <p className="mt-4 type-ui text-stone">
+          <p className="mt-tight type-ui text-stone">
             {siteCity}
           </p>
-          <p className="mt-2 type-meta text-stone">© {year} Aglaya Nogina</p>
+          <p className="type-meta text-stone">© {year} Aglaya Nogina</p>
         </div>
 
         <div>
           <p className="type-meta text-ink">Connect</p>
-          <ul className="mt-3 md:mt-4 md:space-y-2">
+          <ul className="mt-tight">
             <li>
               <a href={contact.emailHref} className={footerLink}>
                 {contact.email}
@@ -59,7 +59,7 @@ export function SiteFooter() {
 
         <div>
           <p className="type-meta text-ink">Studio</p>
-          <p className="mt-4 type-ui text-stone">
+          <p className="mt-tight type-ui text-stone">
             Available for commissions, exhibitions, and editorial collaborations.
           </p>
         </div>

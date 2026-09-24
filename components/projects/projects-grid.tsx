@@ -37,7 +37,7 @@ export function ProjectsGrid({ projects }: Props) {
 
   return (
     <>
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
         {availableFilters.map(({ label, kind }) => {
           const isActive = active === kind;
           const count =
@@ -55,27 +55,31 @@ export function ProjectsGrid({ projects }: Props) {
                 })
               }
               aria-pressed={isActive}
-              className={cn(
-                "inline-flex items-center min-h-11 md:min-h-9 type-ui px-4 border transition-colors",
-                isActive
-                  ? "border-clay text-ink"
-                  : "border-mist text-stone hover:border-stone hover:text-ink",
-              )}
+              className="group inline-flex items-baseline min-h-11 md:min-h-9 type-ui focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clay"
             >
-              {label}
-              <span className={cn("ml-2 nums", isActive ? "text-clay" : "text-stone/60")}>
-                {count}
+              {/* Underline drawn like link-draw: full ink line when active */}
+              <span
+                className={cn(
+                  "relative pb-0.5 transition-colors",
+                  "after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-ink after:origin-left after:transition-[scale] after:duration-(--dur-base) after:ease-(--ease-gallery)",
+                  isActive
+                    ? "text-ink after:scale-x-100"
+                    : "text-stone group-hover:text-ink after:scale-x-0 group-hover:after:scale-x-100",
+                )}
+              >
+                {label}
               </span>
+              <span className="ml-1.5 text-stone nums">{count}</span>
             </button>
           );
         })}
       </div>
 
-      <div className="mt-12 md:mt-16" data-filter-state={active}>
+      <div className="mt-block" data-filter-state={active}>
         {filtered.length > 0 ? (
           <WorkGrid entries={filtered} section="projects" />
         ) : (
-          <p className="type-lead text-stone py-16">
+          <p className="type-lead text-stone py-section">
             No projects under {active}. Try another filter.
           </p>
         )}

@@ -9,8 +9,8 @@
   --color-mist: #e8e2d8;
   --color-stone: #6b655e;
 
-  /* Typography — one family (Inter, via next/font). No serif, no caps. */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Typography — one font (Arimo ≈ Arial, via next/font). No serif, no caps. */
+  --font-sans: var(--font-arimo), Arial, Helvetica, sans-serif;
 
   /* Base radii — Stitch HTML uses 2px default */
   --radius: 0.125rem;
@@ -19,6 +19,14 @@
 
   /* Container */
   --spacing-container: 1200px;
+
+  /* Vertical rhythm — the only three steps. With one type size, spacing is
+     the hierarchy: `tight` joins a label to its content, `block` separates
+     blocks inside a section, `section` separates sections (2rem on mobile,
+     see :root below). Use as mt-tight, gap-block, pt-section, … */
+  --spacing-tight: 0.5rem;
+  --spacing-block: 1.5rem;
+  --spacing-section: 2rem;
 
   /* shadcn-style mappings */
   --color-background: var(--color-paper);
@@ -53,6 +61,7 @@ html {
 @media (width >= 48rem) {
   :root {
     --header-h: 5rem;
+    --spacing-section: 3rem;
   }
 }
 
@@ -60,8 +69,9 @@ body {
   background-color: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  font-size: 1.0625rem;
-  line-height: 1.65;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -76,69 +86,59 @@ body {
 }
 
 /* ── Type system ───────────────────────────────────────────────────────
-   One family (Inter), regular case only, two weights (400, 500).
-   Every piece of text on the site uses exactly one of these six roles;
-   colour (ink / stone) is the only other variable. Never set font-size,
-   font-family, weight, tracking, line-height or text-transform directly —
+   ONE font, ONE size, ONE style (Aglaya's rule): Arimo 400, 1rem / 1.5,
+   regular case, upright, no bold, no italic, no letter-spacing.
+   Hierarchy comes only from colour (ink / stone), spacing and position.
+
+   The six role names stay so markup keeps its meaning (a title is still
+   marked as a title), but every role renders identically. Never set
+   size, weight, style, tracking, leading or case directly —
    `node scripts/check-type.mjs` (run by `pnpm lint`) enforces it. */
 
-/* Page title — one per page (listing, detail, essay, about, 404) */
 @utility type-title {
-  font-size: 1.625rem;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.015em;
-  text-wrap: balance;
-  @media (width >= 48rem) {
-    font-size: 1.75rem;
-  }
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
 }
-
-/* Heading — section titles, work titles in lists, essay titles in lists */
 @utility type-heading {
-  font-size: 1.1875rem;
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-  text-wrap: balance;
-  @media (width >= 48rem) {
-    font-size: 1.25rem;
-  }
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
 }
-
-/* Lead — intros, stand-firsts, statements, pull quotes (add `italic`) */
 @utility type-lead {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 1.55;
-  text-wrap: pretty;
-  @media (width >= 48rem) {
-    font-size: 1.25rem;
-  }
+  font-style: normal;
+  line-height: 1.5;
 }
-
-/* Body — reading text: essays, descriptions, bio */
 @utility type-body {
-  font-size: 1.0625rem;
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 1.65;
-  text-wrap: pretty;
+  font-style: normal;
+  line-height: 1.5;
 }
-
-/* UI — navigation, links, buttons, filters */
 @utility type-ui {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 1.4;
+  font-style: normal;
+  line-height: 1.5;
 }
-
-/* Meta — captions, dates, labels, breadcrumbs, counters */
 @utility type-meta {
-  font-size: 0.8125rem;
+  font-size: 1rem;
   font-weight: 400;
+  font-style: normal;
   line-height: 1.5;
   /* Long unbroken metadata strings must not push horizontal scroll */
   overflow-wrap: anywhere;
+}
+
+/* Headings and emphasis inherit the one style (no browser bold/italic) */
+:where(h1, h2, h3, h4, h5, h6, strong, b, em, i, cite, blockquote, th, dt) {
+  font-size: inherit;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* Tabular figures for years, counts and ranges */
@@ -217,18 +217,14 @@ html[data-motion="on"] [data-reveal-state="pending"][data-reveal="line"] {
   transition-delay: calc(var(--reveal-i, 0) * var(--stagger));
 }
 
-/* Home hero first-load entrance. Armed by the inline head script in
-   app/layout.tsx (html[data-entrance]); text only — the portrait is the LCP
-   element and never animates. Desktop: 4 steps, 40 + 3 × 70 + 440 ≈ 690ms.
-   Below lg step 3 (bio, places) is display:none, so step 4 closes the gap. */
+/* Home first-load entrance for the opening work's label. Armed by the inline
+   head script in app/layout.tsx (html[data-entrance]); text only — the
+   opening image is the LCP element and never animates. 3 steps ≈ 620ms. */
 @keyframes motion-hero-rise {
   from {
     opacity: 0;
     translate: 0 var(--reveal-rise-text);
   }
-}
-@keyframes motion-line-draw {
-  from { scale: 0 1; }
 }
 html[data-entrance="on"] [data-hero-step] {
   animation: motion-hero-rise var(--dur-entrance) var(--ease-gallery) both;
@@ -236,14 +232,6 @@ html[data-entrance="on"] [data-hero-step] {
 }
 [data-hero-step="2"] { --hero-i: 1; }
 [data-hero-step="3"] { --hero-i: 2; }
-[data-hero-step="4"] { --hero-i: 3; }
-@media (width < 64rem) {
-  [data-hero-step="4"] { --hero-i: 2; }
-}
-html[data-entrance="on"] [data-hero-line] {
-  transform-origin: left center;
-  animation: motion-line-draw var(--dur-settle) var(--ease-gallery) 40ms both;
-}
 
 /* Artwork hover — opacity only */
 [data-artwork-img] {
@@ -408,6 +396,15 @@ body > header {
 ::view-transition-new(.art-morph) {
   animation: motion-fade-in var(--dur-morph) var(--ease-gallery) both;
   mix-blend-mode: normal;
+}
+/* Grid tiles are 4:5 crops, heroes and the viewer are not: fill the moving
+   box instead of stretching, so neither snapshot distorts mid-morph. */
+::view-transition-old(.art-morph),
+::view-transition-new(.art-morph),
+::view-transition-old(lb-photo),
+::view-transition-new(lb-photo) {
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Lightbox (components/artwork/lightbox.tsx), scoped by html[data-lb-vt].

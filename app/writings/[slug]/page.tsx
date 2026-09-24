@@ -59,7 +59,7 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
     <>
       <JsonLd data={articleJsonLd} />
       <ReadingProgress />
-      <Container className="pt-10 md:pt-12 pb-3">
+      <Container className="pt-block">
         <Breadcrumbs
           items={[
             { label: "Writings", href: "/writings" },
@@ -69,17 +69,17 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
       </Container>
 
       {/* Article header */}
-      <Container className="pt-12 md:pt-16">
+      <Container className="pt-section">
         <header className="max-w-[760px] mx-auto text-center">
           <p className="type-meta text-stone">Essay</p>
-          <h1 className="type-title mt-2">
+          <h1 className="type-title">
             {writing.title}
           </h1>
-          <p className="type-meta text-stone mt-6">Aglaya Nogina</p>
+          <p className="type-meta text-stone mt-tight">Aglaya Nogina</p>
         </header>
       </Container>
 
-      <Container className="my-12 md:my-16">
+      <Container className="my-block">
         <div className="mx-auto h-px w-16 bg-mist" />
       </Container>
 
@@ -102,16 +102,16 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
 
       {/* More writings */}
       {more.length > 0 && (
-        <Container className="border-t border-mist pt-16 md:pt-20">
-          <p className="type-meta text-stone mb-10">More writings</p>
-          <ul data-work-grid className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
+        <Container className="border-t border-mist pt-section">
+          <p className="type-meta text-stone mb-tight">More writings</p>
+          <ul data-work-grid className="grid grid-cols-1 md:grid-cols-3 gap-block">
             {more.map((w) => (
               <li key={w.slug} data-grid-item>
                 <Link href={w.href} className="group block">
                   <h3 className="type-heading text-ink underline decoration-transparent decoration-1 underline-offset-4 group-hover:decoration-ink/40">
                     {w.title}
                   </h3>
-                  <p className="type-body text-stone mt-3 line-clamp-3">
+                  <p className="type-body text-stone mt-tight line-clamp-3">
                     {w.excerpt}
                   </p>
                 </Link>

@@ -20,6 +20,13 @@ export const illustration = defineType({
     }),
     defineField({ name: "year", title: "Year / range", type: "string" }),
     defineField({
+      name: "sortDate",
+      title: "Date for ordering",
+      type: "date",
+      description:
+        "Optional. Lists run newest first by Year; set this only when two entries share a year, to say which came later. The day can be 01.",
+    }),
+    defineField({
       name: "medium",
       type: "string",
       description: "e.g. 'Pen and ink on paper'",

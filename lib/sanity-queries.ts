@@ -9,6 +9,9 @@
  * Aglaya sets in the Studio. `src` is the uncropped original, kept as a
  * fallback for the rare image with no asset reference. Intrinsic dimensions
  * come from Sanity's metadata sidecar and are adjusted for the crop.
+ *
+ * No list query sorts: `year` is free text, so order(year desc) sorts it as
+ * a string. lib/content.ts orders every list with byRecency (lib/chrono.ts).
  */
 
 /**
@@ -46,11 +49,12 @@ export const ARTIST_QUERY = /* groq */ `*[_type == "artist" && _id == "artist"][
   selectedExhibitions[]{ year, detail }
 }`;
 
-export const PROJECTS_QUERY = /* groq */ `*[_type == "project"] | order(year desc) {
+export const PROJECTS_QUERY = /* groq */ `*[_type == "project"] {
   _id,
   title,
   "slug": slug.current,
   year,
+  sortDate,
   medium,
   location,
   dimensions,
@@ -60,12 +64,13 @@ export const PROJECTS_QUERY = /* groq */ `*[_type == "project"] | order(year des
   gallery[] ${IMAGE_WITH_ALT}
 }`;
 
-export const EXHIBITIONS_QUERY = /* groq */ `*[_type == "exhibition"] | order(year desc) {
+export const EXHIBITIONS_QUERY = /* groq */ `*[_type == "exhibition"] {
   _id,
   title,
   "slug": slug.current,
   kind,
   year,
+  sortDate,
   venue,
   city,
   curator,
@@ -74,11 +79,12 @@ export const EXHIBITIONS_QUERY = /* groq */ `*[_type == "exhibition"] | order(ye
   gallery[] ${IMAGE_WITH_ALT}
 }`;
 
-export const ILLUSTRATIONS_QUERY = /* groq */ `*[_type == "illustration"] | order(year desc) {
+export const ILLUSTRATIONS_QUERY = /* groq */ `*[_type == "illustration"] {
   _id,
   title,
   "slug": slug.current,
   year,
+  sortDate,
   medium,
   client,
   description,
@@ -90,15 +96,18 @@ export const PHOTOGRAPH_SETS_QUERY = /* groq */ `*[_type == "photographSet"] {
   _id,
   title,
   "slug": slug.current,
+  year,
+  sortDate,
   blurb,
   images[] ${IMAGE_WITH_ALT}
 }`;
 
-export const WRITINGS_QUERY = /* groq */ `*[_type == "writing"] | order(year desc) {
+export const WRITINGS_QUERY = /* groq */ `*[_type == "writing"] {
   _id,
   title,
   "slug": slug.current,
   year,
+  sortDate,
   excerpt,
   body
 }`;

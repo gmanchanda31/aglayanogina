@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function WritingsPage() {
   return (
     <>
-      <Container className="pt-20 pb-12 md:pt-28 md:pb-16">
+      <Container className="pt-section pb-block">
         <PageHeader
           eyebrow={page.eyebrow}
           title={page.title}
@@ -34,20 +34,20 @@ export default function WritingsPage() {
         <div className="border-t border-mist" />
       </Container>
 
-      <Container className="pt-4 md:pt-6">
+      <Container>
         <ul className="divide-y divide-mist">
           {writings.map((w) => (
             <li key={w.slug}>
               <Link
                 href={w.href}
                 data-dir="next"
-                className="group py-8 md:py-10 grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-10 items-baseline"
+                className="group py-block grid grid-cols-1 md:grid-cols-12 gap-tight md:gap-x-block items-baseline"
               >
                 <div className="md:col-span-10">
                   <h2 className="type-heading text-ink underline decoration-transparent decoration-1 underline-offset-4 group-hover:decoration-ink/40">
                     {w.title}
                   </h2>
-                  <p className="type-body text-stone mt-2 max-w-2xl">
+                  <p className="type-body text-stone mt-tight max-w-2xl">
                     {w.excerpt}
                   </p>
                 </div>

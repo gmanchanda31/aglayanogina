@@ -27,6 +27,13 @@ export const exhibition = defineType({
     }),
     defineField({ name: "year", title: "Year / range", type: "string" }),
     defineField({
+      name: "sortDate",
+      title: "Date for ordering",
+      type: "date",
+      description:
+        "Optional. Lists run newest first by Year; set this only when two entries share a year, to say which came later. The day can be 01.",
+    }),
+    defineField({
       name: "venue",
       title: "Venue",
       type: "string",

@@ -7,7 +7,7 @@ export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
 
 export default async function Icon() {
-  const fontPath = path.join(process.cwd(), "public", "fonts", "Inter-Medium.ttf");
+  const fontPath = path.join(process.cwd(), "public", "fonts", "arimo-latin-400.woff");
   const buf = await fs.readFile(fontPath);
   const fontData = buf.buffer.slice(
     buf.byteOffset,
@@ -25,10 +25,9 @@ export default async function Icon() {
           justifyContent: "center",
           backgroundColor: "#0F0E0D",
           color: "#FAF7F2",
-          fontFamily: "Inter",
-          fontWeight: 500,
+          fontFamily: "Arimo",
+          fontWeight: 400,
           fontSize: 36,
-          letterSpacing: "-0.04em",
           lineHeight: 1,
         }}
       >
@@ -37,7 +36,7 @@ export default async function Icon() {
     ),
     {
       ...size,
-      fonts: [{ name: "Inter", data: fontData, weight: 500, style: "normal" }],
+      fonts: [{ name: "Arimo", data: fontData, weight: 400, style: "normal" }],
     },
   );
 }

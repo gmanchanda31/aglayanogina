@@ -36,7 +36,7 @@ export default async function PhotographSetPage({ params }: { params: Params }) 
 
   return (
     <>
-      <Container className="pt-10 md:pt-12 pb-3">
+      <Container className="pt-block">
         <Breadcrumbs
           items={[
             { label: "Photographs", href: "/photographs" },
@@ -45,16 +45,16 @@ export default async function PhotographSetPage({ params }: { params: Params }) 
         />
       </Container>
 
-      <Container className="pt-10 md:pt-14 pb-10 md:pb-12">
+      <Container className="pt-block pb-block">
         <p className="type-meta text-stone nums">{set.images.length} photographs</p>
-        <h1 className="type-title mt-2">{title}</h1>
+        <h1 className="type-title">{title}</h1>
       </Container>
 
       <Container>
         <div className="border-t border-mist" />
       </Container>
 
-      <Container className="pt-12 md:pt-16">
+      <Container className="pt-block">
         <PhotoMasonry images={set.images} eagerFirst label={title} />
       </Container>
 

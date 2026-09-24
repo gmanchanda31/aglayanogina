@@ -1,7 +1,7 @@
 /**
  * Type-system guard. Every piece of text uses one of the six roles in
  * app/globals.css (type-title, type-heading, type-lead, type-body, type-ui,
- * type-meta) — one family, regular case, weights 400/500 only.
+ * type-meta) — one font, one size, one style: Inter 400, regular case.
  *
  * Fails if a component sets size, family, weight, tracking, line-height or
  * case directly, or reintroduces caps / a serif.
@@ -20,7 +20,8 @@ const RULES = [
   [/label-caps|title-page|title-section|serif-italic|\bserif\b|font-serif|font-\[family|vollkorn|georgia/i, "one family (Inter) — use a type-* role"],
   [/\btracking-/, "no letter-spacing utilities — the roles own tracking"],
   [/\btext-(xs|sm|base|lg|xl|[2-9]xl)\b|\btext-\[\d/, "no raw font sizes — use a type-* role"],
-  [/\bfont-(thin|extralight|light|semibold|bold|extrabold|black)\b|fontWeight:\s*[6-9]00/, "weights are 400 and 500 only"],
+  [/\bfont-(thin|extralight|light|medium|semibold|bold|extrabold|black)\b|fontWeight:\s*[5-9]00/, "one weight (400) only"],
+  [/\bitalic\b|fontStyle:\s*["']italic/, "one style — no italic"],
   [/\bleading-(?!none\b)/, "no raw line-heights — the roles own leading"],
 ];
 

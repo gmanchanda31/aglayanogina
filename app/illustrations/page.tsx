@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default function IllustrationsPage() {
   return (
     <>
-      <Container className="pt-20 pb-12 md:pt-28 md:pb-16">
+      <Container className="pt-section pb-block">
         <PageHeader
           eyebrow={page.eyebrow}
           title={page.title}
@@ -33,7 +33,7 @@ export default function IllustrationsPage() {
         <div className="border-t border-mist" />
       </Container>
 
-      <Container className="pt-12 md:pt-16">
+      <Container className="pt-block">
         <WorkGrid entries={illustrations} section="illustrations" />
       </Container>
     </>

@@ -63,7 +63,7 @@ export function EntryDetail({
 
   return (
     <LightboxGroup images={viewerImages} label={entry.title}>
-      <Container className="pt-10 md:pt-12 pb-3">
+      <Container className="pt-block">
         <Breadcrumbs
           items={[
             { label: sectionLabel, href: sectionHref },
@@ -74,7 +74,7 @@ export function EntryDetail({
 
       {/* HERO — natural-aspect rendering so vertical artworks aren't cropped */}
       {hero && heroProps ? (
-        <Container className="pt-6 md:pt-10">
+        <Container className="pt-block">
           <figure className="mx-auto w-full max-w-[1000px] flex justify-center">
             <LightboxTrigger
               index={0}
@@ -91,14 +91,14 @@ export function EntryDetail({
       ) : null}
 
       {/* TITLE + METADATA — small, centred, metadata stacked directly below */}
-      <Container className="pt-10 md:pt-14">
+      <Container className="pt-block">
         <div className="max-w-[640px] mx-auto text-center">
           <h1 className="type-title">
             {entry.title}
           </h1>
 
           {entry.metadata.length > 0 ? (
-            <dl className="mt-4 space-y-1" aria-label={metaLabel}>
+            <dl className="mt-tight" aria-label={metaLabel}>
               {entry.metadata.map((m, i) => (
                 <div
                   key={i}
@@ -117,7 +117,7 @@ export function EntryDetail({
 
       {/* DESCRIPTION */}
       {(standFirst || restDescription.length > 0) ? (
-        <Container className="pt-14 md:pt-20 pb-4">
+        <Container className="pt-section">
           <div className="max-w-[640px] mx-auto">
             {standFirst ? (
               <p className="type-lead text-ink">
@@ -127,7 +127,7 @@ export function EntryDetail({
             {restDescription.map((para, i) => (
               <p
                 key={i}
-                className="type-body text-ink mt-6"
+                className="type-body text-ink mt-block"
               >
                 {para}
               </p>
@@ -138,25 +138,25 @@ export function EntryDetail({
 
       {/* PULL QUOTE */}
       {entry.pullQuote ? (
-        <Container className="border-t border-mist mt-14 md:mt-20">
-          <div className="py-16 md:py-20 max-w-[700px] mx-auto text-center">
+        <Container className="border-t border-mist mt-section">
+          <div className="py-section max-w-[700px] mx-auto text-center">
             <blockquote
               data-reveal="fade"
-              className="type-lead italic text-ink"
+              className="type-lead text-ink"
             >
               “{entry.pullQuote}”
             </blockquote>
             {entry.quoteAttribution ? (
-              <p className="type-meta text-stone mt-8">— {entry.quoteAttribution}</p>
+              <p className="type-meta text-stone mt-tight">— {entry.quoteAttribution}</p>
             ) : null}
           </div>
         </Container>
       ) : null}
 
-      {/* GALLERY — natural-aspect images, no cropping; each opens the viewer */}
+      {/* GALLERY — uniform 4:5 tiles; each opens the viewer uncropped */}
       {galleryImages.length > 0 ? (
-        <Container className={cn(entry.pullQuote ? "border-t border-mist" : "", "pt-16 md:pt-20")}>
-          <p className="type-meta text-stone mb-10 md:mb-12">Gallery</p>
+        <Container className={cn(entry.pullQuote ? "border-t border-mist" : "", "pt-section")}>
+          <p className="type-meta text-stone mb-tight">Gallery</p>
           <GalleryGrid
             images={galleryImages}
             startIndex={hero ? 1 : 0}

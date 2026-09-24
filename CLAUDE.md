@@ -25,7 +25,7 @@ before making changes, and update it when conventions change.
 | Framework | Next.js 16 (App Router, Turbopack) | `next dev` / `next build` |
 | Language | TypeScript strict (`tsconfig.json`) | No `any`, no implicit `any` |
 | Styling | Tailwind CSS v4 | Tokens declared in `app/globals.css` via `@theme` |
-| Fonts | `next/font/google` — Inter only | Latin + Cyrillic, weights 400/500, italic for quotations only |
+| Fonts | `next/font/google` — Arimo only (Arial-metric) | Latin + Cyrillic, weight 400, one size |
 | Long-form | MDX (`@next/mdx`) | Writings live in `content/writings/*.mdx` |
 | Images | `next/image` | AVIF/WebP, capped at 1920w device size |
 | Icons | `lucide-react` | No Material Symbols, no FontAwesome |
@@ -43,12 +43,26 @@ before making changes, and update it when conventions change.
 | `mist` | `#E8E2D8` | Hairlines, image borders, dividers |
 | `stone` | `#6B655E` | Secondary text — captions, dates, metadata |
 
-**One typeface (Inter), regular case only — no caps, no letter-spaced labels,
-weights 400/500.** Every text element uses one of six roles in
-`app/globals.css`: `type-title`, `type-heading`, `type-lead`, `type-body`,
-`type-ui`, `type-meta`. Colour (ink/stone) is the only other variable.
-`pnpm lint` runs `scripts/check-type.mjs`, which fails on raw sizes, caps,
-tracking, leading, other weights or a serif.
+**One font, one size, one style (Aglaya's rule).** Arimo 400, 16px/1.5,
+regular case, upright — no bold, no italic, no caps, no size contrast.
+Hierarchy comes only from colour (ink/stone), spacing and position.
+Every text element still uses one of six semantic roles in
+`app/globals.css` (`type-title`, `type-heading`, `type-lead`, `type-body`,
+`type-ui`, `type-meta`) — they render identically today, so markup keeps its
+meaning. `pnpm lint` runs `scripts/check-type.mjs`, which fails on raw
+sizes, caps, tracking, leading, any non-400 weight, italic or a serif.
+
+**Spacing:** three steps only — `tight` (0.5rem, label → content), `block`
+(1.5rem, between blocks), `section` (2rem / 3rem md+, between sections), as
+Tailwind utilities (`mt-tight`, `gap-block`, `pt-section`…).
+
+**Images in grids:** every grid/list tile is the same 4:5 box, `object-cover`,
+4px gap (`ArtTile`, `components/artwork/art-tile.tsx`). Sanity tiles are cut
+server-side around Aglaya's hotspot (`image.tile`). The uncropped `src` is
+used only for the detail hero, the home opening work and the lightbox.
+
+**Order:** every list is newest first via `byRecency` (`lib/chrono.ts`):
+optional `sortDate` → end year → month → start year → title.
 
 **No drop shadows. No gradients. No saturated colors. No round-full pills.**
 
@@ -364,9 +378,13 @@ To add a new exhibition row:
 
 ### Update the home page
 
-The home page is content-driven, but the **hero quote and "Currently /
-Recent" works are hand-picked** in `app/page.tsx`. To swap which projects
-get featured, edit the `getProject(...)` calls there.
+The home page is one work on the wall plus a text index of every project
+(recent → past) and a closing line. The opening work, its exhibition line and
+the closing line are set in Sanity Studio → **Homepage**; with no work picked
+it falls back to the most recent project. The index is derived from
+`projects` (already sorted) — there is nothing to hand-pick. Components:
+`components/home/home-work.tsx`, `components/home/home-index.tsx`; data:
+`lib/home.ts`.
 
 ### Update site-wide details (contact, social, navigation)
 
@@ -393,7 +411,7 @@ These flow into the footer and the Patreon CTAs.
 - **Don't read JSON directly inside a page.** Always go through `lib/content.ts`.
 - **Don't add `dark:` classes.** The site is light-only by design.
 - **Don't add drop shadows or gradients.** They break the editorial aesthetic.
-- **Don't introduce new fonts.** Inter only.
+- **Don't introduce new fonts.** Arimo only.
 - **Don't add icons from outside `lucide-react`.**
 - **Use `next/image` for every artwork.** Always pass an explicit `sizes` prop.
 - **Keep `data/parsed.json` valid JSON.** A single trailing comma will
@@ -404,9 +422,7 @@ These flow into the footer and the Patreon CTAs.
   `/projects/ceramic` (URL) — fine to leave both untouched.
 - **Long unbroken metadata strings get split automatically** by
   `splitCamelRuns()`. Don't rely on that for normal text — write spaces.
-- **Text uses a `type-*` role, never raw sizes/weights/caps.** `font-medium`
-  only on the header wordmark, the current nav item and inline emphasis;
-  `italic` only on quotations.
+- **Text uses a `type-*` role, never raw sizes/weights/styles/caps.**
 
 ---
 

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Arimo } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -9,11 +9,12 @@ import { PageTransition } from "@/components/motion/page-transition";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+// Arimo: metric-compatible with Arial (Aglaya's old site), open licence,
+// renders the same on every platform. The site's one and only font.
+const arimo = Arimo({
+  variable: "--font-arimo",
   subsets: ["latin", "latin-ext", "cyrillic"],
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
+  weight: ["400"],
   display: "swap",
 });
 
@@ -66,7 +67,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={inter.variable}
+      className={arimo.variable}
       // Next turns off smooth scrolling during route changes when this is set,
       // so navigation lands at the top instead of gliding there
       data-scroll-behavior="smooth"

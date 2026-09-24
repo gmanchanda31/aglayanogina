@@ -6,8 +6,7 @@ import { cn } from "@/lib/utils";
 
 interface WorkGridProps<T extends BaseEntry> {
   entries: T[];
-  /** Optional metadata extractor; default = first non-year metadata line */
-  getMedium?: (entry: T) => string | undefined;
+  /** Optional metadata extractor; default = the "Year" metadata line */
   getYear?: (entry: T) => string | undefined;
   /** Passed to each card for the card→detail morph */
   section?: "projects" | "exhibitions" | "illustrations";
@@ -15,10 +14,12 @@ interface WorkGridProps<T extends BaseEntry> {
 }
 
 /**
- * Every card is one column wide at every breakpoint. Height follows each
- * artwork's own proportions — nothing is forced, nothing is cropped.
+ * Listings: 2 columns, 3 from lg. Every card is the same 4:5 tile plus a
+ * two-line caption, so every row is the same height.
  */
-const GRID_SIZES = "(min-width: 1200px) 360px, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 100vw";
+const GRID_SIZES = "(min-width: 1200px) 376px, (min-width: 1024px) 32vw, 50vw";
+/** Cards in the first row at lg load eagerly (the LCP candidates). */
+const PRIORITY_COUNT = 3;
 
 /**
  * Metadata lines are labelled at the source (`buildMetadata` in lib/content.ts),
@@ -30,17 +31,12 @@ function lineFor(entry: BaseEntry, label: string): string | undefined {
   return e.metadata?.find((m) => m.label === label)?.value;
 }
 
-function defaultGetMedium(entry: BaseEntry): string | undefined {
-  return lineFor(entry, "Medium");
-}
-
 function defaultGetYear(entry: BaseEntry): string | undefined {
   return lineFor(entry, "Year");
 }
 
 export function WorkGrid<T extends BaseEntry>({
   entries,
-  getMedium = defaultGetMedium,
   getYear = defaultGetYear,
   section,
   className,
@@ -49,11 +45,11 @@ export function WorkGrid<T extends BaseEntry>({
     <div
       data-work-grid
       className={cn(
-        "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 md:gap-x-10 gap-y-14 md:gap-y-16 items-start",
+        "grid grid-cols-2 lg:grid-cols-3 gap-1",
         className,
       )}
     >
-      {entries.map((entry) => {
+      {entries.map((entry, i) => {
         if (!entry.hero) return null;
         const card = (
           <div data-grid-item>
@@ -61,9 +57,9 @@ export function WorkGrid<T extends BaseEntry>({
               href={entry.href}
               image={entry.hero}
               title={entry.title}
-              medium={getMedium(entry)}
               year={getYear(entry)}
               sizes={GRID_SIZES}
+              priority={i < PRIORITY_COUNT}
               section={section}
             />
           </div>

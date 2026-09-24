@@ -17,32 +17,32 @@ const components: PortableTextComponents = {
   },
   block: {
     normal: ({ children }) => (
-      <p className="type-body text-ink max-w-[65ch] mb-7">
+      <p className="type-body text-ink max-w-[65ch] mb-block">
         {children}
       </p>
     ),
     marker: ({ children }) => (
-      <p className="type-meta text-stone nums mt-14 mb-6 first:mt-0">{children}</p>
+      <p className="type-meta text-stone nums mt-section mb-tight first:mt-0">{children}</p>
     ),
     h2: ({ children }) => (
-      <h2 className="type-heading text-ink mt-14 mb-5">
+      <h2 className="type-heading text-ink mt-section mb-tight">
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="type-body font-medium text-ink mt-10 mb-4">
+      <h3 className="type-body text-ink mt-block mb-tight">
         {children}
       </h3>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="type-body italic text-stone border-l-2 border-mist pl-6 my-8">
+      <blockquote className="type-body text-stone border-l-2 border-mist pl-6 my-block">
         {children}
       </blockquote>
     ),
   },
   marks: {
-    em: ({ children }) => <em className="italic">{children}</em>,
-    strong: ({ children }) => <strong className="font-medium">{children}</strong>,
+    em: ({ children }) => <em>{children}</em>,
+    strong: ({ children }) => <strong>{children}</strong>,
     dropCap: ({ children }) => <DropCap>{children}</DropCap>,
     link: ({ value, children }) => {
       const href = (value as { href?: string })?.href ?? "#";
@@ -62,12 +62,12 @@ const components: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="type-body text-ink max-w-[65ch] my-6 ml-6 list-disc">
+      <ul className="type-body text-ink max-w-[65ch] my-block ml-6 list-disc">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="type-body text-ink max-w-[65ch] my-6 ml-6 list-decimal">
+      <ol className="type-body text-ink max-w-[65ch] my-block ml-6 list-decimal">
         {children}
       </ol>
     ),

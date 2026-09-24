@@ -13,49 +13,49 @@ export const homePicks = defineType({
   fields: [
     defineField({
       name: "heroItalic",
-      title: "Hero italic line",
+      title: "Closing line",
       type: "text",
       rows: 2,
       description:
-        "Single italic line under AGLAYA NOGINA. Lifted from her own words. Keep ≤ 18 words.",
+        "First line under the list of works at the foot of the homepage, e.g. 'Interdisciplinary artist'. Keep it short.",
     }),
     defineField({
       name: "heroTagline",
-      title: "Hero tagline",
+      title: "Closing line — second line",
       type: "text",
       rows: 2,
-      description: "Small label-caps tagline beneath the italic line.",
+      description: "Quieter line beneath the closing line, e.g. 'Working across images, objects, text and space'.",
     }),
     defineField({
       name: "featuredProject",
-      title: "Featured project (Currently on view)",
+      title: "Work on the homepage",
       type: "reference",
       to: [{ type: "project" }],
       description:
-        "The project shown in the cinematic 21:9 banner. Pick the most current.",
+        "The one work the homepage opens on, shown large at its own proportions. Leave empty to show the most recent project.",
     }),
     defineField({
       name: "featuredTeaser",
       title: "Featured project teaser",
       type: "string",
-      description:
-        "One italic line beneath the title in the featured section. Keep ≤ 80 chars.",
+      hidden: true,
+      description: "No longer shown on the homepage. Kept so nothing is lost.",
       validation: (r) => r.max(100),
     }),
     defineField({
       name: "featuredExhibitionLine",
-      title: "Featured project — exhibition line",
+      title: "Exhibition line (under the work)",
       type: "string",
       description:
-        "Optional, e.g. 'KUT Gallery, Kyiv · October 2025'. Shown in the metadata stack.",
+        "Optional, e.g. 'KUT Gallery, Kyiv · October 2025'. Third line of the label under the homepage work.",
     }),
     defineField({
       name: "selectedWorks",
-      title: "Selected works (the asymmetric grid)",
+      title: "Selected works",
       type: "array",
       of: [{ type: "reference", to: [{ type: "project" }] }],
-      validation: (r) => r.min(2).max(8),
-      description: "4 projects render at the canonical layout. 2 or 6 also work.",
+      hidden: true,
+      description: "No longer shown — the homepage lists every project, newest first. Kept so nothing is lost.",
     }),
     defineField({
       name: "journalPicks",
@@ -87,8 +87,8 @@ export const homePicks = defineType({
           },
         },
       ],
-      validation: (r) => r.length(2),
-      description: "Pick exactly two essays.",
+      hidden: true,
+      description: "No longer shown on the homepage. Kept so nothing is lost.",
     }),
   ],
   preview: {

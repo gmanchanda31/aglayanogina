@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <>
-      <Container className="pt-20 pb-12 md:pt-28 md:pb-16">
+      <Container className="pt-section pb-block">
         <PageHeader
           eyebrow={page.eyebrow}
           title={page.title}
@@ -36,7 +36,7 @@ export default function ProjectsPage() {
         <div className="border-t border-mist" />
       </Container>
 
-      <Container className="pt-12 md:pt-16">
+      <Container className="pt-block">
         <ProjectsGrid projects={projects} />
       </Container>
     </>
