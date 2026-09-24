@@ -56,7 +56,7 @@ export function ProjectsGrid({ projects }: Props) {
               }
               aria-pressed={isActive}
               className={cn(
-                "inline-flex items-center min-h-11 md:min-h-9 label-caps px-4 border transition-colors",
+                "inline-flex items-center min-h-11 md:min-h-9 type-ui px-4 border transition-colors",
                 isActive
                   ? "border-clay text-ink"
                   : "border-mist text-stone hover:border-stone hover:text-ink",
@@ -75,7 +75,7 @@ export function ProjectsGrid({ projects }: Props) {
         {filtered.length > 0 ? (
           <WorkGrid entries={filtered} section="projects" />
         ) : (
-          <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-lg py-16">
+          <p className="type-lead text-stone py-16">
             No projects under {active}. Try another filter.
           </p>
         )}

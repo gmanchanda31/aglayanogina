@@ -17,8 +17,8 @@ export const metadata: Metadata = {
 const sections: Array<{ heading: string; rows: CVRow[] }> = [
   { heading: "Education", rows: about.cv.education },
   { heading: "Publications", rows: about.cv.publications },
-  { heading: "Solo Exhibitions", rows: about.cv.soloExhibitions },
-  { heading: "Selected Exhibitions", rows: about.cv.selectedExhibitions },
+  { heading: "Solo exhibitions", rows: about.cv.soloExhibitions },
+  { heading: "Selected exhibitions", rows: about.cv.selectedExhibitions },
 ];
 
 export default function AboutPage() {
@@ -56,16 +56,16 @@ export default function AboutPage() {
       <Container className="pt-20 pb-16 md:pt-28 md:pb-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
           <div className="md:col-span-7">
-            <h1 className="title-page">
+            <h1 className="type-title">
               About
             </h1>
-            <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-lg md:text-xl leading-[1.5] mt-6 max-w-2xl">
+            <p className="type-lead text-stone mt-6 max-w-2xl">
               {about.intro}
             </p>
             {about.paragraphs.map((para, i) => (
               <p
                 key={i}
-                className="text-ink text-base md:text-[1.0625rem] leading-[1.65] mt-6 max-w-2xl"
+                className="type-body text-ink mt-6 max-w-2xl"
               >
                 {para}
               </p>
@@ -82,7 +82,7 @@ export default function AboutPage() {
               className="block w-full h-auto"
             />
             {portrait.caption ? (
-              <figcaption className="label-caps text-stone mt-3">{portrait.caption}</figcaption>
+              <figcaption className="type-meta text-stone mt-3">{portrait.caption}</figcaption>
             ) : null}
           </figure>
         </div>
@@ -108,20 +108,20 @@ export default function AboutPage() {
 function CVSection({ heading, rows }: { heading: string; rows: CVRow[] }) {
   return (
     <section>
-      <h2 className="label-caps text-stone mb-8 md:mb-10">{heading}</h2>
+      <h2 className="type-heading text-ink mb-8 md:mb-10">{heading}</h2>
       <ul className="divide-y divide-mist">
         {rows.map((row, i) => (
           <li
             key={i}
-            className="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-8 py-4 md:py-5"
+            className="grid grid-cols-1 md:grid-cols-12 md:items-baseline gap-2 md:gap-8 py-4 md:py-5"
           >
             <span
-              className="md:col-span-3 font-[family-name:var(--font-vollkorn)] italic text-stone text-base md:text-lg nums"
+              className="md:col-span-3 type-meta text-stone nums"
               aria-hidden={!row.year}
             >
               {row.year ? formatYearRange(row.year) : "·"}
             </span>
-            <span className="md:col-span-9 text-ink text-base leading-[1.55]">
+            <span className="md:col-span-9 type-body text-ink">
               {formatYearRange(row.detail)}
             </span>
           </li>

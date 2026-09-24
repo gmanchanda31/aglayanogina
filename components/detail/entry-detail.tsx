@@ -93,7 +93,7 @@ export function EntryDetail({
       {/* TITLE + METADATA — small, centred, metadata stacked directly below */}
       <Container className="pt-10 md:pt-14">
         <div className="max-w-[640px] mx-auto text-center">
-          <h1 className="title-page">
+          <h1 className="type-title">
             {entry.title}
           </h1>
 
@@ -105,9 +105,9 @@ export function EntryDetail({
                   className="flex flex-wrap justify-center items-baseline gap-x-2"
                 >
                   {m.label ? (
-                    <dt className="label-caps text-stone text-xs">{m.label}</dt>
+                    <dt className="type-meta text-stone">{m.label}</dt>
                   ) : null}
-                  <dd className="text-stone text-base leading-[1.55] nums">{m.value}</dd>
+                  <dd className="type-meta text-ink nums">{m.value}</dd>
                 </div>
               ))}
             </dl>
@@ -120,14 +120,14 @@ export function EntryDetail({
         <Container className="pt-14 md:pt-20 pb-4">
           <div className="max-w-[640px] mx-auto">
             {standFirst ? (
-              <p className="font-[family-name:var(--font-vollkorn)] italic text-lg md:text-[1.25rem] leading-[1.55] text-ink">
+              <p className="type-lead text-ink">
                 {standFirst}
               </p>
             ) : null}
             {restDescription.map((para, i) => (
               <p
                 key={i}
-                className="text-ink text-base md:text-[1.0625rem] leading-[1.7] mt-6"
+                className="type-body text-ink mt-6"
               >
                 {para}
               </p>
@@ -142,15 +142,12 @@ export function EntryDetail({
           <div className="py-16 md:py-20 max-w-[700px] mx-auto text-center">
             <blockquote
               data-reveal="fade"
-              className={cn(
-                "font-[family-name:var(--font-vollkorn)] italic leading-[1.4]",
-                "text-[1.25rem] md:text-[1.5rem] text-ink",
-              )}
+              className="type-lead italic text-ink"
             >
               “{entry.pullQuote}”
             </blockquote>
             {entry.quoteAttribution ? (
-              <p className="label-caps text-stone mt-8">— {entry.quoteAttribution}</p>
+              <p className="type-meta text-stone mt-8">— {entry.quoteAttribution}</p>
             ) : null}
           </div>
         </Container>
@@ -159,7 +156,7 @@ export function EntryDetail({
       {/* GALLERY — natural-aspect images, no cropping; each opens the viewer */}
       {galleryImages.length > 0 ? (
         <Container className={cn(entry.pullQuote ? "border-t border-mist" : "", "pt-16 md:pt-20")}>
-          <p className="label-caps text-stone mb-10 md:mb-12">Gallery</p>
+          <p className="type-meta text-stone mb-10 md:mb-12">Gallery</p>
           <GalleryGrid
             images={galleryImages}
             startIndex={hero ? 1 : 0}

@@ -46,8 +46,8 @@ export default async function PhotographSetPage({ params }: { params: Params }) 
       </Container>
 
       <Container className="pt-10 md:pt-14 pb-10 md:pb-12">
-        <p className="label-caps text-stone nums">{set.images.length} photographs</p>
-        <h1 className="title-page mt-2">{title}</h1>
+        <p className="type-meta text-stone nums">{set.images.length} photographs</p>
+        <h1 className="type-title mt-2">{title}</h1>
       </Container>
 
       <Container>

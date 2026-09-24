@@ -25,7 +25,7 @@ before making changes, and update it when conventions change.
 | Framework | Next.js 16 (App Router, Turbopack) | `next dev` / `next build` |
 | Language | TypeScript strict (`tsconfig.json`) | No `any`, no implicit `any` |
 | Styling | Tailwind CSS v4 | Tokens declared in `app/globals.css` via `@theme` |
-| Fonts | `next/font/google` — Vollkorn (serif) + Inter (sans) | Latin + Cyrillic subsets, weights 400/700/800 (Vollkorn), 300/400/500/600 (Inter) |
+| Fonts | `next/font/google` — Inter only | Latin + Cyrillic, weights 400/500, italic for quotations only |
 | Long-form | MDX (`@next/mdx`) | Writings live in `content/writings/*.mdx` |
 | Images | `next/image` | AVIF/WebP, capped at 1920w device size |
 | Icons | `lucide-react` | No Material Symbols, no FontAwesome |
@@ -43,8 +43,12 @@ before making changes, and update it when conventions change.
 | `mist` | `#E8E2D8` | Hairlines, image borders, dividers |
 | `stone` | `#6B655E` | Secondary text — captions, dates, metadata |
 
-Headlines use **Vollkorn** (serif). Body uses **Inter** (sans). Labels are
-all-caps with `.label-caps` (12-13px, tracked 0.12em).
+**One typeface (Inter), regular case only — no caps, no letter-spaced labels,
+weights 400/500.** Every text element uses one of six roles in
+`app/globals.css`: `type-title`, `type-heading`, `type-lead`, `type-body`,
+`type-ui`, `type-meta`. Colour (ink/stone) is the only other variable.
+`pnpm lint` runs `scripts/check-type.mjs`, which fails on raw sizes, caps,
+tracking, leading, other weights or a serif.
 
 **No drop shadows. No gradients. No saturated colors. No round-full pills.**
 
@@ -389,7 +393,7 @@ These flow into the footer and the Patreon CTAs.
 - **Don't read JSON directly inside a page.** Always go through `lib/content.ts`.
 - **Don't add `dark:` classes.** The site is light-only by design.
 - **Don't add drop shadows or gradients.** They break the editorial aesthetic.
-- **Don't introduce new fonts.** Vollkorn + Inter only.
+- **Don't introduce new fonts.** Inter only.
 - **Don't add icons from outside `lucide-react`.**
 - **Use `next/image` for every artwork.** Always pass an explicit `sizes` prop.
 - **Keep `data/parsed.json` valid JSON.** A single trailing comma will
@@ -400,8 +404,9 @@ These flow into the footer and the Patreon CTAs.
   `/projects/ceramic` (URL) — fine to leave both untouched.
 - **Long unbroken metadata strings get split automatically** by
   `splitCamelRuns()`. Don't rely on that for normal text — write spaces.
-- **Titles use `title-page` / `title-section`** (`app/globals.css`). Don't
-  reintroduce display sizes — Aglaya asked for a restrained type scale.
+- **Text uses a `type-*` role, never raw sizes/weights/caps.** `font-medium`
+  only on the header wordmark, the current nav item and inline emphasis;
+  `italic` only on quotations.
 
 ---
 

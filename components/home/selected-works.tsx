@@ -20,12 +20,12 @@ export function SelectedWorks() {
     >
       <Container className="pt-16 md:pt-20 pb-12 md:pb-16">
         <header className="flex items-baseline justify-between gap-6">
-          <h2 id="selected-works-heading" className="label-caps text-stone">
+          <h2 id="selected-works-heading" className="type-meta text-stone">
             Selected works
           </h2>
           <Link
             href="/projects"
-            className="link-draw label-caps text-stone hover:text-ink"
+            className="link-draw type-ui text-stone hover:text-ink"
           >
             All projects
           </Link>

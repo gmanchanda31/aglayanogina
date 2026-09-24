@@ -16,7 +16,7 @@ export function StatementBlock() {
         {HERO_BIO ? (
           <p
             data-reveal="text"
-            className="lg:hidden font-[family-name:var(--font-vollkorn)] text-[1.25rem] md:text-[1.375rem] leading-[1.55] text-ink"
+            className="lg:hidden type-lead text-ink"
           >
             {HERO_BIO}
           </p>
@@ -25,7 +25,7 @@ export function StatementBlock() {
           <p
             key={i}
             data-reveal="text"
-            className="font-[family-name:var(--font-vollkorn)] text-[1.25rem] md:text-[1.375rem] leading-[1.55] text-ink"
+            className="type-lead text-ink"
           >
             {para}
           </p>
@@ -33,7 +33,7 @@ export function StatementBlock() {
         <div className="pt-6">
           <Link
             href="/about"
-            className="link-draw inline-block label-caps text-stone hover:text-ink"
+            className="link-draw inline-block type-ui text-stone hover:text-ink"
           >
             More about Aglaya
           </Link>

@@ -395,7 +395,7 @@ export function Lightbox({ images, index, onClose, onIndexChange, label }: Light
         data-lightbox-bar
         className="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-2 py-2 sm:px-4 sm:py-3"
       >
-        <p className="label-caps nums text-paper/70 pl-2" aria-live="polite">
+        <p className="type-meta nums text-paper/70 pl-2" aria-live="polite">
           {String(index + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
         </p>
         <button
@@ -484,7 +484,7 @@ export function Lightbox({ images, index, onClose, onIndexChange, label }: Light
 
       {/* Caption */}
       {caption ? (
-        <p className="absolute inset-x-0 bottom-0 z-20 px-6 py-6 text-center label-caps text-paper/60 truncate">
+        <p className="absolute inset-x-0 bottom-0 z-20 px-6 py-6 text-center type-meta text-paper/60 truncate">
           {caption}
         </p>
       ) : null}

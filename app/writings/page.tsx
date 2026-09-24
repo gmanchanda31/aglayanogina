@@ -44,15 +44,15 @@ export default function WritingsPage() {
                 className="group py-8 md:py-10 grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-10 items-baseline"
               >
                 <div className="md:col-span-10">
-                  <h2 className="title-section text-ink underline decoration-transparent decoration-1 underline-offset-4 group-hover:decoration-ink/40">
+                  <h2 className="type-heading text-ink underline decoration-transparent decoration-1 underline-offset-4 group-hover:decoration-ink/40">
                     {w.title}
                   </h2>
-                  <p className="mt-2 text-stone text-base leading-[1.6] max-w-2xl">
+                  <p className="type-body text-stone mt-2 max-w-2xl">
                     {w.excerpt}
                   </p>
                 </div>
                 <div className="md:col-span-2 flex md:justify-end">
-                  <span className="label-caps text-stone group-hover:text-ink inline-flex items-center gap-1.5">
+                  <span className="type-ui text-stone group-hover:text-ink inline-flex items-center gap-1.5">
                     Read
                     <span data-arrow className="inline-flex">
                       <ArrowRight className="size-3.5" aria-hidden />

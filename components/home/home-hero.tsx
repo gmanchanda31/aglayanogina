@@ -53,7 +53,7 @@ export function HomeHero() {
             )}
           />
           {caption ? (
-            <figcaption data-hero-step="4" className="label-caps text-stone mt-3">{caption}</figcaption>
+            <figcaption data-hero-step="4" className="type-meta text-stone mt-3">{caption}</figcaption>
           ) : null}
         </figure>
 
@@ -65,7 +65,7 @@ export function HomeHero() {
           {HERO_ITALIC ? (
             <p
               data-hero-step="1"
-              className="font-[family-name:var(--font-vollkorn)] italic text-ink text-[1.375rem] md:text-[1.75rem] leading-[1.3] max-w-[22ch] text-balance"
+              className="type-lead text-ink max-w-[22ch] text-balance"
             >
               {HERO_ITALIC}
             </p>
@@ -74,7 +74,7 @@ export function HomeHero() {
           {HERO_TAGLINE ? (
             <p
               data-hero-step="2"
-              className={cn("label-caps text-stone leading-[1.6] max-w-[34ch] text-balance", HERO_ITALIC && "mt-3 md:mt-4")}
+              className={cn("type-lead text-stone max-w-[34ch] text-balance", HERO_ITALIC && "mt-3 md:mt-4")}
             >
               {HERO_TAGLINE}
             </p>
@@ -84,7 +84,7 @@ export function HomeHero() {
             <p
               data-hero-step="3"
               className={cn(
-                "hidden lg:block text-stone text-[0.9375rem] leading-[1.65] max-w-[42ch] text-pretty",
+                "hidden lg:block type-body text-stone max-w-[42ch]",
                 (HERO_ITALIC || HERO_TAGLINE) && "mt-6",
               )}
             >
@@ -95,7 +95,7 @@ export function HomeHero() {
           {HERO_META ? (
             <p
               data-hero-step="3"
-              className={cn("hidden lg:block label-caps text-stone/70", (HERO_ITALIC || HERO_TAGLINE || HERO_BIO) && "mt-4")}
+              className={cn("hidden lg:block type-meta text-stone/70", (HERO_ITALIC || HERO_TAGLINE || HERO_BIO) && "mt-4")}
             >
               {HERO_META}
             </p>
@@ -112,14 +112,14 @@ export function HomeHero() {
             <Link
               href="/projects"
               data-dir="next"
-              className="link-draw inline-flex items-center gap-2 label-caps text-ink"
+              className="link-draw inline-flex items-center gap-2 type-ui text-ink"
             >
               View selected works
               <span data-arrow className="inline-flex">
                 <ArrowRight className="size-3.5" aria-hidden />
               </span>
             </Link>
-            <Link href="/writings" className="link-draw label-caps text-stone hover:text-ink">
+            <Link href="/writings" className="link-draw type-ui text-stone hover:text-ink">
               Read the writings
             </Link>
           </div>

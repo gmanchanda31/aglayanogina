@@ -7,7 +7,7 @@ export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
 
 export default async function Icon() {
-  const fontPath = path.join(process.cwd(), "public", "fonts", "Vollkorn-700.ttf");
+  const fontPath = path.join(process.cwd(), "public", "fonts", "Inter-Medium.ttf");
   const buf = await fs.readFile(fontPath);
   const fontData = buf.buffer.slice(
     buf.byteOffset,
@@ -25,10 +25,10 @@ export default async function Icon() {
           justifyContent: "center",
           backgroundColor: "#0F0E0D",
           color: "#FAF7F2",
-          fontFamily: "Vollkorn",
-          fontWeight: 700,
-          fontSize: 38,
-          letterSpacing: "-0.02em",
+          fontFamily: "Inter",
+          fontWeight: 500,
+          fontSize: 36,
+          letterSpacing: "-0.04em",
           lineHeight: 1,
         }}
       >
@@ -37,7 +37,7 @@ export default async function Icon() {
     ),
     {
       ...size,
-      fonts: [{ name: "Vollkorn", data: fontData, weight: 700, style: "normal" }],
+      fonts: [{ name: "Inter", data: fontData, weight: 500, style: "normal" }],
     },
   );
 }

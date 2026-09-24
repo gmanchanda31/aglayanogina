@@ -1,4 +1,4 @@
-import { home } from "@/lib/content";
+import { HERO_PORTRAIT } from "@/lib/home";
 import { OG_CONTENT_TYPE, OG_SIZE, landingOG } from "@/lib/og";
 
 export const alt = "Aglaya Nogina — Visual Artist";
@@ -11,6 +11,6 @@ export default async function Image() {
     title: "Aglaya Nogina",
     lede:
       "Xerography, relief printing, painting, photography, and writing — exploring memory, displacement, and friendship.",
-    imagePath: home.hero?.src,
+    imagePath: HERO_PORTRAIT.src,
   });
 }

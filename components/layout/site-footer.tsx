@@ -4,7 +4,7 @@ import { Container } from "./container";
 
 /** 44px tap rows on mobile; compact list from md up */
 const footerLink =
-  "label-caps text-stone hover:text-ink transition-colors inline-flex items-center min-h-11 md:min-h-0";
+  "type-ui text-stone hover:text-ink transition-colors inline-flex items-center min-h-11 md:min-h-0";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -16,22 +16,22 @@ export function SiteFooter() {
           <Link
             href="/"
             aria-label={`${siteName} — home`}
-            className="font-[family-name:var(--font-vollkorn)] text-base uppercase tracking-[0.18em] text-ink"
+            className="type-meta text-ink"
           >
             {siteName}
           </Link>
-          <p className="mt-4 text-stone font-[family-name:var(--font-inter)] text-base leading-[1.65]">
+          <p className="mt-4 type-ui text-stone">
             {siteCity}
           </p>
-          <p className="mt-2 label-caps text-stone">© {year} Aglaya Nogina</p>
+          <p className="mt-2 type-meta text-stone">© {year} Aglaya Nogina</p>
         </div>
 
         <div>
-          <p className="label-caps text-ink">Connect</p>
+          <p className="type-meta text-ink">Connect</p>
           <ul className="mt-3 md:mt-4 md:space-y-2">
             <li>
               <a href={contact.emailHref} className={footerLink}>
-                <span className="normal-case tracking-normal text-sm">{contact.email}</span>
+                {contact.email}
               </a>
             </li>
             <li>
@@ -58,8 +58,8 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <p className="label-caps text-ink">Studio</p>
-          <p className="mt-4 text-stone text-base leading-[1.65]">
+          <p className="type-meta text-ink">Studio</p>
+          <p className="mt-4 type-ui text-stone">
             Available for commissions, exhibitions, and editorial collaborations.
           </p>
         </div>

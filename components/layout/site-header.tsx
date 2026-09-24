@@ -55,7 +55,7 @@ export function SiteHeader() {
           <Link
             href="/"
             aria-label={`${siteName} — home`}
-            className="inline-flex items-center font-[family-name:var(--font-vollkorn)] text-base uppercase tracking-[0.16em] leading-none text-ink h-8"
+            className="inline-flex items-center type-ui font-medium leading-none text-ink h-8"
           >
             {siteName}
           </Link>
@@ -69,9 +69,9 @@ export function SiteHeader() {
                     href={link.href}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "label-caps inline-flex items-center h-full leading-none transition-colors relative",
+                      "type-ui inline-flex items-center h-full leading-none transition-colors relative",
                       active
-                        ? "text-ink after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-px after:bg-clay"
+                        ? "font-medium text-ink after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-px after:bg-clay"
                         : "text-stone hover:text-ink",
                     )}
                   >
@@ -89,7 +89,7 @@ export function SiteHeader() {
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
             onClick={() => setMobileOpen((v) => !v)}
-            className="lg:hidden inline-flex items-center gap-2 h-11 -mr-2 px-2 label-caps text-ink"
+            className="lg:hidden inline-flex items-center gap-2 h-11 -mr-2 px-2 type-ui text-ink"
           >
             {mobileOpen ? <X className="size-5" aria-hidden /> : <Menu className="size-5" aria-hidden />}
             <span>{mobileOpen ? "Close" : "Menu"}</span>
@@ -122,8 +122,8 @@ function MobileNav({ open, pathname }: { open: boolean; pathname: string }) {
               href={link.href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "font-[family-name:var(--font-vollkorn)] text-xl py-3 border-b border-mist",
-                active ? "text-ink" : "text-stone hover:text-ink",
+                "type-lead py-3 border-b border-mist",
+                active ? "text-ink font-medium" : "text-stone hover:text-ink",
               )}
             >
               {link.title}

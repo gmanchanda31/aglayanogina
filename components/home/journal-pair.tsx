@@ -13,7 +13,7 @@ export function JournalPair() {
       <Container className="pt-20 md:pt-24 pb-4">
         <h2
           id="journal-heading"
-          className="label-caps text-ink text-center mb-16 md:mb-20"
+          className="type-meta text-ink text-center mb-16 md:mb-20"
         >
           From the journal
         </h2>
@@ -30,7 +30,7 @@ export function JournalPair() {
               data-reveal="text"
               className="flex flex-col items-center text-center px-2 md:px-6"
             >
-              <h3 className="title-section">
+              <h3 className="type-heading">
                 <Link
                   href={writing.href}
                   className="hover:text-stone"
@@ -38,12 +38,12 @@ export function JournalPair() {
                   {writing.title}
                 </Link>
               </h3>
-              <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-base leading-[1.55] mt-4 max-w-sm">
+              <p className="type-body text-stone mt-4 max-w-sm">
                 {teaser}
               </p>
               <Link
                 href={writing.href}
-                className="link-draw mt-6 label-caps text-stone hover:text-ink"
+                className="link-draw mt-6 type-ui text-stone hover:text-ink"
               >
                 Read essay
               </Link>
@@ -54,7 +54,7 @@ export function JournalPair() {
         <div className="text-center mt-16 md:mt-20">
           <Link
             href="/writings"
-            className="link-draw label-caps text-stone hover:text-ink"
+            className="link-draw type-ui text-stone hover:text-ink"
           >
             All writings
           </Link>

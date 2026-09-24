@@ -9,7 +9,7 @@ export function PracticeRibbon() {
       <Container className="py-12 md:py-14">
         <h2
           id="practice-heading"
-          className="label-caps text-stone text-center mb-8 md:mb-10"
+          className="type-meta text-stone text-center mb-8 md:mb-10"
         >
           The practice
         </h2>
@@ -35,16 +35,16 @@ export function PracticeRibbon() {
                     />
                   ) : (
                     <div>
-                      <p className="font-[family-name:var(--font-vollkorn)] italic text-base md:text-[1.125rem] leading-snug text-ink">
+                      <p className="type-lead text-ink">
                         {tile.cardLine}
                       </p>
                       {tile.cardSubline ? (
-                        <p className="label-caps text-stone mt-1 nums">{tile.cardSubline}</p>
+                        <p className="type-meta text-stone mt-1 nums">{tile.cardSubline}</p>
                       ) : null}
                     </div>
                   )}
                 </div>
-                <p className="label-caps text-stone group-hover:text-ink transition-colors mt-3">
+                <p className="type-ui text-stone group-hover:text-ink transition-colors mt-3">
                   {tile.label}
                 </p>
               </Link>

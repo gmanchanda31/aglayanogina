@@ -64,7 +64,6 @@ export function WorkGrid<T extends BaseEntry>({
               medium={getMedium(entry)}
               year={getYear(entry)}
               sizes={GRID_SIZES}
-              size="md"
               section={section}
             />
           </div>

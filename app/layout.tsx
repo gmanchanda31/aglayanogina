@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Vollkorn } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -9,18 +9,11 @@ import { PageTransition } from "@/components/motion/page-transition";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const vollkorn = Vollkorn({
-  variable: "--font-vollkorn",
-  subsets: ["latin", "latin-ext", "cyrillic"],
-  weight: ["400", "700", "800"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
-
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin", "latin-ext", "cyrillic"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -73,7 +66,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${vollkorn.variable} ${inter.variable}`}
+      className={inter.variable}
       // Next turns off smooth scrolling during route changes when this is set,
       // so navigation lands at the top instead of gliding there
       data-scroll-behavior="smooth"
@@ -86,7 +79,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-paper text-ink">
         <a
           href="#main"
-          className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-50 focus-visible:bg-paper focus-visible:px-4 focus-visible:py-2 focus-visible:label-caps focus-visible:border focus-visible:border-ink"
+          className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-50 focus-visible:bg-paper focus-visible:px-4 focus-visible:py-2 focus-visible:type-ui focus-visible:border focus-visible:border-ink"
         >
           Skip to content
         </a>

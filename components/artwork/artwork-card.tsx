@@ -12,7 +12,6 @@ interface ArtworkCardProps {
   medium?: string;
   year?: string;
   sizes: string;
-  size?: "sm" | "md" | "lg";
   priority?: boolean;
   className?: string;
   /** Listing section — keys the card→detail image morph. Omit on home. */
@@ -26,7 +25,6 @@ export function ArtworkCard({
   medium,
   year,
   sizes,
-  size,
   priority,
   className,
   section,
@@ -53,7 +51,7 @@ export function ArtworkCard({
       ) : (
         img
       )}
-      <ArtworkCaption title={title} medium={medium} year={year} size={size} />
+      <ArtworkCaption title={title} medium={medium} year={year} />
     </Link>
   );
 }

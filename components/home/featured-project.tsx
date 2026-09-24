@@ -18,7 +18,7 @@ export function FeaturedProject() {
     >
       {/* Eyebrow */}
       <Container className="pt-16 md:pt-20 pb-10 md:pb-12">
-        <p className="label-caps text-stone text-center">Featured project</p>
+        <p className="type-meta text-stone text-center">Featured project</p>
       </Container>
 
       {/* Hero at its own proportions — no frame, no crop, no letterboxing */}
@@ -43,19 +43,19 @@ export function FeaturedProject() {
           <div className="md:col-span-7" data-reveal="text">
             <h2
               id="featured-heading"
-              className="title-page text-ink"
+              className="type-heading text-ink"
             >
               {project.title}
             </h2>
             {teaser ? (
-              <p className="font-[family-name:var(--font-vollkorn)] italic text-stone text-base md:text-[1.0625rem] leading-[1.55] mt-3 max-w-xl">
+              <p className="type-lead text-stone mt-3 max-w-xl">
                 {teaser}
               </p>
             ) : null}
             <Link
               href={project.href}
               data-dir="next"
-              className="link-draw inline-flex items-center gap-2 mt-8 label-caps text-ink"
+              className="link-draw inline-flex items-center gap-2 mt-8 type-ui text-ink"
             >
               View the project
               <span data-arrow className="inline-flex">
@@ -67,20 +67,20 @@ export function FeaturedProject() {
           <dl className="md:col-span-5 md:pt-2 grid grid-cols-1 gap-y-5">
             {medium ? (
               <div>
-                <dt className="label-caps text-stone">Medium</dt>
-                <dd className="text-ink text-base mt-2 leading-[1.55]">{medium}</dd>
+                <dt className="type-meta text-stone">Medium</dt>
+                <dd className="type-meta text-ink mt-2">{medium}</dd>
               </div>
             ) : null}
             {years ? (
               <div>
-                <dt className="label-caps text-stone">Years</dt>
-                <dd className="text-ink text-base mt-2 nums">{years}</dd>
+                <dt className="type-meta text-stone">Years</dt>
+                <dd className="type-meta text-ink mt-2 nums">{years}</dd>
               </div>
             ) : null}
             {exhibitionLine ? (
               <div>
-                <dt className="label-caps text-stone">Exhibition</dt>
-                <dd className="text-ink text-base mt-2 leading-[1.55]">{exhibitionLine}</dd>
+                <dt className="type-meta text-stone">Exhibition</dt>
+                <dd className="type-meta text-ink mt-2">{exhibitionLine}</dd>
               </div>
             ) : null}
           </dl>

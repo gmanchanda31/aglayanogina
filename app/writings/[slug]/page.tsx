@@ -71,11 +71,11 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
       {/* Article header */}
       <Container className="pt-12 md:pt-16">
         <header className="max-w-[760px] mx-auto text-center">
-          <p className="label-caps text-stone">Essay</p>
-          <h1 className="title-page mt-2">
+          <p className="type-meta text-stone">Essay</p>
+          <h1 className="type-title mt-2">
             {writing.title}
           </h1>
-          <p className="label-caps text-stone mt-6">Aglaya Nogina</p>
+          <p className="type-meta text-stone mt-6">Aglaya Nogina</p>
         </header>
       </Container>
 
@@ -103,15 +103,15 @@ export default async function WritingDetailPage({ params }: { params: Params }) 
       {/* More writings */}
       {more.length > 0 && (
         <Container className="border-t border-mist pt-16 md:pt-20">
-          <p className="label-caps text-stone mb-10">More writings</p>
+          <p className="type-meta text-stone mb-10">More writings</p>
           <ul data-work-grid className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
             {more.map((w) => (
               <li key={w.slug} data-grid-item>
                 <Link href={w.href} className="group block">
-                  <h3 className="title-section italic text-ink underline decoration-transparent decoration-1 underline-offset-4 group-hover:decoration-ink/40">
+                  <h3 className="type-heading text-ink underline decoration-transparent decoration-1 underline-offset-4 group-hover:decoration-ink/40">
                     {w.title}
                   </h3>
-                  <p className="text-stone text-sm leading-[1.6] mt-3 line-clamp-3">
+                  <p className="type-body text-stone mt-3 line-clamp-3">
                     {w.excerpt}
                   </p>
                 </Link>

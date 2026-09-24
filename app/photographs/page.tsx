@@ -44,7 +44,7 @@ export default function PhotographsPage() {
             <Link
               key={s.routeSlug}
               href={`#${s.routeSlug}`}
-              className="label-caps text-stone hover:text-ink transition-colors inline-flex items-center min-h-11 md:min-h-0"
+              className="type-ui text-stone hover:text-ink transition-colors inline-flex items-center min-h-11 md:min-h-0"
             >
               {s.title}
               <span className="ml-2 text-stone/60 nums">{s.images.length}</span>
@@ -67,11 +67,11 @@ export default function PhotographsPage() {
               className="scroll-mt-[calc(var(--header-h)+1.5rem)]"
             >
               <header className="mb-8 md:mb-10">
-                <h2 id={`${set.routeSlug}-heading`} className="title-section text-ink">
+                <h2 id={`${set.routeSlug}-heading`} className="type-heading text-ink">
                   <Link href={set.href} className="hover:text-stone">
                     {set.title}
                   </Link>
-                  <span className="ml-3 label-caps text-stone nums">
+                  <span className="ml-3 type-meta text-stone nums">
                     {set.images.length}
                   </span>
                 </h2>
@@ -84,7 +84,7 @@ export default function PhotographsPage() {
               />
 
               <div className="mt-6 md:mt-8 flex justify-center">
-                <Link href={set.href} className="link-draw label-caps text-stone hover:text-ink">
+                <Link href={set.href} className="link-draw type-ui text-stone hover:text-ink">
                   {set.images.length > PREVIEW_COUNT
                     ? `View all ${set.images.length} photographs`
                     : "View archive"}

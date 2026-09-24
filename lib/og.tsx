@@ -24,26 +24,55 @@ async function loadFont(file: string): Promise<ArrayBuffer> {
   return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
 }
 
+type OGFonts = NonNullable<ConstructorParameters<typeof ImageResponse>[1]>["fonts"];
+
+/** Inter only: Regular for meta and the lede, Medium for titles */
+async function loadInter(): Promise<OGFonts> {
+  const [regular, medium] = await Promise.all([
+    loadFont("Inter-Regular.ttf"),
+    loadFont("Inter-Medium.ttf"),
+  ]);
+  return [
+    { name: "Inter", data: regular, weight: 400, style: "normal" },
+    { name: "Inter", data: medium, weight: 500, style: "normal" },
+  ];
+}
+
+/**
+ * Fetch a remote (Sanity CDN) image as a data URI, sized down so the OG
+ * render stays fast. Returns null on any failure, like the local path.
+ */
+async function fetchImageDataUri(src: string): Promise<string | null> {
+  try {
+    const url = `${src}${src.includes("?") ? "&" : "?"}w=1200&fm=jpg&q=80`;
+    const res = await fetch(url, { signal: AbortSignal.timeout(10_000) });
+    if (!res.ok) return null;
+    const mime = res.headers.get("content-type") ?? "image/jpeg";
+    const buf = Buffer.from(await res.arrayBuffer());
+    return `data:${mime};base64,${buf.toString("base64")}`;
+  } catch {
+    return null;
+  }
+}
+
 interface LandingOGProps {
-  /** Section eyebrow text (label-caps) */
+  /** Section eyebrow text (sentence case) */
   eyebrow?: string;
   /** Page title — the visual focal point */
   title: string;
-  /** Optional italic stand-first */
+  /** Optional stand-first */
   lede?: string;
-  /** Optional image path (under /public). When provided, used as right column. */
+  /** Optional image path (under /public) or remote URL. When provided, used as right column. */
   imagePath?: string;
 }
 
 export async function landingOG({ eyebrow, title, lede, imagePath }: LandingOGProps) {
-  const [vollkorn, vollkornItalic, inter] = await Promise.all([
-    loadFont("Vollkorn-700.ttf"),
-    loadFont("Vollkorn-400-italic.ttf"),
-    loadFont("Inter-500.ttf"),
-  ]);
+  const fonts = await loadInter();
 
   let imageDataUri: string | null = null;
-  if (imagePath) {
+  if (imagePath && /^https?:/.test(imagePath)) {
+    imageDataUri = await fetchImageDataUri(imagePath);
+  } else if (imagePath) {
     try {
       const abs = path.join(process.cwd(), "public", imagePath.replace(/^\//, ""));
       const buf = await fs.readFile(abs);
@@ -80,9 +109,8 @@ export async function landingOG({ eyebrow, title, lede, imagePath }: LandingOGPr
           <div
             style={{
               fontFamily: "Inter",
-              fontSize: 18,
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
+              fontWeight: 500,
+              fontSize: 22,
               color: COLOR.ink,
             }}
           >
@@ -94,9 +122,8 @@ export async function landingOG({ eyebrow, title, lede, imagePath }: LandingOGPr
               <div
                 style={{
                   fontFamily: "Inter",
-                  fontSize: 18,
-                  letterSpacing: "0.16em",
-                  textTransform: "uppercase",
+                  fontWeight: 400,
+                  fontSize: 22,
                   color: COLOR.stone,
                 }}
               >
@@ -106,11 +133,11 @@ export async function landingOG({ eyebrow, title, lede, imagePath }: LandingOGPr
 
             <div
               style={{
-                fontFamily: "Vollkorn",
-                fontWeight: 700,
-                fontSize: imageDataUri ? 96 : 132,
-                lineHeight: 1.02,
-                letterSpacing: "-0.01em",
+                fontFamily: "Inter",
+                fontWeight: 500,
+                fontSize: imageDataUri ? 80 : 108,
+                lineHeight: 1.05,
+                letterSpacing: "-0.025em",
                 color: COLOR.ink,
               }}
             >
@@ -120,8 +147,8 @@ export async function landingOG({ eyebrow, title, lede, imagePath }: LandingOGPr
             {lede ? (
               <div
                 style={{
-                  fontFamily: "Vollkorn",
-                  fontStyle: "italic",
+                  fontFamily: "Inter",
+                  fontWeight: 400,
                   fontSize: 28,
                   lineHeight: 1.4,
                   color: COLOR.stone,
@@ -143,9 +170,8 @@ export async function landingOG({ eyebrow, title, lede, imagePath }: LandingOGPr
             <div
               style={{
                 fontFamily: "Inter",
-                fontSize: 16,
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
+                fontWeight: 400,
+                fontSize: 20,
                 color: COLOR.stone,
               }}
             >
@@ -195,11 +221,7 @@ export async function landingOG({ eyebrow, title, lede, imagePath }: LandingOGPr
     ),
     {
       ...OG_SIZE,
-      fonts: [
-        { name: "Vollkorn", data: vollkorn, weight: 700, style: "normal" },
-        { name: "Vollkorn", data: vollkornItalic, weight: 400, style: "italic" },
-        { name: "Inter", data: inter, weight: 500, style: "normal" },
-      ],
+      fonts,
     },
   );
 }
@@ -212,11 +234,7 @@ interface DetailOGProps {
 }
 
 export async function detailOG({ section, title, meta, imagePath }: DetailOGProps) {
-  const [vollkorn, vollkornItalic, inter] = await Promise.all([
-    loadFont("Vollkorn-700.ttf"),
-    loadFont("Vollkorn-400-italic.ttf"),
-    loadFont("Inter-500.ttf"),
-  ]);
+  const fonts = await loadInter();
 
   let imageDataUri: string | null = null;
   try {
@@ -271,9 +289,8 @@ export async function detailOG({ section, title, meta, imagePath }: DetailOGProp
           <div
             style={{
               fontFamily: "Inter",
-              fontSize: 18,
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
+              fontWeight: 500,
+              fontSize: 22,
               color: COLOR.ink,
             }}
           >
@@ -284,9 +301,8 @@ export async function detailOG({ section, title, meta, imagePath }: DetailOGProp
             <div
               style={{
                 fontFamily: "Inter",
-                fontSize: 18,
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
+                fontWeight: 400,
+                fontSize: 22,
                 color: COLOR.clay,
               }}
             >
@@ -295,11 +311,11 @@ export async function detailOG({ section, title, meta, imagePath }: DetailOGProp
 
             <div
               style={{
-                fontFamily: "Vollkorn",
-                fontWeight: 700,
-                fontSize: title.length > 22 ? 76 : 96,
-                lineHeight: 1.05,
-                letterSpacing: "-0.01em",
+                fontFamily: "Inter",
+                fontWeight: 500,
+                fontSize: title.length > 22 ? 64 : 80,
+                lineHeight: 1.08,
+                letterSpacing: "-0.025em",
                 color: COLOR.ink,
               }}
             >
@@ -310,9 +326,8 @@ export async function detailOG({ section, title, meta, imagePath }: DetailOGProp
               <div
                 style={{
                   fontFamily: "Inter",
-                  fontSize: 18,
-                  letterSpacing: "0.14em",
-                  textTransform: "uppercase",
+                  fontWeight: 400,
+                  fontSize: 22,
                   color: COLOR.stone,
                   lineHeight: 1.5,
                 }}
@@ -333,9 +348,8 @@ export async function detailOG({ section, title, meta, imagePath }: DetailOGProp
             <div
               style={{
                 fontFamily: "Inter",
-                fontSize: 14,
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
+                fontWeight: 400,
+                fontSize: 18,
                 color: COLOR.stone,
               }}
             >
@@ -347,11 +361,7 @@ export async function detailOG({ section, title, meta, imagePath }: DetailOGProp
     ),
     {
       ...OG_SIZE,
-      fonts: [
-        { name: "Vollkorn", data: vollkorn, weight: 700, style: "normal" },
-        { name: "Vollkorn", data: vollkornItalic, weight: 400, style: "italic" },
-        { name: "Inter", data: inter, weight: 500, style: "normal" },
-      ],
+      fonts,
     },
   );
 }
